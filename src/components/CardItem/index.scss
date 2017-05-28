@@ -1,0 +1,18 @@
+.CardItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+
+  &-Card {
+    width: 100%;
+  }
+
+  &-Image {
+    height: 250px;
+    object-fit: cover;
+  }
+
+  &-CardTitle {
+  }
+}

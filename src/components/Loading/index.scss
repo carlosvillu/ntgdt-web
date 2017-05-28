@@ -1,0 +1,15 @@
+.Loading {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 76vh;
+  justify-content: center;
+
+  &-title {
+    font-size: 36px;
+    margin-bottom: 36px;
+    text-align: center;
+  }
+}
+
+
