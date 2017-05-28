@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import CircularProgress from 'material-ui/CircularProgress'
 
@@ -11,7 +11,10 @@ const Loading = ({label, i18n}) => (
 
 Loading.displayName = 'Loading'
 Loading.propTypes = {
-  label: PropTypes.string
+  label: PropTypes.string,
+  i18n: PropTypes.shape({
+    t: PropTypes.func
+  })
 }
 Loading.defaultProps = {
   label: 'DEFAULT_LOADING_MSG'
