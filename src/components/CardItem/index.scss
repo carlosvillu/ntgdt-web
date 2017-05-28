@@ -3,6 +3,12 @@
   align-items: center;
   justify-content: center;
   padding-bottom: 20px;
+  position: relative;
+
+  &-Menu {
+    position: absolute !important;
+    left: 86vw;
+  }
 
   &-Card {
     width: 100%;

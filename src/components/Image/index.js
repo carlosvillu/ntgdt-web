@@ -1,4 +1,3 @@
-/* eslint operator-linebreak:0 no-nested-ternary:0 */
 import Image from './component'
 
 import withState from 'recompose/withState'
@@ -17,8 +16,6 @@ export default compose(
   }),
   mapProps(ownerProps => ({
     ...ownerProps,
-    src: ownerProps.loaded ? ownerProps.src :
-         ownerProps.blur !== undefined ? ownerProps.blur :
-         ownerProps.src
+    src: ownerProps.loaded ? ownerProps.src : ownerProps.blur
   }))
 )(Image)

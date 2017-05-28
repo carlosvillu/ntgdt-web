@@ -3,11 +3,13 @@ import PropTypes from 'prop-types'
 
 import {Card, CardMedia, CardHeader} from 'material-ui/Card'
 import Image from '../Image'
+import CardItemMenu from '../CardItemMenu'
 
 const CardItem = ({id, title, image, blur, height, site}) => {
   return (
     <div className='CardItem' style={{height}}>
       <Card className='CardItem-Card'>
+        <CardItemMenu className='CardItem-Menu' />
         <CardHeader
           title={title}
           avatar={require(`../../images/${site}.png`)} />
