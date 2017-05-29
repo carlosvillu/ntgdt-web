@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@schibstedspain/linting-rules": "1.5.0",
-    "@schibstedspain/suistudio-webpack": "2"
+    "@schibstedspain/suistudio-webpack": "3.0.0-beta.0"
   },
   "suistudio-webpack": {
     "vendor": [
