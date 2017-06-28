@@ -9,7 +9,7 @@ const CardItem = ({id, title, image, blur, height, site}) => {
   return (
     <div className='CardItem' style={{height}}>
       <Card className='CardItem-Card'>
-        <CardItemMenu className='CardItem-Menu' />
+        <CardItemMenu className='CardItem-Menu' image={image} />
         <CardHeader
           title={title}
           avatar={require(`../../images/${site}.png`)} />

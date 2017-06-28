@@ -8,6 +8,7 @@ import {AppContainer} from 'react-hot-loader'
 import { BrowserRouter as Router } from 'react-router-dom'
 import {Provider} from '@schibstedspain/ddd-react-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
+import {register} from '@schibstedspain/suistudio-webpack/registerServiceWorker'
 
 import * as firebase from 'firebase/app'
 import 'firebase/database'
@@ -45,3 +46,8 @@ if (module.hot) {
     render(NewApp)
   })
 }
+
+register({
+  first: () => window.alert('Content is cached for offline use.'),
+  renovate: () => window.alert('New content is available; please refresh.')
+})()

@@ -9,7 +9,7 @@ import Download from 'material-ui/svg-icons/file/file-download'
 import Send from 'material-ui/svg-icons/content/send'
 
 const position = {horizontal: 'right', vertical: 'top'}
-const CardItemMenu = ({i18n, className, onSave, onShare}) => {
+const CardItemMenu = ({i18n, className, image, onSave, onShare}) => {
   return (
     <IconMenu
       iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
@@ -17,8 +17,12 @@ const CardItemMenu = ({i18n, className, onSave, onShare}) => {
       targetOrigin={position}
       className={className}
     >
-      <MenuItem primaryText={i18n.t('SAVE')} onClick={onSave} leftIcon={<Download />} />
-      <MenuItem primaryText={i18n.t('SHARE')} onClick={onShare} leftIcon={<Send />} />
+      <MenuItem onClick={onSave} leftIcon={<Download />}>
+        <a className='CardItemMenu-Link' href={image} download>{i18n.t('SAVE')}</a>
+      </MenuItem>
+      <MenuItem onClick={onShare} leftIcon={<Send />}>
+        <a className='CardItemMenu-Link' href={`whatsapp://send?text=${image}`}>{i18n.t('SHARE')}</a>
+      </MenuItem>
     </IconMenu>
   )
 }
@@ -26,6 +30,7 @@ const CardItemMenu = ({i18n, className, onSave, onShare}) => {
 CardItemMenu.displayName = 'CardItemMenu'
 CardItemMenu.propTypes = {
   className: PropTypes.string,
+  image: PropTypes.string,
   i18n: PropTypes.shape({
     t: PropTypes.func
   }),

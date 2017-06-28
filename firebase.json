@@ -9,6 +9,19 @@
         "source": "**",
         "destination": "/index.html"
       }
-    ]
+    ],
+    "headers": [{
+      "source" : "**/*.@(js|css|jpg|jpeg|gif|png)",
+      "headers" : [ {
+        "key" : "Cache-Control",
+        "value" : "max-age=31556926"
+      }]
+    },{
+      "source" : "/service-worker.js",
+      "headers" : [ {
+        "key" : "Cache-Control",
+        "value" : "no-cache"
+      }]
+    }]
   }
 }

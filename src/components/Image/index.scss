@@ -1,0 +1,8 @@
+.Image {
+  overflow: hidden;
+
+  &.has-scrolling {
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+}

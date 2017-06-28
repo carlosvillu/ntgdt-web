@@ -8,11 +8,7 @@ import compose from 'recompose/compose'
 export default compose(
   getContext({i18n: PropTypes.object}),
   withHandlers({
-    onShare: (props) => () => {
-      window.alert('Compartir')
-    },
-    onSave: (props) => () => {
-      window.alert('Guardar')
-    }
+    onShare: (props) => () => {},
+    onSave: (props) => () => {}
   })
 )(CardItemMenu)

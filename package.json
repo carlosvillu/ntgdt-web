@@ -19,11 +19,13 @@
     "@schibstedspain/ddd-react-redux": "1",
     "@schibstedspain/rosetta": "3",
     "@schibstedspain/sui-image-lazy-load": "1.4.0",
+    "classnames": "2.2.5",
     "firebase": "4.0.0",
     "material-ui": "0.18.1",
     "prop-types": "15.5.10",
     "react": "15.5.4",
     "react-dom": "15.5.4",
+    "react-loadable": "3.3.1",
     "react-router": "4.1.1",
     "react-router-dom": "4.1.1",
     "react-tap-event-plugin": "2.0.1",
@@ -32,19 +34,25 @@
     "reset-css": "2.2.0"
   },
   "devDependencies": {
-    "@schibstedspain/linting-rules": "1.5.0",
-    "@schibstedspain/suistudio-webpack": "3.0.0-beta.0"
+    "@schibstedspain/linting-rules": "1",
+    "@schibstedspain/suistudio-webpack": "3"
   },
   "suistudio-webpack": {
+    "offline": true,
     "vendor": [
+      "@schibstedspain/ddd-react-redux",
+      "@schibstedspain/rosetta",
+      "classnames",
       "react",
       "react-dom",
-      "redux",
       "react-redux",
-      "@schibstedspain/ddd-react-redux",
-      "@schibstedspain/rosetta"
+      "redux"
     ]
   },
-  "eslintConfig": { "extends": ["./node_modules/@schibstedspain/linting-rules/eslintrc.js"]},
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@schibstedspain/linting-rules/eslintrc.js"
+    ]
+  },
   "sasslintConfig": "./node_modules/@schibstedspain/linting-rules/sass-lint.yml"
 }
