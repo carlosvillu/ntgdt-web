@@ -5,4 +5,11 @@
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
   }
+  
+  .has-overflow {
+    background-color: rgb(0, 188, 212);
+    color: white;
+    padding: 5px;
+    text-align: center;
+  }
 }

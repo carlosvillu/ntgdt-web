@@ -21,6 +21,7 @@
     "@schibstedspain/sui-image-lazy-load": "1.4.0",
     "classnames": "2.2.5",
     "firebase": "4.0.0",
+    "imagesloaded": "^4.1.3",
     "material-ui": "0.18.1",
     "prop-types": "15.5.10",
     "react": "15.5.4",

@@ -1,3 +1,16 @@
 .App {
+  border: 1px solid lightgrey;
+  margin: 0 auto;
+  max-width: 50em;
   overflow-x: hidden;
+}
+
+.App-children > div > div:nth-child(1) {
+  max-width: 50em;
+  position: fixed !important;
+  top: 0;
+}
+
+.InfiniteList {
+  margin-top: 64px;
 }
