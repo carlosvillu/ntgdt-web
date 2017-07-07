@@ -6,7 +6,7 @@ import AppBar from 'material-ui/AppBar'
 
 const Home = ({i18n}) => (
   <div className='Home'>
-    <AppBar showMenuIconButton={false} title={i18n.t('HOME_TITLE')} />
+    <AppBar showMenuIconButton={false} title={<img src='../../images/ntgdt-logo.png' />} />
     <InfiniteList />
   </div>
 )
