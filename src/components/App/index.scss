@@ -4,3 +4,12 @@
   max-width: 50em;
   overflow-x: hidden;
 }
+
+.App-children > div > div:nth-child(1) {
+  max-width: 50em;
+  position: fixed;
+}
+
+.InfiniteList {
+  margin-top: 64px;
+}
