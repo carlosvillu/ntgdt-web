@@ -1,5 +1,5 @@
 .App {
-  box-shadow: 2px 11px 20px rgba(0,0,0,.5);
+  border: 1px solid lightgrey;
   margin: 0 auto;
   max-width: 50em;
   overflow-x: hidden;
@@ -7,7 +7,8 @@
 
 .App-children > div > div:nth-child(1) {
   max-width: 50em;
-  position: fixed;
+  position: fixed !important;
+  top: 0;
 }
 
 .InfiniteList {

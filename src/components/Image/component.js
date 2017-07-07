@@ -2,10 +2,11 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+import imagesLoaded from 'imagesloaded'
 
 import cx from 'classnames'
 
-const isOverflow = element =>
+const checkHasOverflow = element =>
   element &&
   (
     element.scrollHeight > element.clientHeight ||
@@ -13,23 +14,30 @@ const isOverflow = element =>
   )
 
 class Image extends React.Component {
+  state = { hasOverflow: false }
+
   componentDidMount () {
-    this.hasOverflow = isOverflow(this._node)
-    console.log(this.hasOverflow)
+    const node = this._node
+    imagesLoaded(node, () => {
+      this.setState({hasOverflow: checkHasOverflow(node)})
+    })
+    this.hasOverflow = checkHasOverflow(this._node)
   }
+
   render () {
     const {src, className, style, onChangeScroll, hasScroll} = this.props
     const containerClass = cx('Image', {
       'has-scrolling': hasScroll
     })
+
     return (
       <div
         className={containerClass}
         style={style}
         onClick={onChangeScroll}
-        ref={node => this._node = node}
+        ref={node => { this._node = node }}
       >
-        {this.hasOverflow && <p>Has Overflow</p>}
+        {this.state.hasOverflow && <p className='has-overflow'>haz click para activar scroll</p>}
         <img className={className} src={src} />
       </div>
     )
