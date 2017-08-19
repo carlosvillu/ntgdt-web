@@ -5,13 +5,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "suistudio-webpack build -C",
+    "build": "sui-bundler build -C",
     "postbuild": "cp ./src/manifest.json ./public && cp ./src/images/cuantocabron.png ./public",
     "deploy": "npm run build && firebase deploy",
     "lint": "npm run lint:js",
-    "lint:js": "linting-rules js --ignore-pattern public --fix",
-    "lint:sass": "linting-rules sass",
-    "start": "suistudio-webpack dev"
+    "lint:js": "sui-lint js --ignore-pattern public --fix",
+    "lint:sass": "sui-lint sass",
+    "start": "sui-bundler dev"
   },
   "keywords": [],
   "author": "",
@@ -22,7 +22,8 @@
     "@schibstedspain/sui-image-lazy-load": "1.4.0",
     "classnames": "2.2.5",
     "firebase": "4.0.0",
-    "imagesloaded": "^4.1.3",
+    "idb-keyval": "2.3.0",
+    "imagesloaded": "4.1.3",
     "material-ui": "0.18.1",
     "prop-types": "15.5.10",
     "react": "15.5.4",
@@ -36,12 +37,14 @@
     "reset-css": "2.2.0"
   },
   "devDependencies": {
-    "@schibstedspain/linting-rules": "1",
-    "@schibstedspain/suistudio-webpack": "3"
+    "@schibstedspain/sui-bundler": "2",
+    "@schibstedspain/sui-lint": "2"
   },
-  "suistudio-webpack": {
+  "sui-bundler": {
     "offline": {
-      "whitelist": ["::all::"]
+      "whitelist": [
+        "::all::"
+      ]
     },
     "vendor": [
       "@schibstedspain/ddd-react-redux",
@@ -55,8 +58,8 @@
   },
   "eslintConfig": {
     "extends": [
-      "./node_modules/@schibstedspain/linting-rules/eslintrc.js"
+      "./node_modules/@schibstedspain/sui-lint/eslintrc.js"
     ]
   },
-  "sasslintConfig": "./node_modules/@schibstedspain/linting-rules/sass-lint.yml"
+  "sasslintConfig": "./node_modules/@schibstedspain/sui-lint/sass-lint.yml"
 }

@@ -8,8 +8,9 @@ import {AppContainer} from 'react-hot-loader'
 import { BrowserRouter as Router } from 'react-router-dom'
 import {Provider} from '@schibstedspain/ddd-react-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import {register} from '@schibstedspain/suistudio-webpack/registerServiceWorker'
+import {register, unregister} from '@schibstedspain/sui-bundler/registerServiceWorker'
 
+import idb from 'idb-keyval'
 import * as firebase from 'firebase/app'
 import 'firebase/database'
 
@@ -25,6 +26,8 @@ const config = {
   messagingSenderId: '1069878588859'
 }
 firebase.initializeApp(config)
+
+window.idb = idb
 
 const render = Component =>
   ReactDOM.render(
@@ -46,6 +49,8 @@ if (module.hot) {
     render(NewApp)
   })
 }
+
+// unregister()
 
 register({
   first: () => window.alert('Content is cached for offline use.'),

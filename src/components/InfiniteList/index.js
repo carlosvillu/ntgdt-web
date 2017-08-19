@@ -11,6 +11,7 @@ import Loading from '../Loading'
 
 import * as firebase from 'firebase/app'
 
+const ITEMS_KEY = 'items'
 const sortByDate = ({createdAt: a}, {createdAt: b}) =>
   a < b ? 1 :
   a > b ? -1 :
@@ -19,14 +20,20 @@ const sortByDate = ({createdAt: a}, {createdAt: b}) =>
 export default compose(
   defaultProps({items: [], itemHeight: 440}),
   lifecycle({
-    componentDidMount () {
-      this.setState({loading: true})
-      firebase.database().ref('/entries').on('value', snapshot => {
+    async componentDidMount () {
+      // this.setState({loading: true})
+
+      const prevItems = (await idb.get(ITEMS_KEY) || {})
+      this.setState({items: Object.values(prevItems).sort(sortByDate)})
+
+      firebase.database().ref('/entries').on('value', async snapshot => {
         console.log('Nuevas imagenes', Object.values(snapshot.val()).sort(sortByDate))
+        const items = {...prevItems, ...snapshot.val()}
+        await idb.set(ITEMS_KEY, items)
         this.setState({
-          items: Object.values(snapshot.val())
-                  .sort(sortByDate),
-          loading: false
+          items: Object.values(items)
+                  .sort(sortByDate)
+          // loading: false
         })
       })
     },
