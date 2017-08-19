@@ -8,7 +8,7 @@ import {AppContainer} from 'react-hot-loader'
 import { BrowserRouter as Router } from 'react-router-dom'
 import {Provider} from '@schibstedspain/ddd-react-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import {register, unregister} from '@schibstedspain/sui-bundler/registerServiceWorker'
+import {register} from '@schibstedspain/sui-bundler/registerServiceWorker'
 
 import idb from 'idb-keyval'
 import * as firebase from 'firebase/app'

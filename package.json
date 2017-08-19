@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "build": "sui-bundler build -C",
+    "co": "npm run lint && git commit",
     "postbuild": "cp ./src/manifest.json ./public && cp ./src/images/cuantocabron.png ./public",
     "deploy": "npm run build && firebase deploy",
     "lint": "npm run lint:js",

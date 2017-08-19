@@ -23,13 +23,13 @@ export default compose(
     async componentDidMount () {
       // this.setState({loading: true})
 
-      const prevItems = (await idb.get(ITEMS_KEY) || {})
+      const prevItems = (await window.idb.get(ITEMS_KEY) || {})
       this.setState({items: Object.values(prevItems).sort(sortByDate)})
 
       firebase.database().ref('/entries').on('value', async snapshot => {
-        console.log('Nuevas imagenes', Object.values(snapshot.val()).sort(sortByDate))
+        console.log('Nuevas imagenes', Object.values(snapshot.val()).sort(sortByDate)) // eslint-disable-line
         const items = {...prevItems, ...snapshot.val()}
-        await idb.set(ITEMS_KEY, items)
+        await window.idb.set(ITEMS_KEY, items)
         this.setState({
           items: Object.values(items)
                   .sort(sortByDate)
