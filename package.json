@@ -4,7 +4,9 @@
   "private": true,
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "co": "npx sui-mono commit"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
