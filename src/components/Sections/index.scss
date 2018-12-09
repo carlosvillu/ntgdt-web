@@ -4,9 +4,13 @@
   display: flex;
   font-size: $fz-m;
   font-weight: $fw-regular;
-  margin-top: $m-xl;
   position: sticky;
   top: -1px;
+      padding-left: $p-xl;
+    padding-top: $p-xl;
+    padding-bottom: $p-xl;
+    background: $c-white;
+    z-index: 1;
 
   &-section {
     margin-right: $m-l;
