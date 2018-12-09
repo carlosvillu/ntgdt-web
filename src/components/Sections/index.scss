@@ -1,0 +1,24 @@
+@import '../../styles/settings';
+
+.Sections {
+  display: flex;
+  font-size: $fz-m;
+  font-weight: $fw-regular;
+  margin-top: $m-xl;
+  position: sticky;
+  top: -1px;
+
+  &-section {
+    margin-right: $m-l;
+  }
+
+  &-literal {
+    color: $c-gray-light;
+  }
+
+  &-literal.is-selected {
+    color: $c-text-base;
+    border-bottom: $bdw-s solid;
+    padding-bottom: $p-s;
+  }
+}

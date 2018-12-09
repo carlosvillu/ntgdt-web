@@ -1,0 +1,18 @@
+@import '../../styles/settings';
+
+.Item {
+  margin-top: $m-xl;
+  position: relative;
+
+  &-toolbar {
+    display: flex;
+    font-size: $fz-xl;
+    justify-content: space-between;
+    margin-bottom: $m-l;
+
+    & > svg {
+      margin-left: $m-l;
+    }
+  }
+
+}
