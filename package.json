@@ -5,13 +5,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "co": "npx sui-mono commit"
+    "co": "npx sui-mono commit",
+    "start": "npx sui-bundler dev"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "react": "16.7.0-alpha.2",
+    "react-dom": "16.7.0-alpha.2"
+  },
   "devDependencies": {
+    "@s-ui/bundler": "3",
+    "@s-ui/component-peer-dependencies": "1",
+    "@s-ui/lint": "2",
     "@s-ui/mono": "1"
   },
   "sui-bundler": {
@@ -23,8 +30,8 @@
   },
   "eslintConfig": {
     "extends": [
-      "./node_modules/@schibstedspain/sui-lint/eslintrc.js"
+      "./node_modules/@s-ui/lint/eslintrc.js"
     ]
   },
-  "sasslintConfig": "./node_modules/@schibstedspain/sui-lint/sass-lint.yml"
+  "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml"
 }
