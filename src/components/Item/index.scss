@@ -1,8 +1,12 @@
 @import '../../styles/settings';
 
 .Item {
+  border-bottom: $bdw-s solid $c-gray-light;
+  border-top: $bdw-s solid $c-gray-light;
   margin-top: $m-xl;
+  padding-top: $p-l;
   position: relative;
+
 
   &-toolbar {
     display: flex;
@@ -13,6 +17,19 @@
     & > svg {
       margin-left: $m-l;
     }
+  }
+
+  &-title {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 66%;
+  }
+
+  &-icons {
+    display: flex;
+    justify-content: space-around;
+    width: 33%;
   }
 
 }
