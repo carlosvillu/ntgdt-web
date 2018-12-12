@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Item = React.lazy(() => import('../Item'))
+const Item = React.lazy(() => import(/* webpackChunkName: 'Item' */ '../Item'))
 
 const URL1 =
   'https://statics.memondo.com/p/s1/vefs/2018/12/VEF_503957_c1c4d96910124b2b8226e7a3dacc9d62_twitter_dudas_existenciales_por_jorgesuareza13.jpg'

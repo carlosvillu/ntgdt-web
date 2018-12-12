@@ -1,10 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Image = React.lazy(() => import('../Image'))
-const Favorite = React.lazy(() => import('../Icons/Favorite'))
-const GetApp = React.lazy(() => import('../Icons/GetApp'))
-const Send = React.lazy(() => import('../Icons/Send'))
+const Image = React.lazy(() =>
+  import(/* webpackChunkName: 'Image' */ '../Image')
+)
+const Favorite = React.lazy(() =>
+  import(/* webpackChunkName: 'Favorite' */ '../Icons/Favorite')
+)
+const GetApp = React.lazy(() =>
+  import(/* webpackChunkName: 'GetApp' */ '../Icons/GetApp')
+)
+const Send = React.lazy(() =>
+  import(/* webpackChunkName: 'Send' */ '../Icons/Send')
+)
 
 const Item = ({urlImage, alt}) => (
   <div className="Item">
