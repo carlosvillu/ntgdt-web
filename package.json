@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "co": "npx sui-mono commit",
-    "start": "npx sui-bundler dev"
+    "start": "npx sui-bundler dev",
+    "deploy": "npx sui-bundler build -C && npx surge -d https://ntgdt.surge.sh public"
   },
   "keywords": [],
   "author": "",
