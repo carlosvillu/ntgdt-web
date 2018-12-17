@@ -1,35 +1,40 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Image = React.lazy(() =>
-  import(/* webpackChunkName: 'Image' */ '../Image')
-)
-const Favorite = React.lazy(() =>
-  import(/* webpackChunkName: 'Favorite' */ '../Icons/Favorite')
-)
-const GetApp = React.lazy(() =>
-  import(/* webpackChunkName: 'GetApp' */ '../Icons/GetApp')
-)
-const Send = React.lazy(() =>
-  import(/* webpackChunkName: 'Send' */ '../Icons/Send')
-)
+import Image from '../Image'
+import Favorite from '../Icons/Favorite'
+import GetApp from '../Icons/GetApp'
+import Send from '../Icons/Send'
 
-const Item = ({urlImage, alt}) => (
-  <div className="Item">
-    <h2 className="Item-title">{alt}</h2>
-    <Image src={urlImage} alt={alt} />
-    <div className="Item-icons">
-      <Favorite className="Item-icon" isFavorite />
-      <GetApp className="Item-icon" />
-      <Send className="Item-icon" />
+const Item = ({item, style}) => {
+  const {title, image, image_blur: blur} = item
+  return (
+    <div className="Item" style={style}>
+      <h2 className="Item-title">{title}</h2>
+      <div className="Item-image">
+        <Image blur={blur} src={image} alt={title} />
+      </div>
+      <div className="Item-icons">
+        <Favorite className="Item-icon" />
+        <GetApp className="Item-icon" />
+        <Send className="Item-icon" />
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 Item.displayName = 'Item'
 Item.propTypes = {
-  urlImage: PropTypes.string,
-  alt: PropTypes.string
+  style: PropTypes.object,
+  item: PropTypes.shape({
+    createdAt: PropTypes.number,
+    id: PropTypes.string,
+    image: PropTypes.string,
+    image_blur: PropTypes.string,
+    link: PropTypes.string,
+    site: PropTypes.string,
+    title: PropTypes.string
+  })
 }
 
 export default Item

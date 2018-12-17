@@ -1,13 +1,9 @@
 @import '../../styles/settings';
 
 .Item {
-  border-top: $bdw-s solid $c-gray-light;
+  border-top: $bdw-m solid $c-gray-lightest;
   font-size: $fz-xl;
   padding-top: $p-l;
-
-  &:first-of-type {
-    margin-top: $m-xl;
-  }
 
   &-toolbar {
     display: flex;
@@ -25,10 +21,17 @@
     font-size: $fz-m;
     line-height: 1.2em;
     margin-bottom: 16px;
-    max-height: 2.4em;
+    height: 2.4em;
     max-width: 100%;
     overflow-y: hidden;
     text-overflow: ellipsis;
+  }
+
+  &-image {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 300px;
   }
 
   &-icons {
