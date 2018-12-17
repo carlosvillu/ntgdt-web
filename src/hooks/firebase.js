@@ -13,6 +13,8 @@ const config = {
 }
 firebase.initializeApp(config)
 
+const sortByDate = ({createdAt: a}, {createdAt: b}) => new Date(b) - new Date(a)
+
 export const useFirebaseRef = ref => {
   const [loading, setLoading] = useState(true)
   const [items, setItems] = useState()
@@ -22,10 +24,11 @@ export const useFirebaseRef = ref => {
       .database()
       .ref(ref)
       .orderByChild('createdAt')
-      .limitToFirst(100)
+      .limitToLast(100)
       .on('value', async snapshot => {
+        const items = Object.values(snapshot.val()).sort(sortByDate)
         setLoading(false)
-        setItems(snapshot.val())
+        setItems(items)
       })
 
     return () =>
