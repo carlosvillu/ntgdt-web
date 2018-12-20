@@ -1,23 +1,29 @@
-import React from 'react'
+import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 
-// 439.39
 import Item from '../Item'
+import FullScreenImage from '../FullScreenImage'
 import VirtualList from 'react-tiny-virtual-list'
-// import {AutoSizer, List} from 'react-virtualized'
 
 const Grid = ({items}) => {
+  const [currentItem, setCurrentItem] = useState({})
   return (
     <div className="Grid">
       <VirtualList
         width="100%"
-        height={600}
+        height={window.innerHeight - 124}
         itemCount={items.length}
         itemSize={439.39}
         renderItem={({index, style}) => (
-          <Item item={items[index]} key={items[index].id} style={style} />
+          <Item
+            item={items[index]}
+            key={items[index].id}
+            style={style}
+            onClick={() => setCurrentItem(items[index])}
+          />
         )}
       />
+      <FullScreenImage image={currentItem.image} key={Date.now()} />
     </div>
   )
 }

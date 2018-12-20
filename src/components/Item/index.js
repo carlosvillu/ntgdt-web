@@ -6,12 +6,12 @@ import Favorite from '../Icons/Favorite'
 import GetApp from '../Icons/GetApp'
 import Send from '../Icons/Send'
 
-const Item = ({item, style}) => {
+const Item = ({item, style, onClick}) => {
   const {title, image, image_blur: blur} = item
   return (
     <div className="Item" style={style}>
       <h2 className="Item-title">{title}</h2>
-      <div className="Item-image">
+      <div className="Item-image" onClick={onClick}>
         <Image blur={blur} src={image} alt={title} />
       </div>
       <div className="Item-icons">
@@ -25,6 +25,7 @@ const Item = ({item, style}) => {
 
 Item.displayName = 'Item'
 Item.propTypes = {
+  onClick: PropTypes.func,
   style: PropTypes.object,
   item: PropTypes.shape({
     createdAt: PropTypes.number,

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const imgWith = url => width =>
   `https://res.cloudinary.com/carlosvillu/image/fetch/w_${width},f_auto/${url}`
 
-const Image = ({alt, src, blur}) => {
+const Image = ({alt, src, blur, onClick}) => {
   const imgURLWith = imgWith(src)
   return (
     <img
@@ -20,6 +20,7 @@ const Image = ({alt, src, blur}) => {
 
 Image.displayName = 'Image'
 Image.propTypes = {
+  onClick: PropTypes.func,
   alt: PropTypes.string,
   blur: PropTypes.string,
   src: PropTypes.string
