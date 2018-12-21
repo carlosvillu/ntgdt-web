@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useCallback} from 'react'
 import {get, set} from 'idb-keyval'
 
 import * as firebase from 'firebase/app'
@@ -15,13 +15,35 @@ const config = {
 firebase.initializeApp(config)
 
 const MAX_ITEMS = 100
-const ITEMS_KEY = 'ITEMS_KEY'
+const ITEMS_KEY = 'NTGDT_ITEMS_KEY'
+const FAVORITES_ITEMS_KEY = 'NTGDT_FAVORITES_ITEMS_KEY'
 const sortByDate = ({createdAt: a}, {createdAt: b}) => new Date(b) - new Date(a)
 const uniqueElementsBy = (arr, fn) =>
   arr.reduce((acc, v) => {
     if (!acc.some(x => fn(v, x))) acc.push(v)
     return acc
   }, [])
+
+export const useFavoritesFirebase = item => {
+  const [isFavorite, setIsFavorite] = useState(false)
+  useEffect(() => {
+    get(FAVORITES_ITEMS_KEY).then((favorites = []) => {
+      setIsFavorite(favorites.some(favorite => item.id === favorite.id))
+    })
+  }, [])
+
+  const callbackHandleClick = useCallback(async () => {
+    const favorites = await get(FAVORITES_ITEMS_KEY)
+    const nextFavorites = uniqueElementsBy(
+      [item, ...(favorites || [])],
+      (a, b) => a.id === b.id
+    ).sort(sortByDate)
+    set(FAVORITES_ITEMS_KEY, nextFavorites)
+    setIsFavorite(true)
+  })
+
+  return {callbackHandleClick, isFavorite}
+}
 
 export const useFirebaseRef = ref => {
   const [loading, setLoading] = useState(true)
