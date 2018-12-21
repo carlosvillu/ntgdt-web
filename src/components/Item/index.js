@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import {useFavoritesFirebase} from '../../hooks/firebase'
+import {useItemFavoriteFirebase} from '../../hooks/firebase'
 
 import Image from '../Image'
 import Favorite from '../Icons/Favorite'
@@ -10,7 +10,7 @@ import Send from '../Icons/Send'
 
 const Item = ({item, style, onClick}) => {
   const {title, image, image_blur: blur} = item
-  const {isFavorite, callbackHandleClick} = useFavoritesFirebase(item)
+  const {isFavorite, callbackHandleClick} = useItemFavoriteFirebase(item)
   return (
     <div className="Item" style={style}>
       <h2 className="Item-title">{title}</h2>

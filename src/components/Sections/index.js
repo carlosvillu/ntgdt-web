@@ -1,12 +1,21 @@
 import React from 'react'
+import Link from 'react-router/lib/Link'
 
 const Sections = () => (
   <ul className="Sections">
     <li className="Sections-section">
-      <span className="Sections-literal is-selected">New</span>
+      <Link className="Sections-link" to="/" activeClassName="is-selected">
+        <span className="Sections-literal">New</span>
+      </Link>
     </li>
     <li className="Sections-section">
-      <span className="Sections-literal">Favorites</span>
+      <Link
+        className="Sections-link"
+        to="/favorites"
+        activeClassName="is-selected"
+      >
+        <span className="Sections-literal">Favorites</span>
+      </Link>
     </li>
   </ul>
 )
