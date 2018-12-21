@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import {get, set} from 'idb-keyval'
 
 import * as firebase from 'firebase/app'
 import 'firebase/database'
@@ -13,23 +14,42 @@ const config = {
 }
 firebase.initializeApp(config)
 
+const MAX_ITEMS = 100
+const ITEMS_KEY = 'ITEMS_KEY'
 const sortByDate = ({createdAt: a}, {createdAt: b}) => new Date(b) - new Date(a)
+const uniqueElementsBy = (arr, fn) =>
+  arr.reduce((acc, v) => {
+    if (!acc.some(x => fn(v, x))) acc.push(v)
+    return acc
+  }, [])
 
 export const useFirebaseRef = ref => {
   const [loading, setLoading] = useState(true)
   const [items, setItems] = useState()
 
   useEffect(() => {
-    firebase
-      .database()
-      .ref(ref)
-      .orderByChild('createdAt')
-      .limitToLast(100)
-      .on('value', async snapshot => {
-        const items = Object.values(snapshot.val()).sort(sortByDate)
-        setLoading(false)
-        setItems(items)
-      })
+    get(ITEMS_KEY).then((items = []) => {
+      const [lastItemSaved = {}] = items
+      lastItemSaved.id && setLoading(false)
+      setItems(items)
+
+      firebase
+        .database()
+        .ref(ref)
+        .orderByChild('createdAt')
+        .startAt(lastItemSaved.createdAt)
+        .limitToLast(MAX_ITEMS)
+        .on('value', async snapshot => {
+          const fbItems = Object.values(snapshot.val() || {}).sort(sortByDate)
+          const nextItems = uniqueElementsBy(
+            [...fbItems, ...items],
+            (a, b) => a.id === b.id
+          )
+          set(ITEMS_KEY, nextItems)
+          setLoading(false)
+          setItems(nextItems)
+        })
+    })
 
     return () =>
       firebase
