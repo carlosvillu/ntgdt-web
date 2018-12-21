@@ -5,6 +5,11 @@
   font-size: $fz-xl;
   padding-top: $p-l;
 
+
+  &:first-of-type {
+    border-top: none;
+  }
+
   &-toolbar {
     display: flex;
     justify-content: space-between;
