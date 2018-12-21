@@ -33,7 +33,7 @@ export const useFavoritesFirebase = () => {
       setItems(favorites)
       setLoading(false)
     })
-  })
+  }, [])
 
   return {loading, items}
 }
