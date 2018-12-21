@@ -24,7 +24,20 @@ const uniqueElementsBy = (arr, fn) =>
     return acc
   }, [])
 
-export const useFavoritesFirebase = item => {
+export const useFavoritesFirebase = () => {
+  const [items, setItems] = useState()
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    get(FAVORITES_ITEMS_KEY).then((favorites = []) => {
+      setItems(favorites)
+      setLoading(false)
+    })
+  })
+
+  return {loading, items}
+}
+export const useItemFavoriteFirebase = item => {
   const [isFavorite, setIsFavorite] = useState(false)
   useEffect(() => {
     get(FAVORITES_ITEMS_KEY).then((favorites = []) => {
