@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useCallback} from 'react'
 import PropTypes from 'prop-types'
 
 import Item from '../Item'
@@ -7,6 +7,9 @@ import VirtualList from 'react-tiny-virtual-list'
 
 const Grid = ({items}) => {
   const [currentItem, setCurrentItem] = useState({})
+  const [isOpenImage, setIsOpenImage] = useState(false)
+  const handleCloseImage = useCallback(() => setIsOpenImage(false))
+
   return (
     <div className="Grid">
       <VirtualList
@@ -19,11 +22,18 @@ const Grid = ({items}) => {
             item={items[index]}
             key={items[index].id}
             style={style}
-            onClick={() => setCurrentItem(items[index])}
+            onClick={() => {
+              setCurrentItem(items[index])
+              setIsOpenImage(true)
+            }}
           />
         )}
       />
-      <FullScreenImage image={currentItem.image} key={Date.now()} />
+      <FullScreenImage
+        image={currentItem.image}
+        isOpen={isOpenImage}
+        onClose={handleCloseImage}
+      />
     </div>
   )
 }

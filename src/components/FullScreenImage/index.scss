@@ -20,12 +20,11 @@
   }
 
   &-closeIconContainer {
-    display: none;
     border-radius: 50%;
     background-color: #ffffff7a;
     box-shadow: $bxsh-m;
     font-size: $fz-giant;
-    position: absolute;
+    position: fixed;
     right: $p-l;
     top: $p-l;
     z-index: 3;

@@ -1,42 +1,29 @@
-import React, {useState} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 
 import Close from '../Icons/Close'
 
-const FullScreenImage = ({image}) => {
-  const [isOpen, setIsOpen] = useState(Boolean(image))
+const FullScreenImage = ({image, isOpen, onClose}) => {
   const className = cx('FullScreenImage', {
     'is-open': isOpen
   })
+
   return (
     <div className={className}>
-      <div
-        className="FullScreenImage-closeIconContainer"
-        onClick={() => {
-          setIsOpen(false)
-        }}
-      >
-        <Close
-          onClick={() => {
-            setIsOpen(false)
-          }}
-        />
+      <div className="FullScreenImage-closeIconContainer" onClick={onClose}>
+        <Close onClick={onClose} />
       </div>
-      <img
-        className="FullScreenImage-image"
-        src={image}
-        onClick={() => {
-          setIsOpen(false)
-        }}
-      />
+      <img className="FullScreenImage-image" src={image} onClick={onClose} />
     </div>
   )
 }
 
 FullScreenImage.displayName = 'FullScreenImage'
 FullScreenImage.propTypes = {
-  image: PropTypes.string
+  image: PropTypes.string,
+  isOpen: PropTypes.bool,
+  onClose: PropTypes.func
 }
 
 export default FullScreenImage
