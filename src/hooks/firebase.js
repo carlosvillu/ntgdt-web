@@ -14,6 +14,7 @@ const config = {
 }
 firebase.initializeApp(config)
 
+const NOT_FOUND = -1
 const MAX_ITEMS = 100
 const ITEMS_KEY = 'NTGDT_ITEMS_KEY'
 const FAVORITES_ITEMS_KEY = 'NTGDT_FAVORITES_ITEMS_KEY'
@@ -29,6 +30,17 @@ export const useFavoritesFirebase = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    const handleFavoritesRemove = async () => {
+      const favorites = await get(FAVORITES_ITEMS_KEY)
+      setItems(favorites)
+    }
+
+    document.addEventListener('favorites:remove', handleFavoritesRemove)
+    return () =>
+      document.removeEventListener('favorites:remove', handleFavoritesRemove)
+  }, [])
+
+  useEffect(() => {
     get(FAVORITES_ITEMS_KEY).then((favorites = []) => {
       setItems(favorites)
       setLoading(false)
@@ -37,6 +49,7 @@ export const useFavoritesFirebase = () => {
 
   return {loading, items}
 }
+
 export const useItemFavoriteFirebase = item => {
   const [isFavorite, setIsFavorite] = useState(false)
   useEffect(() => {
@@ -46,13 +59,28 @@ export const useItemFavoriteFirebase = item => {
   }, [])
 
   const callbackHandleClick = useCallback(async () => {
-    const favorites = await get(FAVORITES_ITEMS_KEY)
-    const nextFavorites = uniqueElementsBy(
-      [item, ...(favorites || [])],
-      (a, b) => a.id === b.id
-    ).sort(sortByDate)
-    set(FAVORITES_ITEMS_KEY, nextFavorites)
-    setIsFavorite(true)
+    const favorites = (await get(FAVORITES_ITEMS_KEY)) || []
+
+    const indexFavorite = favorites.findIndex(
+      favorite => favorite.id === item.id
+    )
+
+    if (indexFavorite === NOT_FOUND) {
+      const nextFavorites = uniqueElementsBy(
+        [item, ...(favorites || [])],
+        (a, b) => a.id === b.id
+      ).sort(sortByDate)
+      set(FAVORITES_ITEMS_KEY, nextFavorites)
+      setIsFavorite(true)
+    } else {
+      const nextFavorites = [
+        ...favorites.slice(0, indexFavorite),
+        ...favorites.slice(indexFavorite + 1)
+      ]
+      set(FAVORITES_ITEMS_KEY, nextFavorites)
+      setIsFavorite(false)
+      document.dispatchEvent(new window.Event('favorites:remove'))
+    }
   })
 
   return {callbackHandleClick, isFavorite}
