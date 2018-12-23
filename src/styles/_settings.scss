@@ -94,7 +94,7 @@ $c-instagram: #8a3ab9 !default;
 $c-highlight: #fffed4 !default;
 
 // Background transparent
-$c-background-transparent: #000000ba;
+$c-background-transparent: unquote('#000000ba');
 
 // --- Spacing --- //
 //
