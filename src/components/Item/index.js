@@ -23,8 +23,12 @@ const Item = ({item, style, onClick}) => {
           isFavorite={isFavorite}
           onClick={callbackHandleClick}
         />
-        <GetApp className="Item-icon" />
-        <Send className="Item-icon" />
+        <a href={item.image} download="image.jpeg">
+          <GetApp className="Item-icon" />
+        </a>
+        <a href={`whatsapp://send?text=${item.image}`}>
+          <Send className="Item-icon" />
+        </a>
       </div>
     </div>
   )
