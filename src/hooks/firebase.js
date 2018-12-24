@@ -86,6 +86,20 @@ export const useItemFavoriteFirebase = item => {
   return {callbackHandleClick, isFavorite}
 }
 
+export const useItemFirebase = id => {
+  const [loading, setLoading] = useState(true)
+  const [item, setItem] = useState()
+
+  useEffect(() => {
+    get(ITEMS_KEY).then(items => {
+      const item = items.find(i => i.id === id)
+      setLoading(false)
+      setItem(item)
+    })
+  })
+  return {loading, item}
+}
+
 export const useFirebaseRef = ref => {
   const [loading, setLoading] = useState(true)
   const [items, setItems] = useState()
