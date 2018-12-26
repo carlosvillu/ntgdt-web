@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 
+import Div100HV from 'react-div-100vh'
 import Close from '../Icons/Close'
 
 const FullScreenImage = ({image, isOpen, onClose}) => {
@@ -10,12 +11,16 @@ const FullScreenImage = ({image, isOpen, onClose}) => {
   })
 
   return (
-    <div className={className}>
-      <div className="FullScreenImage-closeIconContainer" onClick={onClose}>
+    <Div100HV className={className}>
+      <div
+        hidden
+        className="FullScreenImage-closeIconContainer"
+        onClick={onClose}
+      >
         <Close onClick={onClose} />
       </div>
       <img className="FullScreenImage-image" src={image} onClick={onClose} />
-    </div>
+    </Div100HV>
   )
 }
 
