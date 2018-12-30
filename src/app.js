@@ -4,13 +4,17 @@ import ReactDOM from 'react-dom'
 import Router from 'react-router/lib/Router'
 import browserHistory from 'react-router/lib/browserHistory'
 import routes from './routes'
+import Context from './context'
+import i18n from './literals'
 
 import {register} from '@s-ui/bundler/registerServiceWorker'
 
 import(/* webpackChunkName: 'index.scss' */ './styles/index.scss')
 
 ReactDOM.render(
-  <Router routes={routes} history={browserHistory} />,
+  <Context.Provider value={{i18n}}>
+    <Router routes={routes} history={browserHistory} />
+  </Context.Provider>,
   document.getElementById('⚛️')
 )
 
