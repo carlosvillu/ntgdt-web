@@ -14,8 +14,8 @@
 
 # CI:
 
-pre: https://ntgdt.surge.sh
-pro: https://ntgdt.com
+- pre: https://ntgdt.surge.sh
+- pro: https://ntgdt.com
 
 # TODO:
 
