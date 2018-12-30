@@ -4,3 +4,4 @@ public/
 .DS_*
 npm-debug.log
 .tern-port
+.firebase
