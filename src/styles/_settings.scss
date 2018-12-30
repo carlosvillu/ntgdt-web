@@ -49,7 +49,8 @@ $c-accent-dark: color-variation($c-accent, $c-dark-step) !default;
 
 // Gray color
 $c-gray: #777777 !default;
-$c-gray-light: color-variation($c-gray, $c-light-step) !default;
+// $c-gray-light: color-variation($c-gray, $c-light-step) !default;
+$c-gray-light: #737373 !default;
 $c-gray-dark: color-variation($c-gray, $c-dark-step) !default;
 $c-gray-lightest: color-variation($c-gray, 4) !default;
 
