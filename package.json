@@ -8,7 +8,7 @@
     "co": "npx sui-mono commit",
     "start": "npx sui-bundler dev",
     "build": "npx sui-bundler build -C",
-    "postbuild": "cp -R src/images public && cp src/manifest.json public",
+    "postbuild": "cp -R src/images public && cp src/manifest.json public && cp src/robots.txt public",
     "deploy:pre": "npm run build && npx surge -d https://ntgdt.surge.sh public",
     "predeploy:pro": "cd functions && npm install",
     "deploy:pro": "npm run build && npx firebase deploy --token \"$FIREBASE_TOKEN\""
