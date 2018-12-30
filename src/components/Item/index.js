@@ -26,7 +26,7 @@ const Item = ({item, style, onClick}) => {
         <a href={item.image} download="image.jpeg" hidden>
           <GetApp className="Item-icon" />
         </a>
-        <a href={`whatsapp://send?text=${item.image}`}>
+        <a href={`whatsapp://send?text=${item.image}`} aria-label="Send">
           <Send className="Item-icon" />
         </a>
       </div>
