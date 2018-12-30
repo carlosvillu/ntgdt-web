@@ -16,6 +16,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@s-ui/i18n": "1.5.0",
+    "classnames": "2.2.6",
     "firebase": "5.7.0",
     "firebase-tools": "6.2.2",
     "idb-keyval": "3.1.0",
