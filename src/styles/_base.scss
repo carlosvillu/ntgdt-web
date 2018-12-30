@@ -1,0 +1,17 @@
+@import './_settings';
+@import './_reset.css';
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  color: $c-text-base;
+  font-family: $ff-sans-serif;
+  font-size: $fz-body;
+}
+

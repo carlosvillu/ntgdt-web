@@ -1,0 +1,205 @@
+// --- Colors --- //
+//
+// Prefixes used:
+// * c = color
+
+$color-lighten-steps: 25, 50, 75, 90, 95 !default;
+$color-darken-steps: 20, 35, 55, 75 !default;
+
+@function color-variation($color, $step: 0) {
+
+  $positive-steps: length($color-lighten-steps);
+  $negative-steps: length($color-darken-steps);
+
+  $variation: $color;
+
+  @if ($step > $positive-steps) {
+    $variation: mix(white, $color, nth($color-lighten-steps, $positive-steps));
+  } @else if ($step < -$negative-steps) {
+    $variation: mix(black, $color, nth($color-darken-steps, $negative-steps));
+  } @else if ($step < 0) {
+    $variation: mix(black, $color, nth($color-darken-steps, -$step));
+  } @else if ($step > 0) {
+    $variation: mix(white, $color, nth($color-lighten-steps, $step));
+  }
+
+  @return $variation;
+}
+
+// Shade step {color}-light or {color}-dark variation
+$c-dark-step: -2 !default;
+$c-light-step: 2 !default;
+
+///////////////////////////////////////////////////////////////////////////////
+// Color Palette
+///////////////////////////////////////////////////////////////////////////////
+
+// System color
+$c-system: #000000 !default;
+
+// Primary color
+$c-primary: #2b91c1 !default;
+$c-primary-light: color-variation($c-primary, $c-light-step) !default;
+$c-primary-dark: color-variation($c-primary, $c-dark-step) !default;
+
+// Secondary/Accent color
+$c-accent: #d57c1b !default;
+$c-accent-light: color-variation($c-accent, $c-light-step) !default;
+$c-accent-dark: color-variation($c-accent, $c-dark-step) !default;
+
+// Gray color
+$c-gray: #777777 !default;
+$c-gray-light: color-variation($c-gray, $c-light-step) !default;
+$c-gray-dark: color-variation($c-gray, $c-dark-step) !default;
+$c-gray-lightest: color-variation($c-gray, 4) !default;
+
+
+// Success color
+$c-success: #00a544 !default;
+$c-success-light: color-variation($c-success, $c-light-step) !default;
+$c-success-dark: color-variation($c-success, $c-dark-step) !default;
+
+// Alert color
+$c-alert: #ff6335 !default;
+$c-alert-light: color-variation($c-alert, $c-light-step) !default;
+$c-alert-dark: color-variation($c-alert, $c-dark-step) !default;
+
+// Error color
+$c-error: #e93e40 !default;
+$c-error-light: color-variation($c-error, $c-light-step) !default;
+$c-error-dark: color-variation($c-error, $c-dark-step) !default;
+
+///////////////////////////////////////////////////////////////////////////////
+// Specific Colors
+///////////////////////////////////////////////////////////////////////////////
+
+// Absolute colors / common colors to avoid linting alerts on hardcoded values
+$c-white: #ffffff !default;
+$c-black: #000000 !default;
+
+// Text colors
+$c-text-base: $c-black !default;
+$c-text-accent: $c-accent !default;
+$c-text-link: $c-text-accent !default;
+
+// Social brand colors
+$c-facebook: #3b5998 !default;
+$c-twitter: #55acee !default;
+$c-google: #d34836 !default;
+$c-youtube: #bb0000 !default;
+$c-whatsapp: #7ed321 !default;
+$c-instagram: #8a3ab9 !default;
+
+// Highlight color
+$c-highlight: #fffed4 !default;
+
+// Background transparent
+$c-background-transparent: unquote('#000000ba');
+
+// --- Spacing --- //
+//
+// The naming convention used for variables is based on Emmet.
+// See [Emmet cheat sheet](http://docs.emmet.io/cheat-sheet/)
+//
+// Primary prefixes:
+// * m = margin
+// * p = padding
+
+// Paddings
+$p-base: 8px;                    // 8px
+
+$p-giant: $p-base * 6 !default; // 48px
+$p-xxxl: $p-base * 5 !default;  // 40px
+$p-xxl: $p-base * 4 !default;   // 32px
+$p-xl: $p-base * 3 !default;    // 24px
+$p-l: $p-base * 2 !default;     // 16px
+$p-m: $p-base !default;         // 8px
+$p-s: $p-base / 2 !default;     // 4px
+
+// Margins
+$m-base: 8px;                   // 8px
+
+$m-giant: $m-base * 6 !default; // 48px
+$m-xxxl: $m-base * 5 !default;  // 40px
+$m-xxl: $m-base * 4 !default;   // 32px
+$m-xl: $m-base * 3 !default;    // 24px
+$m-l: $m-base * 2 !default;     // 16px
+$m-m: $m-base !default;         // 8px
+$m-s: $m-base / 2 !default;     // 4px
+
+
+// Gutter
+$gutter: $p-l !default;
+$gutter-s: $gutter / 2 !default;
+
+
+// --- Fonts and typography --- //
+//
+// Prefixes used:
+// * ff = font family
+// * fw = font weight
+// * fz = font size
+// * lh = line height
+
+// Font family
+$ff-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
+
+
+// Font weights
+$fw-light: 300 !default;
+$fw-regular: 400 !default;
+$fw-semi-bold: 500 !default;
+$fw-bold: 700 !default;
+$fw-black: 900 !default;
+
+// Font sizes
+$fz-base: 16px !default;           // 16px
+
+$fz-giant: $fz-base + 20 !default; // 36px
+$fz-xxxl: $fz-base + 12 !default;  // 28px
+$fz-xxl: $fz-base + 8 !default;    // 24px
+$fz-xl: $fz-base + 4 !default;     // 20px
+$fz-l: $fz-base + 2 !default;      // 18px
+$fz-m: $fz-base !default;          // 16px
+$fz-s: $fz-base - 2 !default;      // 14px
+$fz-xs: $fz-base - 4 !default;     // 12px
+$fz-xxs: $fz-base - 6 !default;    // 10px
+
+// Semantic font sizes
+$fz-h1: $fz-giant !default; // 36px
+$fz-h2: $fz-xxxl !default;  // 28px
+$fz-h3: $fz-xxl !default;   // 24px
+$fz-h4: $fz-xl !default;    // 20px
+$fz-h5: $fz-l !default;     // 18px
+$fz-body: $fz-m !default;   // 16px
+
+// Line heights
+$lh-giant: $fz-giant * 1.2 !default;  // 43.2px
+$lh-xxxl: $fz-xxxl * 1.2 !default;    // 33.6px
+$lh-xxl: $fz-xxl * 1.2 !default;      // 28.8px
+$lh-xl: $fz-xl * 1.2 !default;        // 24px
+$lh-l: $fz-l * 1.2 !default;          // 21.6px
+$lh-m: $fz-m * 1.3 !default;          // 20.8px
+$lh-s: $fz-s * 1.3 !default;          // 18.2px
+$lh-xs: $fz-xs * 1.2 !default;        // 14.4px
+$lh-xxs: $fz-xxs * 1.2 !default;      // 12px
+
+// --- Box Style --- //
+
+// Border radius
+$bdrs-m: 2px !default;
+$bdrs-l: 4px !default;
+
+// Border widths
+$bdw-s: 1px !default;
+$bdw-m: 2px !default;
+$bdw-l: 4px !default;
+$bdw-xl: 8px !default;
+
+// Box shadows
+$bxsh-m: 0 1px 4px 0 rgba(0, 0, 0, .24) !default;
+$bxsh-l: 0 3px 8px 0 rgba(0, 0, 0, .16) !default;
+
+// Box shadows focus
+$bxsh-focus: 0 0 3px 0 $c-primary !default;

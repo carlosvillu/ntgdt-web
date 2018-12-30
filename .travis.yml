@@ -1,0 +1,34 @@
+language: node_js
+
+branches:
+  only:
+    - master
+
+node_js:
+  - "10"
+
+before_install:
+  - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+
+install:
+  - npm install -g surge
+  - npm install --force-online
+
+jobs:
+  include:
+    - stage: Deploy PRE
+      if: type = pull_request
+      env:
+        - NODE_ENV=preproduction
+        - STAGE=preproduction
+      script:
+        # - npm install --only=dev --force-online
+        - npm run deploy:pre
+    - stage: deploy PRO
+      if: branch = master AND NOT type = pull_request
+      env:
+        - NODE_ENV=production
+        - STAGE=production
+      script:
+        - npm install --only=dev --force-online
+        - npm run deploy:pro

@@ -1,0 +1,9 @@
+@import '../../styles/settings';
+
+.Root {
+  letter-spacing: 0.5px;
+
+  &-page {
+    margin: 0 $m-xl;
+  }
+}

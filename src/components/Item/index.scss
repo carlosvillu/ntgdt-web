@@ -1,0 +1,49 @@
+@import '../../styles/settings';
+
+.Item {
+  border-top: $bdw-m solid $c-gray-lightest;
+  font-size: $fz-xl;
+  padding-top: $p-l;
+
+
+  &:first-of-type {
+    border-top: none;
+  }
+
+  &-toolbar {
+    display: flex;
+    justify-content: space-between;
+
+    & > svg {
+      margin-left: $m-l;
+    }
+  }
+
+  &-title {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    font-size: $fz-m;
+    line-height: 1.2em;
+    margin-bottom: 16px;
+    height: 2.4em;
+    max-width: 100%;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &-image {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 300px;
+  }
+
+  &-icons {
+    display: flex;
+    justify-content: space-around;
+    margin: $m-xl 0;
+    width: 33%;
+  }
+
+}

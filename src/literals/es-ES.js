@@ -1,6 +1,5 @@
 export default {
-  'HOME_TITLE': 'ntgdt',
-  'DEFAULT_LOADING_MSG': 'Cargando',
-  'SHARE': 'Compartir',
-  'SAVE': 'Guardar'
+  HOME_LOADING: 'Cargando artículos',
+  SECTIONS_NEWS: 'Últimos',
+  SECTIONS_FAVORITES: 'Favoritos'
 }
