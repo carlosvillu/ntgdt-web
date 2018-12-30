@@ -9,7 +9,7 @@ import i18n from './literals'
 
 import {register} from '@s-ui/bundler/registerServiceWorker'
 
-import(/* webpackChunkName: 'index.scss' */ './styles/index.scss')
+import './styles/index.scss'
 
 ReactDOM.render(
   <Context.Provider value={{i18n}}>
