@@ -2,7 +2,7 @@ import React, {useState, useCallback} from 'react'
 import PropTypes from 'prop-types'
 
 import Item from '../Item'
-import FullScreenImage from '../FullScreenImage'
+import FullScreen from '../FullScreen'
 import VirtualList from 'react-tiny-virtual-list'
 
 const Grid = ({items}) => {
@@ -29,7 +29,8 @@ const Grid = ({items}) => {
           />
         )}
       />
-      <FullScreenImage
+      <FullScreen
+        video={currentItem.video}
         image={currentItem.image}
         isOpen={isOpenImage}
         onClose={handleCloseImage}

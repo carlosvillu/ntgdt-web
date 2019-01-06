@@ -7,15 +7,19 @@ import Image from '../Image'
 import Favorite from '../Icons/Favorite'
 import GetApp from '../Icons/GetApp'
 import Send from '../Icons/Send'
+import Play from '../Icons/Play'
 
 const Item = ({item, style, onClick}) => {
-  const {title, image, image_blur: blur} = item
+  const {title, image, video, image_blur: blur} = item
   const {isFavorite, callbackHandleClick} = useItemFavoriteFirebase(item)
+
   return (
     <div className="Item" style={style}>
       <h2 className="Item-title">{title}</h2>
       <div className="Item-image" onClick={onClick}>
-        <Image blur={blur} src={image} alt={title} />
+        {image && <Image blur={blur} src={image} alt={title} />}
+        {video && <Image blur={blur} src={video.poster} alt={title} />}
+        {video && <Play className="Item-play" fill="white" />}
       </div>
       <div className="Item-icons">
         <Favorite
@@ -42,6 +46,7 @@ Item.propTypes = {
     createdAt: PropTypes.number,
     id: PropTypes.string,
     image: PropTypes.string,
+    video: PropTypes.object,
     image_blur: PropTypes.string,
     link: PropTypes.string,
     site: PropTypes.string,
