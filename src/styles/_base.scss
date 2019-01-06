@@ -13,5 +13,11 @@ body {
   color: $c-text-base;
   font-family: $ff-sans-serif;
   font-size: $fz-body;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+}
+
+body *:not(img) {
+  -webkit-touch-callout: none;
 }
 
