@@ -35,8 +35,14 @@
   &-image {
     align-items: center;
     display: flex;
-    justify-content: center;
     height: 300px;
+    justify-content: center;
+    position: relative;
+  }
+
+  &-play {
+    font-size: 4em;
+    position: absolute;
   }
 
   &-icons {
