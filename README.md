@@ -23,6 +23,6 @@
 - [ ] Add aside menu to filter sources
 - [ ] Add GA Events: Open FullScreen create/remove favorite
 - [ ] Add new Sources
-  - [ ] Gifs
+  - [x] Gifs
   - [ ] http://explosm.net
 - [ ] Send push notification when there is new content
