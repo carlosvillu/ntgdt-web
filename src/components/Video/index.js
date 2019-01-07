@@ -10,7 +10,7 @@ const Video = ({webm, mp4, poster, onClick}) => {
       loop
       muted
       onClick={onClick}
-      playsinline
+      playsInline
       poster={poster}
       src={mp4}
     >
