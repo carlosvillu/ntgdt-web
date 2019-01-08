@@ -18,6 +18,11 @@ ReactDOM.render(
   document.getElementById('⚛️')
 )
 
+document.addEventListener('tracker:event', evt => {
+  const {category, action, label} = evt.detail
+  window.ga('send', 'event', category, action, label)
+})
+
 register({
   first: () => window.alert('Content is cached for offline use.'),
   renovate: () => window.alert('New content is available; please refresh.')
