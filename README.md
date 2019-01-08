@@ -21,8 +21,11 @@
 
 - [ ] Notification on install or update SW
 - [ ] Add aside menu to filter sources
-- [ ] Add GA Events: Open FullScreen create/remove favorite
-- [ ] Add new Sources
+- [ ] Create a page to share memes
+- [ ] Add GA Events:
+  - [x] Open/close FullScreen
+  - [ ] create/remove favorite
+- [x] Add new Sources
   - [x] Gifs
-  - [ ] http://explosm.net
+  - [x] http://explosm.net
 - [ ] Send push notification when there is new content
