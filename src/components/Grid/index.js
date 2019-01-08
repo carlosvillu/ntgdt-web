@@ -8,7 +8,17 @@ import VirtualList from 'react-tiny-virtual-list'
 const Grid = ({items}) => {
   const [currentItem, setCurrentItem] = useState({})
   const [isOpenImage, setIsOpenImage] = useState(false)
-  const handleCloseImage = useCallback(() => setIsOpenImage(false))
+  const handleCloseImage = useCallback(() => {
+    const event = new window.CustomEvent('tracker:event', {
+      detail: {
+        category: 'Item',
+        action: 'fullscreen',
+        label: 'close'
+      }
+    })
+    document.dispatchEvent(event)
+    setIsOpenImage(false)
+  })
 
   return (
     <div className="Grid">
@@ -23,6 +33,14 @@ const Grid = ({items}) => {
             key={items[index].id}
             style={style}
             onClick={() => {
+              const event = new window.CustomEvent('tracker:event', {
+                detail: {
+                  category: 'Item',
+                  action: 'fullscreen',
+                  label: 'open'
+                }
+              })
+              document.dispatchEvent(event)
               setCurrentItem(items[index])
               setIsOpenImage(true)
             }}

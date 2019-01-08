@@ -13,8 +13,8 @@ const FullScreen = ({image, video, isOpen, onClose}) => {
 
   return (
     <Div100HV className={className}>
-      <div hidden className="FullScreen-closeIconContainer" onClick={onClose}>
-        <Close onClick={onClose} />
+      <div hidden className="FullScreen-closeIconContainer">
+        <Close />
       </div>
       {image && (
         <img className="FullScreen-image" src={image} onClick={onClose} />
