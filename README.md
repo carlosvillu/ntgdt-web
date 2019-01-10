@@ -29,3 +29,4 @@
   - [x] Gifs
   - [x] http://explosm.net
 - [ ] Send push notification when there is new content
+- [ ] Add perfume.js
