@@ -7,3 +7,4 @@ npm-debug.log
 .firebase
 serviceAccount.development.json
 serviceAccount.production.json
+functions/servicesAccounts.tar
