@@ -7,7 +7,7 @@ node_js:
 before_install:
 - openssl aes-256-cbc -K $encrypted_65329f5fbcde_key -iv $encrypted_65329f5fbcde_iv
   -in servicesAccounts.tar.enc -out functions/servicesAccounts.tar -d
-- tar xvf function/servicesAccounts.tar
+- tar xvf ./functions/servicesAccounts.tar
 - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
 install:
 - npm install --force-online
