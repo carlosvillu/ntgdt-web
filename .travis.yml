@@ -11,7 +11,6 @@ before_install:
   - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
 
 install:
-  - npm install -g surge
   - npm install --force-online
 
 jobs:
@@ -19,8 +18,9 @@ jobs:
     - stage: Deploy PRE
       if: type = pull_request
       env:
-        - NODE_ENV=preproduction
+        - NODE_ENV=production
         - STAGE=preproduction
+        - HOST=dev.ntgdt.com
       script:
         # - npm install --only=dev --force-online
         - npm run deploy:pre
@@ -29,6 +29,6 @@ jobs:
       env:
         - NODE_ENV=production
         - STAGE=production
+        - HOST=ntgdt.com
       script:
-        - npm install --only=dev --force-online
         - npm run deploy:pro
