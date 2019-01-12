@@ -10,10 +10,14 @@ const stage = functions.config().env
   ? functions.config().env.stage
   : 'development'
 const serviceAccount = require('./serviceAccount.' + stage + '.json')
+const databaseURL =
+  stage === 'development'
+    ? 'https://no-tengo-ganas-de-trabajar-dev.firebaseio.com'
+    : 'https://no-tengo-ganas-de-trabajar.firebaseio.com'
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://no-tengo-ganas-de-trabajar-dev.firebaseio.com'
+  databaseURL: databaseURL
 })
 const db = admin.database()
 

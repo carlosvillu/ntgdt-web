@@ -10,3 +10,4 @@ serviceAccount.production.json
 functions/servicesAccounts.tar
 ./functions/index.html
 functions/index.html
+firebase-debug.log
