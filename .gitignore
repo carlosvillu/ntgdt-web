@@ -8,3 +8,5 @@ npm-debug.log
 serviceAccount.development.json
 serviceAccount.production.json
 functions/servicesAccounts.tar
+./functions/index.html
+functions/index.html

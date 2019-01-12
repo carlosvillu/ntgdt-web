@@ -32,7 +32,7 @@ const Item = ({item, style, onClick, hiddenShare}) => {
         </a>
         <a
           hidden={hiddenShare}
-          href={`whatsapp://send?text=https://${process.env.HOST}/preview/${
+          href={`whatsapp://send?text=https://${process.env.HOST}/preview?id=${
             item.id
           }`}
           aria-label="Send"
