@@ -1,34 +1,32 @@
 language: node_js
-
 branches:
   only:
-    - master
-
+  - master
 node_js:
-  - "10"
-
+- '10'
 before_install:
-  - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
-
+- openssl aes-256-cbc -K $encrypted_65329f5fbcde_key -iv $encrypted_65329f5fbcde_iv
+  -in serviceAccount.development.json.enc -out functions/serviceAccount.development.json
+  -d
+- npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
 install:
-  - npm install --force-online
-
+- npm install --force-online
 jobs:
   include:
-    - stage: Deploy PRE
-      if: type = pull_request
-      env:
-        - NODE_ENV=production
-        - STAGE=preproduction
-        - HOST=dev.ntgdt.com
-      script:
-        # - npm install --only=dev --force-online
-        - npm run deploy:pre
-    - stage: deploy PRO
-      if: branch = master AND NOT type = pull_request
-      env:
-        - NODE_ENV=production
-        - STAGE=production
-        - HOST=ntgdt.com
-      script:
-        - npm run deploy:pro
+  - stage: Deploy PRE
+    if: type = pull_request
+    env:
+    - NODE_ENV=production
+    - STAGE=preproduction
+    - HOST=dev.ntgdt.com
+    script:
+    - npm install --only=dev --force-online
+    - npm run deploy:pre
+  - stage: deploy PRO
+    if: branch = master AND NOT type = pull_request
+    env:
+    - NODE_ENV=production
+    - STAGE=production
+    - HOST=ntgdt.com
+    script:
+    - npm run deploy:pro
