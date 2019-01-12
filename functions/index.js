@@ -33,12 +33,12 @@ exports.share = functions.https.onRequest((request, response) => {
          ? `<meta property="og:image" content="https://res.cloudinary.com/carlosvillu/image/fetch/w_300,f_auto/${
              item.image
            }">`
-         : null
+         : ''
      }
      ${
        item.video
          ? `<meta property="og:image" content="${item.video.mp4}">`
-         : null
+         : ''
      }
      `
     response.send(
