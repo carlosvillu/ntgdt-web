@@ -16,7 +16,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
   response.send('Hello from Firebase!')
 })
 exports.share = functions.https.onRequest((request, response) => {
-  return response.send('Hi!!')
+  return response.send(functions.config().env.NODE_ENV)
   //   const ref = db.ref('/entries/' + request.query.id)
   //   ref.once('value', function(snapshot) {
   //     const item = snapshot.val()

@@ -9,9 +9,9 @@
     "start": "npx sui-bundler dev",
     "build": "npx sui-bundler build -C",
     "postbuild": "cp -R src/images public && cp src/manifest.json public && cp src/robots.txt public",
-    "predeploy:pre": "firebase use development && cd functions && npm install",
+    "predeploy:pre": "firebase use development && firebase functions:config:set env.NODE_ENV=\"development\" && cd functions && npm install",
     "deploy:pre": "npm run build && npx firebase deploy --token \"$FIREBASE_TOKEN\"",
-    "predeploy:pro": "firebase use production && cd functions && npm install",
+    "predeploy:pro": "firebase use production && firebase functions:config:set env.NODE_ENV=\"production\" && cd functions && npm install",
     "deploy:pro": "npm run build && npx firebase deploy --token \"$FIREBASE_TOKEN\""
   },
   "keywords": [],
