@@ -23,7 +23,7 @@ const configDEV = {
 }
 
 firebase.initializeApp(
-  process.env.NODE_ENV === 'production' ? configPRO : configDEV
+  process.env.STAGE === 'production' ? configPRO : configDEV
 )
 
 const NOT_FOUND = -1
