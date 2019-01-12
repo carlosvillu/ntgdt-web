@@ -8,11 +8,11 @@
     "co": "npx sui-mono commit",
     "start": "npx sui-bundler dev",
     "build": "npx sui-bundler build -C",
-    "postbuild": "cp -R src/images public && cp src/manifest.json public && cp src/robots.txt public",
+    "postbuild": "cp public/index.html ./functions && cp -R src/images public && cp src/manifest.json public && cp src/robots.txt public",
     "predeploy:pre": "firebase use development && firebase functions:config:set env.stage=\"development\" && cd functions && npm install",
-    "deploy:pre": "npm run build && cp public/index.html ./functions && npx firebase deploy --token \"$FIREBASE_TOKEN\"",
+    "deploy:pre": "npm run build &&  && npx firebase deploy --token \"$FIREBASE_TOKEN\"",
     "predeploy:pro": "firebase use production && firebase functions:config:set env.stage=\"production\" && cd functions && npm install",
-    "deploy:pro": "npm run build &&  cp public/index.html ./functions && npx firebase deploy --token \"$FIREBASE_TOKEN\""
+    "deploy:pro": "npm run build && npx firebase deploy --token \"$FIREBASE_TOKEN\""
   },
   "keywords": [],
   "author": "",
