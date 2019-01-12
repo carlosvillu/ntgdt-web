@@ -14,11 +14,11 @@ install:
 - npm install --force-online
 jobs:
   include:
-  - stage: Deploy PRE
+  - stage: Deploy Dev
     if: type = pull_request
     env:
     - NODE_ENV=production
-    - STAGE=preproduction
+    - STAGE=development
     - HOST=dev.ntgdt.com
     script:
     - npm install --only=dev --force-online
