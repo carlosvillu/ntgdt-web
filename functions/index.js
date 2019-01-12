@@ -4,7 +4,9 @@ const admin = require('firebase-admin')
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 
-const serviceAccount = require('./serviceAccount.json')
+const serviceAccount = require('./serviceAccount.' +
+  functions.config().env.stage +
+  '.json')
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
