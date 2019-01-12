@@ -30,4 +30,5 @@ jobs:
     - STAGE=production
     - HOST=ntgdt.com
     script:
+    - npm install --only=dev --force-online
     - npm run deploy:pro
