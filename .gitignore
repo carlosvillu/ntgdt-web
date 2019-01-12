@@ -5,4 +5,5 @@ public/
 npm-debug.log
 .tern-port
 .firebase
-serviceAccount*
+serviceAccount.development.json
+serviceAccount.production.json
