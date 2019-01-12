@@ -9,7 +9,7 @@ import GetApp from '../Icons/GetApp'
 import Send from '../Icons/Send'
 import Play from '../Icons/Play'
 
-const Item = ({item, style, onClick}) => {
+const Item = ({item, style, onClick, hiddenShare}) => {
   const {title, image, video, image_blur: blur} = item
   const {isFavorite, callbackHandleClick} = useItemFavoriteFirebase(item)
 
@@ -30,7 +30,13 @@ const Item = ({item, style, onClick}) => {
         <a href={item.image} download="image.jpeg" hidden>
           <GetApp className="Item-icon" />
         </a>
-        <a href={`whatsapp://send?text=${item.image}`} aria-label="Send">
+        <a
+          hidden={hiddenShare}
+          href={`whatsapp://send?text=http://${process.env.HOST}/preview/${
+            item.id
+          }`}
+          aria-label="Send"
+        >
           <Send className="Item-icon" />
         </a>
       </div>
@@ -42,6 +48,7 @@ Item.displayName = 'Item'
 Item.propTypes = {
   onClick: PropTypes.func,
   style: PropTypes.object,
+  hiddenShare: PropTypes.bool,
   item: PropTypes.shape({
     createdAt: PropTypes.number,
     id: PropTypes.string,
