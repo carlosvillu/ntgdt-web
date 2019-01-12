@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "no-tengo-ganas-de-trabajar"
+    "production": "no-tengo-ganas-de-trabajar",
+    "development": "no-tengo-ganas-de-trabajar-dev"
   }
 }

@@ -23,7 +23,7 @@ const configDEV = {
 }
 
 firebase.initializeApp(
-  process.env.NODE_ENV === 'production' ? configPRO : configDEV
+  process.env.STAGE === 'production' ? configPRO : configDEV
 )
 
 const NOT_FOUND = -1
@@ -103,12 +103,24 @@ export const useItemFirebase = id => {
   const [item, setItem] = useState()
 
   useEffect(() => {
-    get(ITEMS_KEY).then(items => {
-      const item = items.find(i => i.id === id)
-      setLoading(false)
-      setItem(item)
+    get(ITEMS_KEY).then((items = []) => {
+      let item = items.find(i => i.id === id)
+      if (item) {
+        setLoading(false)
+        setItem(item)
+      } else {
+        firebase
+          .database()
+          .ref('/entries/' + id)
+          .once('value')
+          .then(snapshot => {
+            item = snapshot.val()
+            item && setLoading(false)
+            item && setItem(item)
+          })
+      }
     })
-  })
+  }, [])
   return {loading, item}
 }
 
