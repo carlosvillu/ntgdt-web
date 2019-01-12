@@ -12,7 +12,7 @@ export default (
     <Route component={Root}>
       <Route path="/" component={Home} />
       <Route path="/favorites" component={Favorites} />
-      <Route path="/preview/:id" component={Preview} />
+      <Route path="/preview" component={Preview} />
     </Route>
   </Router>
 )

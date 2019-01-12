@@ -7,7 +7,7 @@ import FullScreen from '../../components/FullScreen'
 import HeaderSeoItem from '../../components/HeaderSeoItem'
 
 const Preview = ({router}) => {
-  const {loading, item} = useItemFirebase(router.params.id)
+  const {loading, item} = useItemFirebase(router.location.query.id)
   const [currentItem, setCurrentItem] = useState({})
   const [isOpenImage, setIsOpenImage] = useState(false)
   const handleCloseImage = useCallback(() => {
