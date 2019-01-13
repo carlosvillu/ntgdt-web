@@ -36,6 +36,16 @@ const Item = ({item, style, onClick, hiddenShare}) => {
             item.id
           }`}
           aria-label="Send"
+          onClick={() =>
+            document.dispatchEvent(
+              new window.CustomEvent('tracker:event', {
+                detail: {
+                  category: 'Action',
+                  action: 'shared'
+                }
+              })
+            )
+          }
         >
           <Send className="Item-icon" />
         </a>
