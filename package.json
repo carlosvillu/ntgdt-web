@@ -36,7 +36,7 @@
     "@s-ui/mono": "1"
   },
   "sui-bundler": {
-    "env": ["HOST"],
+    "env": ["HOST", "STAGE"],
     "offline": {
       "whitelist": [
         "::all::"
