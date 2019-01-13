@@ -7,16 +7,32 @@ import routes from './routes'
 import Context from './context'
 import i18n from './literals'
 
+import Perfume from 'perfume.js'
+
 import {register} from '@s-ui/bundler/registerServiceWorker'
 
 import './styles/index.scss'
 
+const perfume = new Perfume({
+  // Metrics
+  firstContentfulPaint: true,
+  firstPaint: true,
+  firstInputDelay: true,
+  // Analytics
+  googleAnalytics: {
+    enable: true,
+    timingVar: 'performance'
+  }
+})
+
+perfume.start('render')
 ReactDOM.render(
   <Context.Provider value={{i18n}}>
     <Router routes={routes} history={browserHistory} />
   </Context.Provider>,
   document.getElementById('⚛️')
 )
+perfume.sendTiming('render', perfume.end('render'))
 
 document.addEventListener('tracker:event', evt => {
   const {category, action, label} = evt.detail
