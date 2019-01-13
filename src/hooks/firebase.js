@@ -84,6 +84,15 @@ export const useItemFavoriteFirebase = item => {
       ).sort(sortByDate)
       set(FAVORITES_ITEMS_KEY, nextFavorites)
       setIsFavorite(true)
+      document.dispatchEvent(
+        new window.CustomEvent('tracker:event', {
+          detail: {
+            category: 'Action',
+            action: 'favorite',
+            label: 'created'
+          }
+        })
+      )
     } else {
       const nextFavorites = [
         ...favorites.slice(0, indexFavorite),
@@ -92,6 +101,15 @@ export const useItemFavoriteFirebase = item => {
       set(FAVORITES_ITEMS_KEY, nextFavorites)
       setIsFavorite(false)
       document.dispatchEvent(new window.Event('favorites:remove'))
+      document.dispatchEvent(
+        new window.CustomEvent('tracker:event', {
+          detail: {
+            category: 'Action',
+            action: 'favorite',
+            label: 'remove'
+          }
+        })
+      )
     }
   })
 
