@@ -30,7 +30,7 @@ exports.share = functions.https.onRequest((request, response) => {
   ref.once('value', function(snapshot) {
     const item = snapshot.val()
     const metas = `
-     <meta property="og:title" content="explosm" />
+     <meta property="og:title" content="${item.title}" />
      <meta property="og:url" content="https://ntgdt.com/preview/${item.id}">
      ${
        item.image
