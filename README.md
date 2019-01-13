@@ -14,14 +14,14 @@
 
 # CI:
 
-- pre: https://ntgdt.surge.sh
+- pre: https://dev.ntgdt.com
 - pro: https://ntgdt.com
 
 # TODO:
 
 - [ ] Notification on install or update SW
 - [ ] Add aside menu to filter sources
-- [ ] Create a page to share memes
+- [x] Create a page to share memes
 - [ ] Add GA Events:
   - [x] Open/close FullScreen
   - [ ] create/remove favorite
