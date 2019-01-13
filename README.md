@@ -19,12 +19,13 @@
 
 # TODO:
 
-- [ ] Notification on install or update SW
+- [ ] Notification on install or update SW w/out window.alert
 - [ ] Add aside menu to filter sources
 - [x] Create a page to share memes
-- [ ] Add GA Events:
+- [x] Add GA Events:
   - [x] Open/close FullScreen
-  - [ ] create/remove favorite
+  - [x] create/remove favorite
+  - [x] shared item
 - [x] Add new Sources
   - [x] Gifs
   - [x] http://explosm.net
