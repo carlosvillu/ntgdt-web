@@ -23,6 +23,7 @@
     "firebase": "5.7.0",
     "firebase-tools": "6.2.2",
     "idb-keyval": "3.1.0",
+    "perfume.js": "2.1.1",
     "react": "16.7.0-alpha.2",
     "react-div-100vh": "0.3.2",
     "react-dom": "16.7.0-alpha.2",
@@ -36,7 +37,10 @@
     "@s-ui/mono": "1"
   },
   "sui-bundler": {
-    "env": ["HOST", "STAGE"],
+    "env": [
+      "HOST",
+      "STAGE"
+    ],
     "offline": {
       "whitelist": [
         "::all::"
