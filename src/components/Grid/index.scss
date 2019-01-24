@@ -2,7 +2,9 @@
 
 .Grid {
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 360px;
 }
 
