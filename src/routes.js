@@ -6,6 +6,7 @@ import Root from './components/Root'
 import Home from './pages/Home'
 import Favorites from './pages/Favorites'
 import Preview from './pages/Preview'
+import Shared from './pages/Shared'
 
 export default (
   <Router>
@@ -13,6 +14,7 @@ export default (
       <Route path="/" component={Home} />
       <Route path="/favorites" component={Favorites} />
       <Route path="/preview" component={Preview} />
+      <Route path="/shared-target" component={Shared} />
     </Route>
   </Router>
 )

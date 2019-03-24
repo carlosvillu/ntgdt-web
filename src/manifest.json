@@ -6,6 +6,14 @@
   "display": "standalone",
   "orientation": "portrait",
   "Scope": "/",
+  "share_target": {
+    "action": "/shared-target/",
+    "params": {
+      "title": "myTitle",
+      "text": "myText",
+      "url": "myURL"
+    }
+  },
   "start_url": "/?utm_source=web_app_manifest",
   "icons": [
     {
