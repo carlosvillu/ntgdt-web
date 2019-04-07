@@ -67,6 +67,7 @@ exports.uploadPhoto = functions.https.onRequest((req, res, next) => {
 
     // This callback will be invoked after all uploaded files are saved.
     busboy.on('finish', async () => {
+      let myUrl = ''
       for (const name in uploads) {
         const upload = uploads[name]
         const file = upload.file
@@ -81,15 +82,14 @@ exports.uploadPhoto = functions.https.onRequest((req, res, next) => {
           .getSignedUrl({action: 'read', expires: '03-01-2500'})
           .catch(next)
 
+        myUrl = url
+
         console.log('url', url)
         await db.ref(`/uploads/${nextKey}`).set({
           image: url
         })
-        // res.write(`${file}\n`)
       }
-      // res.end()
-
-      res.send(fs.readFileSync(path.join(__dirname, 'index.html'), 'utf-8'))
+      res.redirect(`/myPhoto?image=${myUrl}`)
     })
 
     // The raw bytes of the upload will be in req.rawBody.  Send it to busboy, and get
