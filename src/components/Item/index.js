@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import {useItemFavoriteFirebase} from '../../hooks/firebase'
 
+import Share from '../Share'
 import Image from '../Image'
 import Favorite from '../Icons/Favorite'
 import GetApp from '../Icons/GetApp'
@@ -30,7 +31,8 @@ const Item = ({item, style, onClick, hiddenShare}) => {
         <a href={item.image} download="image.jpeg" hidden>
           <GetApp className="Item-icon" />
         </a>
-        <a
+        <Share
+          item={item}
           hidden={hiddenShare}
           href={`whatsapp://send?text=${encodeURIComponent(
             `https://${process.env.HOST}/preview?id=${item.id}`
@@ -48,7 +50,7 @@ const Item = ({item, style, onClick, hiddenShare}) => {
           }
         >
           <Send className="Item-icon" />
-        </a>
+        </Share>
       </div>
     </div>
   )
