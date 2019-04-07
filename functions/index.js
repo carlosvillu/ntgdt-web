@@ -70,7 +70,6 @@ exports.uploadPhoto = functions.https.onRequest((req, res, next) => {
       let myUrl = ''
       for (const name in uploads) {
         const upload = uploads[name]
-        const file = upload.file
         const bucket = upload.bucket
         const nextKey = db
           .ref()

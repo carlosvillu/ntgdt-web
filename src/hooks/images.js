@@ -11,7 +11,7 @@ export const useImages = ({blurImg, fullImage}) => {
       imgRef.current.src = blurImg
       imgRef.current.classList.add('is-loading')
     },
-    [imgRef.current]
+    [blurImg]
   )
 
   useEffect(
@@ -36,7 +36,7 @@ export const useImages = ({blurImg, fullImage}) => {
         imgRef.current.classList.remove('is-loading')
       }
     },
-    [imgRef.current]
+    [fullImage]
   )
 
   return imgRef
