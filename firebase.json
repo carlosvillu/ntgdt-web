@@ -8,6 +8,10 @@
       "source": "/preview**",
       "function": "share"
     },
+    {
+      "source": "/uploadPhoto**",
+      "function": "uploadPhoto"
+    },
       {
         "source": "**",
         "destination": "/index.html"
