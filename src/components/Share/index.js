@@ -10,7 +10,6 @@ const Share = ({hidden, item, children}) => {
       )}`}
       aria-label="Send"
       onClick={evt => {
-        debugger // eslint-disable-line
         if (window.navigator.share) {
           evt.preventDefault()
           navigator.share({
