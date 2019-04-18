@@ -12,7 +12,9 @@
     "predeploy:pre": "firebase use development && firebase functions:config:set env.stage=\"development\" && cd functions && npm install",
     "deploy:pre": "npm run build && npx firebase deploy --token \"$FIREBASE_TOKEN\"",
     "predeploy:pro": "firebase use production && firebase functions:config:set env.stage=\"production\" && cd functions && npm install",
-    "deploy:pro": "npm run build && npx firebase deploy --token \"$FIREBASE_TOKEN\""
+    "deploy:pro": "npm run build && npx firebase deploy --token \"$FIREBASE_TOKEN\"",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "keywords": [],
   "author": "",
@@ -28,7 +30,8 @@
     "react-div-100vh": "0.3.2",
     "react-dom": "16.7.0-alpha.2",
     "react-helmet": "5.2.0",
-    "react-tiny-virtual-list": "2.2.0"
+    "react-tiny-virtual-list": "2.2.0",
+    "snyk": "^1.151.1"
   },
   "devDependencies": {
     "@s-ui/bundler": "5",
@@ -52,5 +55,6 @@
       "./node_modules/@s-ui/lint/eslintrc.js"
     ]
   },
-  "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml"
+  "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml",
+  "snyk": true
 }
