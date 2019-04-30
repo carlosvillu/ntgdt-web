@@ -46,7 +46,7 @@ const Item = ({item, style, onClick, hiddenShare}) => {
                 }
               })
             )
-          }}
+          }
         >
           <Send className="Item-icon" />
         </Share>
