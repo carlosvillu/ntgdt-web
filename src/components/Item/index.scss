@@ -52,4 +52,14 @@
     width: 33%;
   }
 
+  &-icon {
+    color: var(--text-color-normal);
+    fill: currentColor;
+    width: $fz-xxl;
+    height: $fz-xxl;
+
+    &.is-favorite {
+      color: #ff6335;
+    }
+  }
 }

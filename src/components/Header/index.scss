@@ -1,8 +1,21 @@
 @import '../../styles/settings';
 
 .Header {
-  font-weight: 800;
+  display: flex;
   font-size: $fz-giant;
-      padding-left: $p-xl;
-    padding-top: $p-xl;
+  font-weight: 800;
+  justify-content: space-between;
+  padding-left: $p-xl;
+  padding-top: $p-xl;
+
+  &-actions {
+    padding-right: $p-xl;
+  }
+
+  &-action {
+    color: var(--text-color-normal);
+    fill: currentColor;
+    width: $fz-xxl;
+    height: $fz-xxl;
+  }
 }
