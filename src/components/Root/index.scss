@@ -1,6 +1,7 @@
 @import '../../styles/settings';
 
 .Root {
+  background-color: var(--background-color);
   letter-spacing: 0.5px;
 
   &-page {

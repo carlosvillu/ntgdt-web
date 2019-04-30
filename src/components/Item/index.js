@@ -24,8 +24,7 @@ const Item = ({item, style, onClick, hiddenShare}) => {
       </div>
       <div className="Item-icons">
         <Favorite
-          className="Item-icon"
-          isFavorite={isFavorite}
+          className={`Item-icon ${isFavorite ? 'is-favorite' : ''}`}
           onClick={callbackHandleClick}
         />
         <a href={item.image} download="image.jpeg" hidden>

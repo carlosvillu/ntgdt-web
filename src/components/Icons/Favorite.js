@@ -2,14 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const SvgComponent = props => {
-  const {isFavorite, onClick, ...htmlProps} = props
+  const {onClick, ...htmlProps} = props
   return (
     <svg
       width="1em"
       height="1em"
       viewBox="0 0 24 24"
       {...htmlProps}
-      fill={isFavorite ? '#ff6335' : null}
       onClick={onClick}
     >
       <path d="M0 0h24v24H0z" fill="none" />
@@ -19,8 +18,7 @@ const SvgComponent = props => {
 }
 
 SvgComponent.propTypes = {
-  onClick: PropTypes.func,
-  isFavorite: PropTypes.bool
+  onClick: PropTypes.func
 }
 
 export default SvgComponent
