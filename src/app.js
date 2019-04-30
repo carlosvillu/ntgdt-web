@@ -41,5 +41,8 @@ document.addEventListener('tracker:event', evt => {
 
 register({
   first: () => window.alert('Content is cached for offline use.'),
-  renovate: () => window.alert('New content is available; please refresh.')
+  renovate: () => {
+    window.alert('New content is available; please refresh.')
+    window.location.href = '/'
+  }
 })()
