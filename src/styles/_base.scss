@@ -9,13 +9,25 @@
   --text-color-light: hsl(0, 0%, 45%, 1);
 }
 
-// html.color-theme-in-transition,
-// html.color-theme-in-transition *,
-// html.color-theme-in-transition *:before,
-// html.color-theme-in-transition *:after {
-//   transition: all 750ms !important;
-//   transition-delay: 0 !important;
-// }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ligth: 100%;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --ligth: 0%;
+  }
+}
+
+html.color-theme-in-transition,
+html.color-theme-in-transition *,
+html.color-theme-in-transition *:before,
+html.color-theme-in-transition *:after {
+  transition: background 750ms !important;
+  transition-delay: 0 !important;
+}
 
 html {
   box-sizing: border-box;
