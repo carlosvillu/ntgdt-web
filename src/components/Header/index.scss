@@ -18,4 +18,15 @@
     width: $fz-xxl;
     height: $fz-xxl;
   }
+
+  @media (prefers-color-scheme: dark) {
+    &-action {
+      display: none;
+    }
+  }
+  @media (prefers-color-scheme: light) {
+    &-action {
+      display: none;
+    }
+  }
 }
