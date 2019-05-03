@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.ntgdt",
+    "sha256_cert_fingerprints":
+    ["F8:5F:6F:79:37:1B:BE:C6:3A:4C:3C:24:34:FB:F7:87:62:A5:C2:A2:36:C7:B2:3F:31:88:EA:9D:3C:D2:15:8B"]
+  }
+}]
