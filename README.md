@@ -31,4 +31,4 @@
   - [x] http://explosm.net
 - [ ] Send push notification when there is new content
 - [x] Add perfume.js
-- [ ] Black and white theme
+- [x] Black and white theme
