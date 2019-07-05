@@ -1,0 +1,40 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-450202:
+    - firebase-tools > archiver > zip-stream > lodash:
+        patched: '2019-07-05T03:57:14.754Z'
+    - firebase-tools > lodash:
+        patched: '2019-07-05T03:57:14.754Z'
+    - firebase-tools > inquirer > lodash:
+        patched: '2019-07-05T03:57:14.754Z'
+    - firebase-tools > archiver > lodash:
+        patched: '2019-07-05T03:57:14.754Z'
+    - firebase > @firebase/firestore > grpc > lodash:
+        patched: '2019-07-05T03:57:14.754Z'
+    - firebase-tools > archiver > async > lodash:
+        patched: '2019-07-05T03:57:14.754Z'
+    - firebase-tools > google-auto-auth > async > lodash:
+        patched: '2019-07-05T03:57:14.754Z'
+    - firebase-tools > superstatic > nash > lodash:
+        patched: '2019-07-05T03:57:14.754Z'
+    - firebase-tools > superstatic > lodash:
+        patched: '2019-07-05T03:57:14.754Z'
+    - firebase-tools > archiver > archiver-utils > lodash:
+        patched: '2019-07-05T03:57:14.754Z'
+    - firebase-tools > @google-cloud/functions-emulator > googleapis > async > lodash:
+        patched: '2019-07-05T03:57:14.754Z'
+    - firebase-tools > @google-cloud/functions-emulator > @google-cloud/storage > async > lodash:
+        patched: '2019-07-05T03:57:14.754Z'
+    - firebase-tools > superstatic > glob-slasher > toxic > lodash:
+        patched: '2019-07-05T03:57:14.754Z'
+    - firebase-tools > archiver > zip-stream > archiver-utils > lodash:
+        patched: '2019-07-05T03:57:14.754Z'
+    - firebase-tools > @google-cloud/functions-emulator > @google-cloud/storage > @google-cloud/common > google-auto-auth > async > lodash:
+        patched: '2019-07-05T03:57:14.754Z'
+    - firebase-tools > @google-cloud/functions-emulator > @google-cloud/storage > @google-cloud/common > split-array-stream > async > lodash:
+        patched: '2019-07-05T03:57:14.754Z'
+    - firebase-tools > @google-cloud/functions-emulator > @google-cloud/storage > gcs-resumable-upload > google-auto-auth > async > lodash:
+        patched: '2019-07-05T03:57:14.754Z'
