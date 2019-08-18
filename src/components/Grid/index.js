@@ -27,6 +27,7 @@ const Grid = ({items}) => {
         height={window.innerHeight - 124}
         itemCount={items.length}
         itemSize={439.39}
+        className="virtualList"
         renderItem={({index, style}) => (
           <Item
             item={items[index]}
