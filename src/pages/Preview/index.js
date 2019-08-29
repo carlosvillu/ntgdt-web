@@ -23,34 +23,33 @@ const Preview = ({router}) => {
   })
   return (
     <div className="Preview">
-      {!loading &&
-        item && (
-          <React.Fragment>
-            <HeaderSeoItem item={item} />
-            <Item
-              hiddenShare
-              item={item}
-              onClick={() => {
-                const event = new window.CustomEvent('tracker:event', {
-                  detail: {
-                    category: 'Item',
-                    action: 'fullscreen',
-                    label: 'open'
-                  }
-                })
-                document.dispatchEvent(event)
-                setCurrentItem(item)
-                setIsOpenImage(true)
-              }}
-            />
-            <FullScreen
-              video={currentItem.video}
-              image={currentItem.image}
-              isOpen={isOpenImage}
-              onClose={handleCloseImage}
-            />
-          </React.Fragment>
-        )}
+      {!loading && item && (
+        <React.Fragment>
+          <HeaderSeoItem item={item} />
+          <Item
+            hiddenShare
+            item={item}
+            onClick={() => {
+              const event = new window.CustomEvent('tracker:event', {
+                detail: {
+                  category: 'Item',
+                  action: 'fullscreen',
+                  label: 'open'
+                }
+              })
+              document.dispatchEvent(event)
+              setCurrentItem(item)
+              setIsOpenImage(true)
+            }}
+          />
+          <FullScreen
+            video={currentItem.video}
+            image={currentItem.image}
+            isOpen={isOpenImage}
+            onClose={handleCloseImage}
+          />
+        </React.Fragment>
+      )}
     </div>
   )
 }

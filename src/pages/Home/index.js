@@ -1,5 +1,4 @@
 import React, {useContext} from 'react'
-
 import {useFirebaseRef} from '../../hooks/firebase'
 
 import Context from '../../context'

@@ -1,7 +1,7 @@
 @import '../../styles/settings';
 
 .FullScreen {
-  -webkit-transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0, 0, 0);
   align-items: center;
   background-color: $c-background-transparent;
   display: none;
@@ -35,4 +35,3 @@
     max-width: 100%;
   }
 }
-
