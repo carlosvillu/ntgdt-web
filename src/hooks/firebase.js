@@ -64,14 +64,11 @@ export const useFavoritesFirebase = () => {
 
 export const useItemFavoriteFirebase = item => {
   const [isFavorite, setIsFavorite] = useState(false)
-  useEffect(
-    () => {
-      get(FAVORITES_ITEMS_KEY).then((favorites = []) => {
-        setIsFavorite(favorites.some(favorite => item.id === favorite.id))
-      })
-    },
-    [item.id]
-  )
+  useEffect(() => {
+    get(FAVORITES_ITEMS_KEY).then((favorites = []) => {
+      setIsFavorite(favorites.some(favorite => item.id === favorite.id))
+    })
+  }, [item.id])
 
   const callbackHandleClick = useCallback(async () => {
     const favorites = (await get(FAVORITES_ITEMS_KEY)) || []
@@ -123,28 +120,25 @@ export const useItemFirebase = id => {
   const [loading, setLoading] = useState(true)
   const [item, setItem] = useState()
 
-  useEffect(
-    () => {
-      get(ITEMS_KEY).then((items = []) => {
-        let item = items.find(i => i.id === id)
-        if (item) {
-          setLoading(false)
-          setItem(item)
-        } else {
-          firebase
-            .database()
-            .ref('/entries/' + id)
-            .once('value')
-            .then(snapshot => {
-              item = snapshot.val()
-              item && setLoading(false)
-              item && setItem(item)
-            })
-        }
-      })
-    },
-    [id]
-  )
+  useEffect(() => {
+    get(ITEMS_KEY).then((items = []) => {
+      let item = items.find(i => i.id === id)
+      if (item) {
+        setLoading(false)
+        setItem(item)
+      } else {
+        firebase
+          .database()
+          .ref('/entries/' + id)
+          .once('value')
+          .then(snapshot => {
+            item = snapshot.val()
+            item && setLoading(false)
+            item && setItem(item)
+          })
+      }
+    })
+  }, [id])
   return {loading, item}
 }
 
@@ -152,39 +146,36 @@ export const useFirebaseRef = ref => {
   const [loading, setLoading] = useState(true)
   const [items, setItems] = useState()
 
-  useEffect(
-    () => {
-      get(ITEMS_KEY).then((items = []) => {
-        const [lastItemSaved = {}] = items
-        lastItemSaved.id && setLoading(false)
-        setItems(items)
+  useEffect(() => {
+    get(ITEMS_KEY).then((items = []) => {
+      const [lastItemSaved = {}] = items
+      lastItemSaved.id && setLoading(false)
+      setItems(items)
 
-        firebase
-          .database()
-          .ref(ref)
-          .orderByChild('createdAt')
-          .startAt(lastItemSaved.createdAt)
-          .limitToLast(MAX_ITEMS)
-          .on('value', async snapshot => {
-            const fbItems = Object.values(snapshot.val() || {}).sort(sortByDate)
-            const nextItems = uniqueElementsBy(
-              [...fbItems, ...items],
-              (a, b) => a.id === b.id
-            )
-            set(ITEMS_KEY, nextItems)
-            setLoading(false)
-            setItems(nextItems)
-          })
-      })
+      firebase
+        .database()
+        .ref(ref)
+        .orderByChild('createdAt')
+        .startAt(lastItemSaved.createdAt)
+        .limitToLast(MAX_ITEMS)
+        .on('value', async snapshot => {
+          const fbItems = Object.values(snapshot.val() || {}).sort(sortByDate)
+          const nextItems = uniqueElementsBy(
+            [...fbItems, ...items],
+            (a, b) => a.id === b.id
+          )
+          set(ITEMS_KEY, nextItems)
+          setLoading(false)
+          setItems(nextItems)
+        })
+    })
 
-      return () =>
-        firebase
-          .database()
-          .ref(ref)
-          .off()
-    },
-    [ref]
-  )
+    return () =>
+      firebase
+        .database()
+        .ref(ref)
+        .off()
+  }, [ref])
 
   return {loading, items}
 }

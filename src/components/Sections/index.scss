@@ -1,17 +1,16 @@
 @import '../../styles/settings';
 
 .Sections {
-    display: flex;
-    font-size: $fz-m;
-    font-weight: $fw-regular;
-    position: sticky;
-    top: -1px;
-    padding-left: $p-xl;
-    padding-top: $p-xl;
-    padding-bottom: $p-xl;
-    background: var(--background-color);
-    z-index: 1;
-
+  display: flex;
+  font-size: $fz-m;
+  font-weight: $fw-regular;
+  position: sticky;
+  top: -1px;
+  padding-left: $p-xl;
+  padding-top: $p-xl;
+  padding-bottom: $p-xl;
+  background: var(--background-color);
+  z-index: 1;
 
   &-section {
     margin-right: $m-l;

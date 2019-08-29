@@ -20,8 +20,8 @@
   "dependencies": {
     "@s-ui/i18n": "1.5.0",
     "classnames": "2.2.6",
-    "firebase": "5.7.0",
-    "firebase-tools": "6.2.2",
+    "firebase": "6.4.2",
+    "firebase-tools": "7.3.0",
     "idb-keyval": "3.1.0",
     "perfume.js": "2.1.1",
     "react": "16.7.0-alpha.2",
@@ -33,7 +33,7 @@
   "devDependencies": {
     "@s-ui/bundler": "5",
     "@s-ui/component-peer-dependencies": "1",
-    "@s-ui/lint": "2",
+    "@s-ui/lint": "3",
     "@s-ui/mono": "1"
   },
   "sui-bundler": {
@@ -52,5 +52,7 @@
       "./node_modules/@s-ui/lint/eslintrc.js"
     ]
   },
-  "sasslintConfig": "./node_modules/@s-ui/lint/sass-lint.yml"
+  "stylelint": {
+    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
+  }
 }
