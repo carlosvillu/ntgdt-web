@@ -7,9 +7,9 @@ const MyPhotos = ({router}) => {
   const {image, title = 'My Image'} = router.location.query
   return (
     <div className="MyPhotos">
-      <React.Fragment>
+      <>
         <Item hiddenShare item={{image, title}} />
-      </React.Fragment>
+      </>
     </div>
   )
 }
