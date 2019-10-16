@@ -18,16 +18,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@s-ui/i18n": "1.5.0",
+    "@s-ui/i18n": "1",
     "classnames": "2.2.6",
-    "firebase": "6.4.2",
+    "firebase": "7.2.0",
     "firebase-tools": "7.3.0",
     "idb-keyval": "3.1.0",
-    "perfume.js": "2.1.1",
-    "react": "16.7.0-alpha.2",
-    "react-div-100vh": "0.3.2",
-    "react-dom": "16.7.0-alpha.2",
-    "react-helmet": "5.2.0",
+    "perfume.js": "3.0.2",
+    "react": "16",
+    "react-div-100vh": "0.3.4",
+    "react-dom": "16",
+    "react-helmet": "5.2.1",
     "react-tiny-virtual-list": "2.2.0"
   },
   "devDependencies": {
