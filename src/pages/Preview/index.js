@@ -24,7 +24,7 @@ const Preview = ({router}) => {
   return (
     <div className="Preview">
       {!loading && item && (
-        <React.Fragment>
+        <>
           <HeaderSeoItem item={item} />
           <Item
             hiddenShare
@@ -48,7 +48,7 @@ const Preview = ({router}) => {
             isOpen={isOpenImage}
             onClose={handleCloseImage}
           />
-        </React.Fragment>
+        </>
       )}
     </div>
   )
