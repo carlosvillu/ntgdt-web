@@ -1,6 +1,47 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="white">
   <head>
+    <style>
+      :root {
+        --ligth: 0%;
+        --background-color: hsl(0, 0%, calc(100% - var(--ligth)));
+        --text-color-normal: hsl(0, 0%, var(--ligth), 1);
+        --text-color-light: hsl(0, 0%, 45%, 1);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ligth: 100%;
+        }
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --ligth: 0%;
+        }
+      }
+
+      html.color-theme-in-transition,
+      html.color-theme-in-transition *,
+      html.color-theme-in-transition *:before,
+      html.color-theme-in-transition *:after {
+        transition: background 750ms !important;
+        transition-delay: 0 !important;
+      }
+
+      html {
+        box-sizing: border-box;
+      }
+
+      html[data-theme='dark'] {
+        --ligth: 100%;
+      }
+      body{
+        background-color: var(--background-color);
+        color: var(--text-color-normal);
+        min-height: 100vh;
+      }
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <link rel="shortcut icon" href="/images/favicon.ico">
