@@ -8,6 +8,11 @@
   padding-left: $p-xl;
   padding-top: $p-xl;
 
+  &-link {
+    text-decoration: none;
+    color: var(--text-color-normal);
+  }
+
   &-actions {
     padding-right: $p-xl;
   }

@@ -1,10 +1,15 @@
 import React from 'react'
 
 import Brightness from '../Icons/Brightness'
+import Link from 'react-router/lib/Link'
 
-const Header = () => (
+const Header = (_, {router}) => (
   <div className="Header">
-    <h1 className="Header-logo">NTGDT</h1>
+    <h1 className="Header-logo">
+      <Link className="Header-link" to="/" activeClassName="is-selected">
+        NTGDT
+      </Link>
+    </h1>
     <div className="Header-actions">
       <Brightness
         className="Header-action"
