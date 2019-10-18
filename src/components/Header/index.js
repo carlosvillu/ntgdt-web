@@ -3,7 +3,7 @@ import React from 'react'
 import Brightness from '../Icons/Brightness'
 import Link from 'react-router/lib/Link'
 
-const Header = (_, {router}) => (
+const Header = () => (
   <div className="Header">
     <h1 className="Header-logo">
       <Link className="Header-link" to="/" activeClassName="is-selected">
