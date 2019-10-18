@@ -2,40 +2,6 @@
 @import './_reset.css';
 
 /* apply a natural box layout model to all elements, but allowing components to change */
-:root {
-  --ligth: 0%;
-  --background-color: hsl(0, 0%, calc(100% - var(--ligth)));
-  --text-color-normal: hsl(0, 0%, var(--ligth), 1);
-  --text-color-light: hsl(0, 0%, 45%, 1);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --ligth: 100%;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --ligth: 0%;
-  }
-}
-
-html.color-theme-in-transition,
-html.color-theme-in-transition *,
-html.color-theme-in-transition *:before,
-html.color-theme-in-transition *:after {
-  transition: background 750ms !important;
-  transition-delay: 0 !important;
-}
-
-html {
-  box-sizing: border-box;
-}
-
-html[data-theme='dark'] {
-  --ligth: 100%;
-}
 
 *,
 *:before,
@@ -47,6 +13,7 @@ body {
   color: var(--text-color-normal);
   font-family: $ff-sans-serif;
   font-size: $fz-body;
+  background-color: var(--background-color);
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
 }
