@@ -20,7 +20,7 @@ const Preview = ({router}) => {
     })
     document.dispatchEvent(event)
     setIsOpenImage(false)
-  })
+  }, [])
   return (
     <div className="Preview">
       {!loading && item && (
