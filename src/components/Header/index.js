@@ -35,6 +35,10 @@ const Header = () => (
       <ContextualMenu cta={<Dots className="Header-dots" onClick={() => {}} />}>
         <ul className="Header-menu">
           <li className="Header-menuItem">Login</li>
+          <li className="Header-menuItem">Login</li>
+          <li className="Header-menuItem">Login</li>
+          <li className="Header-menuItem">Login</li>
+          <li className="Header-menuItem">Login</li>
         </ul>
       </ContextualMenu>
     </div>
