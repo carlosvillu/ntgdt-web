@@ -1,6 +1,9 @@
 import React from 'react'
 
+import Dots from '../Icons/Dots'
+import FavoriteBorder from '../Icons/FavoriteBorder'
 import Brightness from '../Icons/Brightness'
+import ContextualMenu from '../ContextualMenu'
 import Link from 'react-router/lib/Link'
 
 const Header = () => (
@@ -28,6 +31,12 @@ const Header = () => (
           }, 1000)
         }}
       />
+      <FavoriteBorder className="Header-favorites" onClick={() => {}} />
+      <ContextualMenu cta={<Dots className="Header-dots" onClick={() => {}} />}>
+        <ul className="Header-menu">
+          <li className="Header-menuItem">Login</li>
+        </ul>
+      </ContextualMenu>
     </div>
   </div>
 )

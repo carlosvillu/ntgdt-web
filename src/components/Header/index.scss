@@ -3,7 +3,7 @@
 .Header {
   display: flex;
   font-size: $fz-giant;
-  font-weight: 800;
+  font-weight: $fw-black;
   justify-content: space-between;
   padding-left: $p-xl;
   padding-top: $p-xl;
@@ -15,6 +15,11 @@
 
   &-actions {
     padding-right: $p-xl;
+    display: flex;
+    
+    & > * {
+    margin-left: $p-l;
+    }
   }
 
   &-action {
@@ -22,6 +27,17 @@
     fill: currentColor;
     width: $fz-xxl;
     height: $fz-xxl;
+  }
+
+  &-dots, &-favorites {
+    fill: currentColor;
+  }
+
+  &-menu {
+    font-size: $fz-m;
+    line-height: 2em;
+    font-weight: $fw-regular;
+    padding: 0 $p-l;
   }
 
   @media (prefers-color-scheme: dark) {

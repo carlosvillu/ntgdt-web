@@ -18,7 +18,7 @@ const Grid = ({items}) => {
     })
     document.dispatchEvent(event)
     setIsOpenImage(false)
-  })
+  }, [])
 
   return (
     <div className="Grid">

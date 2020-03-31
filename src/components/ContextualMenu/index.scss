@@ -1,0 +1,22 @@
+@import '../../styles/settings';
+
+.ContextualMenu {
+  &-container {
+    position: relative;
+    width: $fz-giant;
+    height: $fz-giant;
+  }
+
+  &-content {
+    color: var(--text-color-accent-normal);
+    background: var(--background-accent-color);
+    box-shadow: $bxsh-m;
+    padding: $p-m;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 200px;
+    z-index: 2;
+  }
+}
+

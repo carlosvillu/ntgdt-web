@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Video = ({webm, mp4, poster, onClick}) => {
-  debugger // eslint-disable-line
   return (
     <video
       autoPlay
