@@ -20,12 +20,12 @@
   "dependencies": {
     "@s-ui/i18n": "1",
     "classnames": "2.2.6",
-    "firebase": "7.2.0",
-    "firebase-tools": "7.3.0",
-    "idb-keyval": "3.1.0",
-    "perfume.js": "3.0.2",
+    "firebase": "7.13.1",
+    "firebase-tools": "7.16.1",
+    "idb-keyval": "3.2.0",
+    "perfume.js": "4.8.1",
     "react": "16",
-    "react-div-100vh": "0.3.4",
+    "react-div-100vh": "0.3.8",
     "react-dom": "16",
     "react-helmet": "5.2.1",
     "react-tiny-virtual-list": "2.2.0"
@@ -54,5 +54,6 @@
   },
   "stylelint": {
     "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
-  }
+  },
+  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js"
 }
