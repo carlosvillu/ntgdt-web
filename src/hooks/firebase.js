@@ -30,7 +30,7 @@ const NOT_FOUND = -1
 const MAX_ITEMS = 100
 const ITEMS_KEY = 'NTGDT_ITEMS_KEY'
 const FAVORITES_ITEMS_KEY = 'NTGDT_FAVORITES_ITEMS_KEY'
-const sortByDate = ({createdAt: a}, {createdAt: b}) => new Date(b) - new Date(a)
+const sortByDate = ({createdAt: a}, {createdAt: b}) => new Date(b) - new Date(a) // eslint-disable-line
 const uniqueElementsBy = (arr, fn) =>
   arr.reduce((acc, v) => {
     if (!acc.some(x => fn(v, x))) acc.push(v)
@@ -111,7 +111,7 @@ export const useItemFavoriteFirebase = item => {
         })
       )
     }
-  })
+  }, [item])
 
   return {callbackHandleClick, isFavorite}
 }
