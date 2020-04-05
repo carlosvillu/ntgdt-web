@@ -1,5 +1,6 @@
 import {useState, useEffect, useCallback} from 'react'
 import {get, set} from 'idb-keyval'
+/* global Event */
 
 import * as firebase from 'firebase/app'
 import 'firebase/database'
@@ -65,6 +66,8 @@ export const useFavoritesFirebase = () => {
   return {loading, items}
 }
 
+export const favoriteAddedEvent = new Event('favorite')
+
 export const useItemFavoriteFirebase = item => {
   const [isFavorite, setIsFavorite] = useState(false)
   useEffect(() => {
@@ -87,6 +90,7 @@ export const useItemFavoriteFirebase = item => {
       ).sort(sortByDate)
       set(FAVORITES_ITEMS_KEY, nextFavorites)
       setIsFavorite(true)
+      document.dispatchEvent(favoriteAddedEvent)
       document.dispatchEvent(
         new window.CustomEvent('tracker:event', {
           detail: {
