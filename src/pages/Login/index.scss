@@ -1,0 +1,32 @@
+@import '../../styles/settings';
+
+.Login {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+
+  &-google {
+    flex-grow: 0;
+    margin-bottom: $m-l;
+    background-image: url('/images/buttons/google.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 80px;
+    width: 324px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &-google {
+      background-image: url('/images/buttons/google-white.png');
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    &-google {
+      background-image: url('/images/buttons/google-blue.png');
+    }
+  }
+}
+
