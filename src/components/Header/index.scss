@@ -40,6 +40,23 @@
     padding: 0 $p-l;
   }
 
+  &-menuLink {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &-logoutLink {
+    display: flex;
+    align-items: center;
+  }
+
+  &-menuPhoto {
+    border-radius: 50%;
+    height: 42px;
+    margin-right: 15px;
+    width: 42px;
+  }
+
   @media (prefers-color-scheme: dark) {
     &-action {
       display: none;

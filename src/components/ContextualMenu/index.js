@@ -36,7 +36,11 @@ const ContextualMenu = ({cta, children}) => {
   }
 
   return (
-    <div ref={containerRef} className="ContextualMenu-container">
+    <div
+      ref={containerRef}
+      className="ContextualMenu-container"
+      onClick={() => setOpen(open => !open)}
+    >
       <div className="ContextualMenu-content">{children}</div>
     </div>
   )

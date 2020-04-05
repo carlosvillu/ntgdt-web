@@ -2,9 +2,14 @@
 
 .Root {
   background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
   letter-spacing: 0.5px;
+  min-height: 100vh;
 
   &-page {
+    display: flex;
+    flex-grow: 1;
     margin: 0 $m-xl;
   }
 }
