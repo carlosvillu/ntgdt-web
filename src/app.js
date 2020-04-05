@@ -25,14 +25,23 @@ const perfume = new Perfume({
   }
 })
 
-perfume.start('render')
-ReactDOM.render(
-  <Context.Provider value={{i18n}}>
-    <Router routes={routes} history={browserHistory} />
-  </Context.Provider>,
-  document.getElementById('⚛️')
-)
-perfume.sendTiming('render', perfume.end('render'))
+/**
+ *
+ *
+ * */
+const render = () => {
+  perfume.start('render')
+  ReactDOM.render(
+    <Context.Provider value={{i18n}}>
+      <Router routes={routes} history={browserHistory} />
+    </Context.Provider>,
+    document.getElementById('⚛️')
+  )
+  perfume.sendTiming('render', perfume.end('render'))
+}
+render()
+
+window.firebase.auth().onAuthStateChanged(render)
 
 document.addEventListener('tracker:event', evt => {
   const {category, action, label} = evt.detail

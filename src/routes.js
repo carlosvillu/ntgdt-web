@@ -7,6 +7,8 @@ import Home from './pages/Home'
 import Favorites from './pages/Favorites'
 import Preview from './pages/Preview'
 import Shared from './pages/Shared'
+import Login from './pages/Login'
+import Logout from './pages/Logout'
 
 import MyPhotos from './pages/MyPhotos'
 
@@ -18,6 +20,8 @@ export default (
       <Route path="/preview" component={Preview} />
       <Route path="/shared-target" component={Shared} />
       <Route path="/myPhoto" component={MyPhotos} />
+      <Route path="/login" component={Login} />
+      <Route path="/logout" component={Logout} />
     </Route>
   </Router>
 )
