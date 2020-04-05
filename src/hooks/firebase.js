@@ -3,6 +3,7 @@ import {get, set} from 'idb-keyval'
 
 import * as firebase from 'firebase/app'
 import 'firebase/database'
+import 'firebase/auth'
 
 const configPRO = {
   apiKey: 'AIzaSyCeUsBwp1gzKDwQqorrri7nRlqr_QXtg1g',
@@ -25,6 +26,8 @@ const configDEV = {
 firebase.initializeApp(
   process.env.STAGE === 'production' ? configPRO : configDEV
 )
+
+window.firebase = firebase
 
 const NOT_FOUND = -1
 const MAX_ITEMS = 100
@@ -178,4 +181,26 @@ export const useFirebaseRef = ref => {
   }, [ref])
 
   return {loading, items}
+}
+
+export const useFirebaseAuth = () => {
+  const loginWithGoogle = async () => {
+    const provider = new firebase.auth.GoogleAuthProvider()
+    try {
+      await firebase.auth().signInWithPopup(provider)
+    } catch (e) {
+      console.error(e) //eslint-disable-line
+    }
+  }
+
+  const logout = async () => {
+    firebase.auth().signOut()
+  }
+
+  const currentUser = firebase.auth().currentUser && {
+    uid: firebase.auth().currentUser?.uid,
+    photoURL: firebase.auth().currentUser?.photoURL
+  }
+
+  return {loginWithGoogle, logout, currentUser}
 }
