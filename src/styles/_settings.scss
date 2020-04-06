@@ -68,6 +68,11 @@ $c-error: #e93e40 !default;
 $c-error-light: color-variation($c-error, $c-light-step) !default;
 $c-error-dark: color-variation($c-error, $c-dark-step) !default;
 
+// Favorite color
+$c-favorite: rgb(244, 0, 87) !default;
+$c-favorite-light: color-variation($c-favorite, $c-light-step) !default;
+$c-favorite-dark: color-variation($c-favorite, $c-dark-step) !default;
+
 ///////////////////////////////////////////////////////////////////////////////
 // Specific Colors
 ///////////////////////////////////////////////////////////////////////////////

@@ -57,6 +57,69 @@
     width: 42px;
   }
 
+  .Header-favorites-button {
+    width: 1em;
+    height: 1em;
+    position: relative;
+  }
+
+  .Header-favorites {
+    fill: transparent;
+    stroke: var(--text-color-normal);
+    stroke-width: 2px;
+    stroke-linecap: round;
+    position: absolute;
+  }
+
+  .Header-favorites.active {
+    fill: var(--text-color-normal);
+  }
+
+  .Header-favorites-animated {
+    fill: transparent;
+    stroke: $c-favorite;
+    stroke-dasharray: 60;
+    stroke-dashoffset: 0;
+    stroke-width: 3px;
+    animation: drawBorder 1s ease-out, fade .5s .4s ;
+    stroke-linecap: round;
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+  }
+
+  @keyframes drawBorder {
+    0% {
+      opacity: 1;
+      stroke-dashoffset: 60;
+    }
+    50% {
+      opacity: 1;
+      stroke-dashoffset: 0;
+    }
+    100% {
+      opacity: 1;
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes fade {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
   @media (prefers-color-scheme: dark) {
     &-action {
       display: none;
