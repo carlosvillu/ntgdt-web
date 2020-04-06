@@ -6,7 +6,7 @@ const Login = () => {
   const {loginWithGoogle, currentUser} = useFirebaseAuth()
 
   if (currentUser) {
-    return null
+    window.location.href = '/'
   }
 
   return (
