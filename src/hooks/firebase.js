@@ -192,7 +192,7 @@ export const useFirebaseAuth = () => {
     const provider = new firebase.auth.GoogleAuthProvider()
     try {
       const user = await firebase.auth().signInWithPopup(provider)
-      console.log(user)
+      console.log(user) // eslint-disable-line
     } catch (e) {
       console.error(e) //eslint-disable-line
       debugger // eslint-disable-line
