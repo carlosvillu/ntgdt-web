@@ -19,6 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "@s-ui/i18n": "1",
+    "@s-ui/react-router": "beta",
     "classnames": "2.2.6",
     "firebase": "7.13.1",
     "firebase-tools": "7.16.1",
