@@ -21,3 +21,8 @@ body {
 body *:not(img) {
   -webkit-touch-callout: none;
 }
+
+body, .app {
+  overflow: hidden;
+  max-height: 100vh;
+}
