@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import Router from 'react-router/lib/Router'
-import browserHistory from 'react-router/lib/browserHistory'
+import Router from '@s-ui/react-router/lib/Router'
+import match from '@s-ui/react-router/lib/match'
+import browserHistory from '@s-ui/react-router/lib/browserHistory'
 import routes from './routes'
 import Context from './context'
 import i18n from './literals'
@@ -25,19 +26,23 @@ const perfume = new Perfume({
   }
 })
 
-/**
- *
- *
- * */
 const render = () => {
-  perfume.start('render')
-  ReactDOM.render(
-    <Context.Provider value={{i18n}}>
-      <Router routes={routes} history={browserHistory} />
-    </Context.Provider>,
-    document.getElementById('⚛️')
+  match(
+    {routes, history: browserHistory},
+    (err, redirectLocation, renderProps) => {
+      if (err) {
+        console.error(err)
+      }
+      perfume.start('render')
+      ReactDOM.render(
+        <Context.Provider value={{i18n}}>
+          <Router {...renderProps} />
+        </Context.Provider>,
+        document.getElementById('⚛️')
+      )
+      perfume.sendTiming('render', perfume.end('render'))
+    }
   )
-  perfume.sendTiming('render', perfume.end('render'))
 }
 render()
 
