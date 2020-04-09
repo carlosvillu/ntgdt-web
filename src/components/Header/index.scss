@@ -1,20 +1,22 @@
 @import '../../styles/settings';
 
+$h-Header:70px;
+
 .Header {
+  align-items: center;
   display: flex;
   font-size: $fz-giant;
-  font-weight: $fw-black;
+  height: $h-Header;
   justify-content: space-between;
-  padding-left: $p-xl;
-  padding-top: $p-xl;
+  padding: 0 $p-l;
 
   &-link {
-    text-decoration: none;
     color: var(--text-color-normal);
+    text-decoration: none;
+    font-weight: $fw-black;
   }
 
   &-actions {
-    padding-right: $p-xl;
     display: flex;
     
     & > * {
@@ -29,7 +31,7 @@
     height: $fz-xxl;
   }
 
-  &-dots, &-favorites {
+  &-burguer, &-favorites, &-ArrowBack {
     fill: currentColor;
   }
 

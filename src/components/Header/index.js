@@ -1,15 +1,20 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 
-import Dots from '../Icons/Dots'
+import Burguer from '../Icons/Burguer'
+import ArrowBack from '../Icons/ArrowBack'
 import FavoriteBorder from '../Icons/FavoriteBorder'
 import Brightness from '../Icons/Brightness'
 import ContextualMenu from '../ContextualMenu'
-import Link from 'react-router/lib/Link'
+import Link from '@s-ui/react-router/lib/Link'
 import {useFirebaseAuth} from '../../hooks/firebase'
+
+import RouterSwitcher from '../RouterSwitcher'
+import RRContext from '@s-ui/react-router/lib/ReactRouterContext'
 
 const Header = () => {
   const {currentUser} = useFirebaseAuth()
   const [favoriteAdded, setFavoriteAdded] = useState(false)
+  const {router} = useContext(RRContext)
 
   useEffect(() => {
     document.addEventListener('favorite', onAddFavorite)
@@ -22,6 +27,34 @@ const Header = () => {
 
   return (
     <div className="Header">
+      <RouterSwitcher>
+        <ArrowBack
+          route="/favorites"
+          className="Header-ArrowBack"
+          onClick={() => router.goBack()}
+        />
+        <ContextualMenu cta={<Burguer className="Header-burguer" />}>
+          <ul className="Header-menu">
+            <li className="Header-menuItem">
+              {currentUser ? (
+                <Link to="/logout" className="Header-menuLink">
+                  <p className="Header-logoutLink">
+                    <img
+                      src={currentUser?.photoURL}
+                      className="Header-menuPhoto"
+                    />
+                    <span>Logout</span>
+                  </p>
+                </Link>
+              ) : (
+                <Link to="/login" className="Header-menuLink">
+                  <p>Login</p>
+                </Link>
+              )}
+            </li>
+          </ul>
+        </ContextualMenu>
+      </RouterSwitcher>
       <h1 className="Header-logo">
         <Link className="Header-link" to="/" activeClassName="is-selected">
           NTGDT
@@ -60,27 +93,6 @@ const Header = () => {
             <FavoriteBorder />
           </Link>
         </div>
-        <ContextualMenu cta={<Dots className="Header-dots" />}>
-          <ul className="Header-menu">
-            <li className="Header-menuItem">
-              {currentUser ? (
-                <Link to="/logout" className="Header-menuLink">
-                  <p className="Header-logoutLink">
-                    <img
-                      src={currentUser?.photoURL}
-                      className="Header-menuPhoto"
-                    />
-                    <span>Logout</span>
-                  </p>
-                </Link>
-              ) : (
-                <Link to="/login" className="Header-menuLink">
-                  <p>Login</p>
-                </Link>
-              )}
-            </li>
-          </ul>
-        </ContextualMenu>
       </div>
     </div>
   )

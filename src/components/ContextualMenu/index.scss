@@ -16,9 +16,9 @@ $animation-duration: 250ms;
     color: var(--text-color-accent-normal);
     padding: $p-m;
     position: absolute;
-    right: 0;
+    left: 0;
     top: 0;
-    transform-origin: top right;
+    transform-origin: top left;
     width: 200px;
     z-index: 2;
 

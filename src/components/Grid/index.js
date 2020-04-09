@@ -5,6 +5,8 @@ import Item from '../Item'
 import FullScreen from '../FullScreen'
 import VirtualList from 'react-tiny-virtual-list'
 
+const HEADER_HEIGTH = 70 /* px */
+
 const Grid = ({items}) => {
   const [currentItem, setCurrentItem] = useState({})
   const [isOpenImage, setIsOpenImage] = useState(false)
@@ -24,7 +26,7 @@ const Grid = ({items}) => {
     <div className="Grid">
       <VirtualList
         width="100%"
-        height={window.innerHeight - 124}
+        height={window.innerHeight - HEADER_HEIGTH}
         itemCount={items.length}
         itemSize={439.39}
         className="virtualList"
