@@ -16,6 +16,9 @@ body {
   background-color: var(--background-color);
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 body *:not(img) {
@@ -25,4 +28,9 @@ body *:not(img) {
 body, .app {
   overflow: hidden;
   max-height: 100vh;
+}
+
+.app {
+  max-width: $maw-App;
+  width: 100%;
 }

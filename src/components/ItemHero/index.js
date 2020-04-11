@@ -8,30 +8,40 @@ import Image from '../Image'
 import Favorite from '../Icons/Favorite'
 import GetApp from '../Icons/GetApp'
 import Send from '../Icons/Send'
-import Play from '../Icons/Play'
+import Video from '../Video'
 
-const Item = ({item, style, onClick, hiddenShare}) => {
+const ItemHero = ({
+  item,
+  style,
+  hiddenShare,
+  height,
+  videoHeight,
+  heroWidth
+}) => {
   const {title, image, video, image_blur: blur} = item
   const {isFavorite, callbackHandleClick} = useItemFavoriteFirebase(item)
 
   return (
-    <div className="Item" style={style}>
-      <h2 className="Item-title">{title}</h2>
-      <div className="Item-image" onClick={onClick}>
-        {image && <Image kind="photo" blur={blur} src={image} alt={title} />}
-        {video && (
-          <Image kind="poster" blur={blur} src={video.poster} alt={title} />
-        )}
-        {video && <Play className="Item-play" fill="white" />}
-      </div>
+    <div
+      className="ItemHero"
+      style={{...style, height: `${video ? videoHeight : height}px`}}
+    >
+      {/* <div className="ItemHero-header"> */}
+      {/*   <h3 className="ItemHero-site">{site}</h3> */}
+      {/*   {title !== site && <h2 className="ItemHero-title">{title}</h2>} */}
+      {/* </div> */}
 
-      <div className="Item-icons">
+      {image && <Image blur={blur} src={image} alt={title} />}
+      {video && <Video {...video} width={heroWidth} height={videoHeight} />}
+
+      {/*
+      <div className="ItemHero-meta" style={{border: '1px solid red'}}>
         <Favorite
-          className={`Item-icon ${isFavorite ? 'is-favorite' : ''}`}
+          className={`ItemHero-icon ${isFavorite ? 'is-favorite' : ''}`}
           onClick={callbackHandleClick}
         />
         <a href={item.image} download="image.jpeg" hidden>
-          <GetApp className="Item-icon" />
+          <GetApp className="ItemHero-icon" />
         </a>
         <Share
           item={item}
@@ -51,16 +61,16 @@ const Item = ({item, style, onClick, hiddenShare}) => {
             )
           }
         >
-          <Send className="Item-icon" />
+          <Send className="ItemHero-icon" />
         </Share>
       </div>
+        */}
     </div>
   )
 }
 
-Item.displayName = 'Item'
-Item.propTypes = {
-  onClick: PropTypes.func,
+ItemHero.displayName = 'ItemHero'
+ItemHero.propTypes = {
   style: PropTypes.object,
   hiddenShare: PropTypes.bool,
   item: PropTypes.shape({
@@ -72,7 +82,9 @@ Item.propTypes = {
     link: PropTypes.string,
     site: PropTypes.string,
     title: PropTypes.string
-  })
+  }),
+  height: PropTypes.number,
+  heroWidth: PropTypes.number
 }
 
-export default Item
+export default ItemHero

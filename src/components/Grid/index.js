@@ -1,83 +1,111 @@
-import React, {useState, useCallback} from 'react'
+import React, {useContext, useEffect, useState, isValidElement} from 'react'
 import PropTypes from 'prop-types'
 
 import Item from '../Item'
-import FullScreen from '../FullScreen'
 import VirtualList from 'react-tiny-virtual-list'
+import RRContext from '@s-ui/react-router/lib/ReactRouterContext'
+import VirtualListPositions from '../../context/VirtualListPositions'
 
 const HEADER_HEIGTH = 70 /* px */
 
-const Grid = ({items}) => {
-  const [currentItem, setCurrentItem] = useState({})
-  const [isOpenImage, setIsOpenImage] = useState(false)
-  const handleCloseImage = useCallback(() => {
-    const event = new window.CustomEvent('tracker:event', {
-      detail: {
-        category: 'Item',
-        action: 'fullscreen',
-        label: 'close'
-      }
-    })
-    document.dispatchEvent(event)
-    setIsOpenImage(false)
-  }, [])
+const Grid = ({scrollToIndex, onChangeIndex, hero, items: remoteitems}) => {
+  const {router} = useContext(RRContext)
+  const {setItem} = useContext(VirtualListPositions)
+  const [items, setItems] = useState([hero].filter(Boolean))
+  const heroWidth = window.innerWidth <= 600 ? window.innerWidth : 600
+  const videoHeight = (heroWidth * 3) / 4
+
+  useEffect(() => {
+    setItems([hero, ...remoteitems].filter(Boolean))
+  }, [remoteitems, hero])
+
+  useEffect(() => {
+    function imageErrorHandler(evt) {
+      const {src} = evt.detail
+
+      const indexImgBroken = items.findIndex(item => {
+        if (isValidElement(item)) return false
+
+        return item.image === src || item.video?.poster === src
+      })
+
+      setItems([
+        ...items.slice(0, indexImgBroken),
+        ...items.slice(indexImgBroken + 1)
+      ])
+    }
+
+    document.addEventListener('image:error', imageErrorHandler)
+
+    return () => document.removeEventListener('image:error', imageErrorHandler)
+  }, [items])
+
+  if (items.length === 0) return null
 
   return (
     <div className="Grid">
       <VirtualList
-        width="100%"
+        width={heroWidth}
         height={window.innerHeight - HEADER_HEIGTH}
         itemCount={items.length}
-        itemSize={439.39}
+        itemSize={index => {
+          if (hero && index === 0) {
+            return hero.props.item.video ? videoHeight : hero.props.height
+          }
+          return 439.39
+        }}
         className="virtualList"
-        renderItem={({index, style}) => (
-          <Item
-            item={items[index]}
-            key={items[index].id}
-            style={style}
-            onClick={() => {
-              const event = new window.CustomEvent('tracker:event', {
-                detail: {
-                  category: 'Item',
-                  action: 'fullscreen',
-                  label: 'open'
-                }
-              })
-              document.dispatchEvent(event)
-              setCurrentItem(items[index])
-              setIsOpenImage(true)
-            }}
-          />
-        )}
-      />
-      <FullScreen
-        video={currentItem.video}
-        image={currentItem.image}
-        isOpen={isOpenImage}
-        onClose={handleCloseImage}
+        scrollToIndex={scrollToIndex}
+        renderItem={({index, style}) => {
+          if (hero && index === 0)
+            return React.cloneElement(hero, {videoHeight, heroWidth})
+
+          return (
+            <Item
+              onClick={evt => {
+                const {width, height} =
+                  evt.currentTarget.getElementsByClassName('Image')[0] || {}
+
+                const event = new window.CustomEvent('tracker:event', {
+                  detail: {
+                    category: 'Item',
+                    action: 'fullscreen',
+                    label: 'open'
+                  }
+                })
+
+                setItem(items[index].id, 0)
+
+                router.push({
+                  pathname: '/preview',
+                  query: {
+                    id: items[index].id,
+                    width,
+                    height
+                  }
+                })
+
+                document.dispatchEvent(event)
+                onChangeIndex(index)
+              }}
+              item={items[index]}
+              key={items[index].id}
+              style={style}
+            />
+          )
+        }}
       />
     </div>
   )
 }
 
 Grid.displayName = 'Grid'
-Grid.defaultProps = {
-  items: []
-}
 
 Grid.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      createdAt: PropTypes.number,
-      id: PropTypes.string,
-      image: PropTypes.string,
-      image_blur: PropTypes.string,
-      link: PropTypes.string,
-      site: PropTypes.string,
-      title: PropTypes.string
-    })
-  )
+  scrollToIndex: PropTypes.number,
+  onChangeIndex: PropTypes.func,
+  hero: PropTypes.node,
+  items: PropTypes.array
 }
 
 export default Grid
-// {items.map(item => <Item item={item} key={item.id} />)}

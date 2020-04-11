@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Video = ({webm, mp4, poster, onClick}) => {
+const Video = ({webm, mp4, poster, onClick, width, height}) => {
   return (
     <video
       autoPlay
@@ -12,6 +12,8 @@ const Video = ({webm, mp4, poster, onClick}) => {
       playsInline
       poster={poster}
       src={mp4}
+      width={width}
+      height={height}
     >
       Tu navegador no soporta HTML5 video
     </video>
@@ -23,6 +25,8 @@ Video.propTypes = {
   onClick: PropTypes.func,
   webm: PropTypes.string,
   mp4: PropTypes.string,
-  poster: PropTypes.string
+  poster: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number
 }
 export default Video

@@ -1,0 +1,64 @@
+@import '../../styles/settings';
+
+.ItemHero {
+  border-top: $bdw-m solid $c-gray-lightest;
+  font-size: $fz-xl;
+
+  &:first-of-type {
+    border-top: none;
+  }
+
+  &-toolbar {
+    display: flex;
+    justify-content: space-between;
+
+    & > svg {
+      margin-left: $m-l;
+    }
+  }
+
+  &-title {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    font-size: $fz-m;
+    line-height: 1.2em;
+    margin-bottom: 16px;
+    height: 2.4em;
+    max-width: 100%;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &-image {
+    align-items: center;
+    display: flex;
+    height: 300px;
+    justify-content: center;
+    position: relative;
+  }
+
+  &-play {
+    font-size: 4em;
+    position: absolute;
+  }
+
+  &-icons {
+    display: flex;
+    justify-content: space-around;
+    margin: $m-xl 0;
+    width: 33%;
+  }
+
+  &-icon {
+    color: var(--text-color-normal);
+    fill: currentColor;
+    width: $fz-xxl;
+    height: $fz-xxl;
+
+    &.is-favorite {
+      color: $c-favorite;
+    }
+  }
+}
+

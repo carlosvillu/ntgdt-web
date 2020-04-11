@@ -10,11 +10,13 @@ import {useFirebaseAuth} from '../../hooks/firebase'
 
 import RouterSwitcher from '../RouterSwitcher'
 import RRContext from '@s-ui/react-router/lib/ReactRouterContext'
+import VirtualListPositions from '../../context/VirtualListPositions'
 
 const Header = () => {
   const {currentUser} = useFirebaseAuth()
   const [favoriteAdded, setFavoriteAdded] = useState(false)
   const {router} = useContext(RRContext)
+  const {setMaster} = useContext(VirtualListPositions)
 
   useEffect(() => {
     document.addEventListener('favorite', onAddFavorite)
@@ -30,6 +32,11 @@ const Header = () => {
       <RouterSwitcher>
         <ArrowBack
           route="/favorites"
+          className="Header-ArrowBack"
+          onClick={() => router.goBack()}
+        />
+        <ArrowBack
+          route="/preview"
           className="Header-ArrowBack"
           onClick={() => router.goBack()}
         />
@@ -56,7 +63,12 @@ const Header = () => {
         </ContextualMenu>
       </RouterSwitcher>
       <h1 className="Header-logo">
-        <Link className="Header-link" to="/" activeClassName="is-selected">
+        <Link
+          className="Header-link"
+          onClick={() => setMaster(0)}
+          to="/"
+          activeClassName="is-selected"
+        >
           NTGDT
         </Link>
       </h1>
