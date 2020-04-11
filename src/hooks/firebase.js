@@ -40,6 +40,14 @@ const uniqueElementsBy = (arr, fn) =>
     if (!acc.some(x => fn(v, x))) acc.push(v)
     return acc
   }, [])
+const shuffle = ([...arr]) => {
+  let m = arr.length
+  while (m) {
+    const i = Math.floor(Math.random() * m--)
+    ;[arr[m], arr[i]] = [arr[i], arr[m]]
+  }
+  return arr
+}
 
 export const useFavoritesFirebase = () => {
   const [items, setItems] = useState()
@@ -147,6 +155,31 @@ export const useItemFirebase = id => {
     })
   }, [id])
   return {loading, item}
+}
+
+export const useRandomFirebaseRef = ref => {
+  const [loading, setLoading] = useState(true)
+  const [items = [], setItems] = useState()
+
+  useEffect(() => {
+    firebase
+      .database()
+      .ref(ref)
+      .on('value', async snapshot => {
+        const fbItems = Object.values(snapshot.val() || {})
+
+        setLoading(false)
+        setItems(fbItems)
+      })
+
+    return () =>
+      firebase
+        .database()
+        .ref(ref)
+        .off()
+  }, [ref])
+
+  return {loading, items: shuffle(items)}
 }
 
 export const useFirebaseRef = ref => {
