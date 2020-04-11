@@ -9,6 +9,7 @@ import Context from './context'
 import i18n from './literals'
 
 import Perfume from 'perfume.js'
+import {VirtualListPositionsProvider} from './context/VirtualListPositions'
 
 import {register} from '@s-ui/bundler/registerServiceWorker'
 
@@ -31,12 +32,14 @@ const render = () => {
     {routes, history: browserHistory},
     (err, redirectLocation, renderProps) => {
       if (err) {
-        console.error(err)
+        console.error(err) // eslint-disable-line
       }
       perfume.start('render')
       ReactDOM.render(
         <Context.Provider value={{i18n}}>
-          <Router {...renderProps} />
+          <VirtualListPositionsProvider>
+            <Router {...renderProps} />
+          </VirtualListPositionsProvider>
         </Context.Provider>,
         document.getElementById('⚛️')
       )
