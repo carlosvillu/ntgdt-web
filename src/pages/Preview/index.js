@@ -1,52 +1,52 @@
-import React, {useState, useCallback} from 'react'
+import React, {useContext} from 'react'
 import PropTypes from 'prop-types'
 
-import {useItemFirebase} from '../../hooks/firebase'
-import Item from '../../components/Item'
-import FullScreen from '../../components/FullScreen'
+import {useItemFirebase, useRandomFirebaseRef} from '../../hooks/firebase'
+import ItemHero from '../../components/ItemHero'
 import HeaderSeoItem from '../../components/HeaderSeoItem'
+import Grid from '../../components/Grid'
+import VirtualListPositions from '../../context/VirtualListPositions'
 
 const Preview = ({router}) => {
-  const {loading, item} = useItemFirebase(router.location.query.id)
-  const [currentItem, setCurrentItem] = useState({})
-  const [isOpenImage, setIsOpenImage] = useState(false)
-  const handleCloseImage = useCallback(() => {
-    const event = new window.CustomEvent('tracker:event', {
-      detail: {
-        category: 'Item',
-        action: 'fullscreen',
-        label: 'close'
-      }
-    })
-    document.dispatchEvent(event)
-    setIsOpenImage(false)
-  }, [])
+  const {id, width, height} = router.location.query
+  const {loading, item} = useItemFirebase(id)
+  const {loading: gridLoading, items: remoteItems} = useRandomFirebaseRef(
+    '/entries'
+  )
+  console.log(remoteItems)
+
+  const {positions, setItem} = useContext(VirtualListPositions)
+  const imgRatio = height / width
+  const heroWidth = window.innerWidth <= 600 ? window.innerWidth : 600
+  const heroHeight = heroWidth * imgRatio
+
   return (
     <div className="Preview">
       {!loading && item && (
         <>
           <HeaderSeoItem item={item} />
-          <Item
-            hiddenShare
-            item={item}
-            onClick={() => {
-              const event = new window.CustomEvent('tracker:event', {
-                detail: {
-                  category: 'Item',
-                  action: 'fullscreen',
-                  label: 'open'
-                }
-              })
-              document.dispatchEvent(event)
-              setCurrentItem(item)
-              setIsOpenImage(true)
-            }}
-          />
-          <FullScreen
-            video={currentItem.video}
-            image={currentItem.image}
-            isOpen={isOpenImage}
-            onClose={handleCloseImage}
+
+          <Grid
+            scrollToIndex={positions[item.id]}
+            onChangeIndex={index => setItem(item.id, index)}
+            items={remoteItems}
+            hero={
+              <ItemHero
+                hiddenShare
+                height={heroHeight}
+                item={item}
+                onClick={() => {
+                  const event = new window.CustomEvent('tracker:event', {
+                    detail: {
+                      category: 'ItemHero',
+                      action: 'fullscreen',
+                      label: 'open'
+                    }
+                  })
+                  document.dispatchEvent(event)
+                }}
+              />
+            }
           />
         </>
       )}
