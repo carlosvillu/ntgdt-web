@@ -5,6 +5,7 @@ import Item from '../Item'
 import VirtualList from 'react-tiny-virtual-list'
 import RRContext from '@s-ui/react-router/lib/ReactRouterContext'
 import VirtualListPositions from '../../context/VirtualListPositions'
+import Loading from '../Loading'
 
 const HEADER_HEIGTH = 70 /* px */
 
@@ -16,7 +17,11 @@ const Grid = ({scrollToIndex, onChangeIndex, hero, items: remoteitems}) => {
   const videoHeight = (heroWidth * 3) / 4
 
   useEffect(() => {
-    setItems([hero, ...remoteitems].filter(Boolean))
+    // if is loading
+    if (remoteitems && remoteitems.length > 0) {
+      setItems([hero, ...remoteitems].filter(Boolean))
+    }
+    setItems([hero, hero, ...remoteitems].filter(Boolean))
   }, [remoteitems, hero])
 
   useEffect(() => {
@@ -40,7 +45,7 @@ const Grid = ({scrollToIndex, onChangeIndex, hero, items: remoteitems}) => {
     return () => document.removeEventListener('image:error', imageErrorHandler)
   }, [items])
 
-  if (items.length === 0) return null
+  if (items.length === 0) return <Loading />
 
   return (
     <div className="Grid">
@@ -59,6 +64,10 @@ const Grid = ({scrollToIndex, onChangeIndex, hero, items: remoteitems}) => {
         renderItem={({index, style}) => {
           if (hero && index === 0)
             return React.cloneElement(hero, {videoHeight, heroWidth})
+
+          if (hero && index === 1 && items.length === 2) {
+            return <Loading />
+          }
 
           return (
             <Item

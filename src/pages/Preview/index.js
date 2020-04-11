@@ -10,10 +10,7 @@ import VirtualListPositions from '../../context/VirtualListPositions'
 const Preview = ({router}) => {
   const {id, width, height} = router.location.query
   const {loading, item} = useItemFirebase(id)
-  const {loading: gridLoading, items: remoteItems} = useRandomFirebaseRef(
-    '/entries'
-  )
-  console.log(remoteItems)
+  const {items: remoteItems} = useRandomFirebaseRef('/entries')
 
   const {positions, setItem} = useContext(VirtualListPositions)
   const imgRatio = height / width
