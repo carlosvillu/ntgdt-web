@@ -19,7 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "@s-ui/i18n": "1",
-    "@s-ui/react-router": "1.0.0.0-beta.6",
+    "@s-ui/react-router": "1.0.0-beta.6",
     "classnames": "2.2.6",
     "firebase": "7.13.1",
     "firebase-tools": "7.16.1",
@@ -29,7 +29,7 @@
     "react-div-100vh": "0.3.8",
     "react-dom": "16",
     "react-helmet": "5.2.1",
-    "react-tiny-virtual-list": "2.2.0"
+    "react-tiny-virtual-list": "^2.2.0"
   },
   "devDependencies": {
     "@s-ui/bundler": "5",

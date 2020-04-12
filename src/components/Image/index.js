@@ -4,25 +4,29 @@ import PropTypes from 'prop-types'
 const imgWith = url => width =>
   `https://res.cloudinary.com/carlosvillu/image/fetch/w_${width},f_auto/${url}`
 
-const Image = ({alt, src, blur, onClick, kind}) => {
+const Image = ({alt, src, blur, onClick, kind, style = {}, width, height}) => {
   const imgURLWith = imgWith(src)
+
+  function imageKind() {
+    switch (kind) {
+      case 'scaleDown':
+        return 'scaleDown'
+      case 'cover':
+        return 'cover'
+      default:
+        return 'scaleDown'
+    }
+  }
+
   return (
     <img
-      data-kind={kind}
-      className="Image"
-      onError={() => {
-        const event = new window.CustomEvent('image:error', {
-          detail: {src}
-        })
-
-        document.dispatchEvent(event)
-      }}
+      loading="lazy"
+      width={width}
+      height={height}
+      onClick={onClick}
+      className={`Image ${onClick ? 'link' : ''} ${imageKind()}`}
+      style={style}
       src={src}
-      srcSet={`
-        ${imgURLWith(320)} 320w,
-        ${imgURLWith(480)} 480w,
-        ${imgURLWith(600)} 600w
-      `}
       alt={alt}
     />
   )
@@ -30,29 +34,14 @@ const Image = ({alt, src, blur, onClick, kind}) => {
 
 Image.displayName = 'Image'
 Image.propTypes = {
-  onClick: PropTypes.func,
   alt: PropTypes.string,
   blur: PropTypes.string,
+  height: PropTypes.number,
+  kind: PropTypes.oneOf(['photo', 'poster']),
+  onClick: PropTypes.func,
   src: PropTypes.string,
-  kind: PropTypes.oneOf(['photo', 'poster'])
+  style: PropTypes.object,
+  width: PropTypes.number
 }
 
 export default Image
-
-/**
-<img
-  className="Image"
-  src={src}
-  srcSet={`
-${imgURLWith(320)} 320w,
-${imgURLWith(480)} 480w,
-${imgURLWith(768)} 768w,
-${imgURLWith(1024)} 1024w,
-${imgURLWith(1280)} 1280w`}
-  sizes="
-(max-width: 20em) 30vw,
-(max-width: 30em) 100%,
-(max-width: 40em) 90vw"
-  alt={alt}
-/>
-*/

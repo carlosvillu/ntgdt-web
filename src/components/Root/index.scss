@@ -4,12 +4,18 @@
   background-color: var(--background-color);
   display: flex;
   flex-direction: column;
+  align-items: center;
   letter-spacing: 0.5px;
-  max-height: 100vh;
-  overflow: hidden;
+  max-width: $maw-App;
+  width: 100%;
 
   &-page {
     display: flex;
     flex-grow: 1;
+  width: 100%;
+
+    & > * {
+      flex-grow: 1;
+    }
   }
 }
