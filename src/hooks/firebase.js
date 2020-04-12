@@ -189,14 +189,14 @@ export const useFirebaseRef = ref => {
   useEffect(() => {
     get(ITEMS_KEY).then((items = []) => {
       const [lastItemSaved = {}] = items
-      // lastItemSaved.id && setLoading(false)
-      // setItems(items)
+      lastItemSaved.id && setLoading(false)
+      setItems(items)
 
       firebase
         .database()
         .ref(ref)
         .orderByChild('createdAt')
-        // .startAt(lastItemSaved.createdAt)
+        .startAt(lastItemSaved.createdAt)
         .limitToLast(MAX_ITEMS)
         .on('value', async snapshot => {
           const fbItems = Object.values(snapshot.val() || {}).sort(sortByDate)
@@ -204,9 +204,9 @@ export const useFirebaseRef = ref => {
             [...fbItems, ...items],
             (a, b) => a.id === b.id
           )
-          // set(ITEMS_KEY, nextItems)
+          set(ITEMS_KEY, nextItems)
           setLoading(false)
-          setItems(fbItems)
+          setItems(nextItems)
         })
     })
 
