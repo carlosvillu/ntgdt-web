@@ -28,85 +28,97 @@ const Header = () => {
   }
 
   return (
-    <div className="Header">
-      <RouterSwitcher>
-        <ArrowBack
-          route="/favorites"
-          className="Header-ArrowBack"
-          onClick={() => router.goBack()}
-        />
-        <ArrowBack
-          route="/preview"
-          className="Header-ArrowBack"
-          onClick={() => router.goBack()}
-        />
-        <ContextualMenu cta={<Burguer className="Header-burguer" />}>
-          <ul className="Header-menu">
-            <li className="Header-menuItem">
-              {currentUser ? (
-                <Link to="/logout" className="Header-menuLink">
-                  <p className="Header-logoutLink">
-                    <img
-                      src={currentUser?.photoURL}
-                      className="Header-menuPhoto"
-                    />
-                    <span>Logout</span>
-                  </p>
-                </Link>
-              ) : (
-                <Link to="/login" className="Header-menuLink">
-                  <p>Login</p>
-                </Link>
-              )}
-            </li>
-          </ul>
-        </ContextualMenu>
-      </RouterSwitcher>
-      <h1 className="Header-logo">
-        <Link
-          className="Header-link"
-          onClick={() => setMaster(0)}
-          to="/"
-          activeClassName="is-selected"
-        >
-          NTGDT
-        </Link>
-      </h1>
-      <div className="Header-actions">
-        <Brightness
-          className="Header-action"
-          onClick={() => {
-            const isDark =
-              document.documentElement.getAttribute('data-theme') === 'dark'
-            document.documentElement.classList.add('color-theme-in-transition')
-            document.documentElement.setAttribute(
-              'data-theme',
-              isDark ? 'white' : 'dark'
-            )
-            window.setTimeout(function() {
-              document.documentElement.classList.remove(
-                'color-theme-in-transition'
-              )
-            }, 1000)
-          }}
-        />
-        <div className="Header-favorites-button">
-          {favoriteAdded && (
-            <FavoriteBorder
-              className="Header-favorites-animated"
-              onAnimationEnd={() => setFavoriteAdded(false)}
+    <>
+      <div className="Header">
+        <div className="Header-Content">
+          <RouterSwitcher>
+            <ArrowBack
+              route="/favorites"
+              className="Header-ArrowBack"
+              onClick={() => router.goBack()}
             />
-          )}
-          <Link
-            className="Header-favorites"
-            to="/favorites"
-            activeClassName="active"
-          >
-            <FavoriteBorder />
-          </Link>
-        </div>
+            <ArrowBack
+              route="/preview"
+              className="Header-ArrowBack"
+              onClick={() => router.goBack()}
+            />
+            <ArrowBack
+              route="/meme"
+              className="Header-ArrowBack"
+              onClick={() => router.goBack()}
+            />
+            <ContextualMenu cta={<Burguer className="Header-burguer" />}>
+              <ul className="Header-menu">
+                <li className="Header-menuItem">
+                  {currentUser ? (
+                    <Link to="/logout" className="Header-menuLink">
+                      <p className="Header-logoutLink">
+                        <img
+                          src={currentUser?.photoURL}
+                          className="Header-menuPhoto"
+                        />
+                        <span>Logout</span>
+                      </p>
+                    </Link>
+                  ) : (
+                    <Link to="/login" className="Header-menuLink">
+                      <p>Login</p>
+                    </Link>
+                  )}
+                </li>
+              </ul>
+            </ContextualMenu>
+          </RouterSwitcher>
+          <h1 className="Header-logo">
+            <Link
+              className="Header-link"
+              onClick={() => setMaster(0)}
+              to="/"
+              activeClassName="is-selected"
+            >
+              NTGDT
+            </Link>
+          </h1>
+          <div className="Header-actions">
+            <Brightness
+              className="Header-action"
+              onClick={() => {
+                const isDark =
+                  document.documentElement.getAttribute('data-theme') === 'dark'
+                document.documentElement.classList.add(
+                  'color-theme-in-transition'
+                )
+                document.documentElement.setAttribute(
+                  'data-theme',
+                  isDark ? 'white' : 'dark'
+                )
+                window.setTimeout(function() {
+                  document.documentElement.classList.remove(
+                    'color-theme-in-transition'
+                  )
+                }, 1000)
+              }}
+            />
+            <div className="Header-favorites-button">
+              {favoriteAdded && (
+                <FavoriteBorder
+                  className="Header-favorites-animated"
+                  onAnimationEnd={() => setFavoriteAdded(false)}
+                />
+              )}
+              <Link
+                className="Header-favorites"
+                to="/favorites"
+                activeClassName="active"
+              >
+                <FavoriteBorder />
+              </Link>
+            </div>
+          </div>
+        </div>{' '}
       </div>
-    </div>
+      <div className="headerPadding" />
+    </>
   )
 }
 

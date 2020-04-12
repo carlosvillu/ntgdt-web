@@ -2,13 +2,32 @@
 
 $h-Header:70px;
 
+.headerPadding {
+
+  margin-bottom: $h-Header;
+}
+
 .Header {
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
+  background: var(--background-color);
   display: flex;
   font-size: $fz-giant;
   height: $h-Header;
-  justify-content: space-between;
-  padding: 0 $p-l;
+  padding: 0 $p-s;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+
+  &-Content {
+    width: 100%;
+    max-width: $maw-App;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
   &-link {
     color: var(--text-color-normal);

@@ -4,12 +4,15 @@ import PropTypes from 'prop-types'
 const imgWith = url => width =>
   `https://res.cloudinary.com/carlosvillu/image/fetch/w_${width},f_auto/${url}`
 
-const Image = ({alt, src, blur, onClick, kind}) => {
+const Image = ({alt, src, blur, onClick, kind, style = {}}) => {
   const imgURLWith = imgWith(src)
+
   return (
     <img
+      onClick={onClick}
       data-kind={kind}
-      className="Image"
+      className={`Image ${onClick ? 'link' : ''}`}
+      style={style}
       onError={() => {
         const event = new window.CustomEvent('image:error', {
           detail: {src}
@@ -18,11 +21,6 @@ const Image = ({alt, src, blur, onClick, kind}) => {
         document.dispatchEvent(event)
       }}
       src={src}
-      srcSet={`
-        ${imgURLWith(320)} 320w,
-        ${imgURLWith(480)} 480w,
-        ${imgURLWith(600)} 600w
-      `}
       alt={alt}
     />
   )
