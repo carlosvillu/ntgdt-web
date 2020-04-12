@@ -27,6 +27,9 @@ const perfume = new Perfume({
   }
 })
 
+export const MAXWIDTH_APP = 1024 // same as $maw-App css variable
+export const LATERAL_PADDING_APP = 16 * 2 // same as $p-App css variable
+
 const render = () => {
   match(
     {routes, history: browserHistory},
