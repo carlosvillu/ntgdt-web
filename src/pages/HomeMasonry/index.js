@@ -12,14 +12,9 @@ const HomeMasonry = () => {
 
   if (loading || items.length === 0) return <Loading />
 
-  const newItems = items.map(item => ({
-    ...item,
-    image: item.image || item.video?.poster || 'https://via.placeholder.com/150'
-  }))
-
   return (
     <div className="HomeMasonry">
-      <MemeList list={newItems}>
+      <MemeList list={newItems(items)}>
         {({item, columnWidth}) => (
           <Image
             key={item.id}
@@ -51,4 +46,12 @@ const HomeMasonry = () => {
   )
 }
 
+export function newItems(items) {
+  return items.map(item => ({
+    ...item,
+    image: item.image || item.video?.poster || 'https://via.placeholder.com/150'
+  }))
+}
+
+HomeMasonry.displayName = 'HomeMasonry'
 export default HomeMasonry

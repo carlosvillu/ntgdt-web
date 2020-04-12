@@ -1,20 +1,25 @@
 import React, {useContext} from 'react'
 import PropTypes from 'prop-types'
 
+import MemeList from '../../components/MemeList'
 import {useItemFirebase, useRandomFirebaseRef} from '../../hooks/firebase'
 import ItemHero from '../../components/ItemHero'
 import HeaderSeoItem from '../../components/HeaderSeoItem'
-
+import {MAXWIDTH_APP} from '../../app'
+import {newItems} from '../../pages/HomeMasonry'
 import Image from '../../components/Image'
 
 const Meme = ({router}) => {
-  const {id, width, height} = router.location.query
+  const {id} = router.location.query
   const {loading, item} = useItemFirebase(id)
-  // const {items: remoteItems} = useRandomFirebaseRef('/entries')
+  const {items: remoteItems} = useRandomFirebaseRef('/entries')
 
-  const imgRatio = height / width
-  const heroWidth = window.innerWidth <= 600 ? window.innerWidth : 600
-  const heroHeight = heroWidth * imgRatio
+  const imgRatio = item ? item.height / item.width : null
+  const heroWidth =
+    window.innerWidth <= MAXWIDTH_APP ? window.innerWidth : MAXWIDTH_APP
+  const videoHeight = heroWidth * imgRatio
+  const maxWithForLongVerticalImages =
+    imgRatio > 1.5 ? Math.min(600, heroWidth) : heroWidth
 
   return (
     <div className="Meme">
@@ -22,16 +27,23 @@ const Meme = ({router}) => {
         <>
           <HeaderSeoItem item={item} />
 
-          <ItemHero hiddenShare height={heroHeight} item={item} />
+          <ItemHero
+            hiddenShare
+            item={item}
+            videoHeight={videoHeight}
+            maxWithForLongVerticalImages={maxWithForLongVerticalImages}
+          />
 
-          {/*
           <div className="HomeMasonry">
-            <MasonryList list={remoteItems}>
-              {({item, height, width}) => (
+            <MemeList list={newItems(remoteItems)}>
+              {({item}) => (
                 <Image
+                  key={item.id}
+                  width={item.width}
+                  height={item.height}
                   src={item.image}
                   alt={item.title}
-                  style={{height, width}}
+                  kind="cover"
                   onClick={() => {
                     router.push({
                       pathname: '/meme',
@@ -50,9 +62,8 @@ const Meme = ({router}) => {
                   }}
                 />
               )}
-            </MasonryList>
+            </MemeList>
           </div>
-            */}
         </>
       )}
     </div>
