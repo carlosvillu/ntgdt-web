@@ -20,10 +20,10 @@ const HomeMasonry = () => {
   return (
     <div className="HomeMasonry">
       <MemeList list={newItems}>
-        {({item}) => (
+        {({item, columnWidth}) => (
           <Image
             key={item.id}
-            width={item.width}
+            width={columnWidth}
             height={item.height}
             src={item.image}
             alt={item.title}
