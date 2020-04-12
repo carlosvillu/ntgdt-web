@@ -5,7 +5,6 @@ import {useItemFirebase, useRandomFirebaseRef} from '../../hooks/firebase'
 import ItemHero from '../../components/ItemHero'
 import HeaderSeoItem from '../../components/HeaderSeoItem'
 
-import MasonryList from '../../components/MasonryList'
 import Image from '../../components/Image'
 
 const Meme = ({router}) => {

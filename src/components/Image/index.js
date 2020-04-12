@@ -4,22 +4,28 @@ import PropTypes from 'prop-types'
 const imgWith = url => width =>
   `https://res.cloudinary.com/carlosvillu/image/fetch/w_${width},f_auto/${url}`
 
-const Image = ({alt, src, blur, onClick, kind, style = {}}) => {
+const Image = ({alt, src, blur, onClick, kind, style = {}, width, height}) => {
   const imgURLWith = imgWith(src)
+
+  function imageKind() {
+    switch (kind) {
+      case 'scaleDown':
+        return 'scaleDown'
+      case 'cover':
+        return 'cover'
+      default:
+        return 'scaleDown'
+    }
+  }
 
   return (
     <img
+      loading="lazy"
+      width={width}
+      height={height}
       onClick={onClick}
-      data-kind={kind}
-      className={`Image ${onClick ? 'link' : ''}`}
+      className={`Image ${onClick ? 'link' : ''} ${imageKind()}`}
       style={style}
-      onError={() => {
-        const event = new window.CustomEvent('image:error', {
-          detail: {src}
-        })
-
-        document.dispatchEvent(event)
-      }}
       src={src}
       alt={alt}
     />
@@ -36,21 +42,3 @@ Image.propTypes = {
 }
 
 export default Image
-
-/**
-<img
-  className="Image"
-  src={src}
-  srcSet={`
-${imgURLWith(320)} 320w,
-${imgURLWith(480)} 480w,
-${imgURLWith(768)} 768w,
-${imgURLWith(1024)} 1024w,
-${imgURLWith(1280)} 1280w`}
-  sizes="
-(max-width: 20em) 30vw,
-(max-width: 30em) 100%,
-(max-width: 40em) 90vw"
-  alt={alt}
-/>
-*/

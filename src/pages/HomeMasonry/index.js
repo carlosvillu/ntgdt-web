@@ -1,24 +1,16 @@
-import React, {useContext, createRef} from 'react'
+import React, {useContext} from 'react'
 
 import RRContext from '@s-ui/react-router/lib/ReactRouterContext'
 import {useFirebaseRef} from '../../hooks/firebase'
-import MasonryList from '../../components/MasonryList'
+import MemeList from '../../components/MemeList'
 import Image from '../../components/Image'
 import Loading from '../../components/Loading'
 
 const HomeMasonry = () => {
   const {router} = useContext(RRContext)
   const {loading, items = []} = useFirebaseRef('/entries')
-  const masonryRef = createRef()
 
   if (loading || items.length === 0) return <Loading />
-
-  console.log(masonryRef)
-  if (masonryRef.current) {
-    console.log(masonryRef.current)
-    masonryRef.current.clearCellPositions()
-    masonryRef.current.recomputeCellPositions()
-  }
 
   const newItems = items.map(item => ({
     ...item,
@@ -27,17 +19,19 @@ const HomeMasonry = () => {
 
   return (
     <div className="HomeMasonry">
-      <MasonryList list={newItems} masonryRef={masonryRef}>
-        {({item, height, width}) => (
+      <MemeList list={newItems}>
+        {({item}) => (
           <Image
             key={item.id}
+            width={item.width}
+            height={item.height}
             src={item.image}
             alt={item.title}
-            style={{height, width}}
+            kind="cover"
             onClick={() => {
               router.push({
                 pathname: '/meme',
-                query: {id: item.id, width, height}
+                query: {id: item.id}
               })
 
               document.dispatchEvent(
@@ -52,7 +46,7 @@ const HomeMasonry = () => {
             }}
           />
         )}
-      </MasonryList>
+      </MemeList>
     </div>
   )
 }

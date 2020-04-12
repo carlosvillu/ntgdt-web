@@ -25,7 +25,7 @@ const columnCount = () => {
 }
 
 // We need to make sure images are loaded from scratch every time for this demo
-const spacer = 10
+const spacer = 16
 const deviceWidth = Math.min(window.innerWidth, maxWidthApp)
 const columnWidth =
   (deviceWidth - paddingApp) / columnCount() -
