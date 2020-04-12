@@ -14,7 +14,7 @@ const Image = ({alt, src, blur, onClick, kind, style = {}, width, height}) => {
       case 'cover':
         return 'cover'
       default:
-        return 'scaleDown'
+        return ''
     }
   }
 

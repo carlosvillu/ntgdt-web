@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const MAXWIDTH_APP = 1024 // same as $maw-App css variable
-const LATERAL_PADDING_APP = 8 * 2 // same as $p-App css variable
+import {MAXWIDTH_APP, LATERAL_PADDING_APP} from '../../app'
 
 const MemeList = ({list, children}) => {
   const columnCount = calculateColumnCount()

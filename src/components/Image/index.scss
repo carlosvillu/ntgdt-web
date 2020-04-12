@@ -1,14 +1,16 @@
 @import '../../styles/settings';
 
 .Image {
-  width: 100%;
-  height: 100%;
 
   &.scaleDown {
+  width: 100%;
+  height: 100%;
     object-fit: scale-down;
   }
 
   &.cover {
+  width: 100%;
+  height: 100%;
     object-fit: cover;
   }
 

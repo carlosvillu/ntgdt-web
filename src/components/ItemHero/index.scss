@@ -1,60 +1,50 @@
 @import '../../styles/settings';
 
 .ItemHero {
-  border-top: $bdw-m solid $c-gray-lightest;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: $m-xl;
   font-size: $fz-xl;
 
-  &:first-of-type {
-    border-top: none;
+  &-site {
+    font-size: $fz-s;
+    text-transform: uppercase;
+    font-weight: $fw-light;
+    line-height: $lh-xl;
   }
 
-  &-toolbar {
-    display: flex;
-    justify-content: space-between;
+  &-description {
+    font-size: $fz-l;
+    font-weight: fw-regular;
+    line-height: $lh-s;
+  }
 
-    & > svg {
+  &-meta {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: $p-l;
+    border-top: 3px solid currentColor;
+  }
+
+  &-actions {
+    font-size: 36px;
+    flex-shrink: 0;
+
+    & > * {
       margin-left: $m-l;
     }
-  }
-
-  &-title {
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    display: -webkit-box;
-    font-size: $fz-m;
-    line-height: 1.2em;
-    margin-bottom: 16px;
-    height: 2.4em;
-    max-width: 100%;
-    overflow-y: hidden;
-    text-overflow: ellipsis;
-  }
-
-  &-image {
-    align-items: center;
-    display: flex;
-    height: 300px;
-    justify-content: center;
-    position: relative;
-  }
-
-  &-play {
-    font-size: 4em;
-    position: absolute;
-  }
-
-  &-icons {
-    display: flex;
-    justify-content: space-around;
-    margin: $m-xl 0;
-    width: 33%;
   }
 
   &-icon {
     color: var(--text-color-normal);
     fill: currentColor;
-    width: $fz-xxl;
-    height: $fz-xxl;
+    width: $fz-xxxl;
+    height: $fz-xxxl;
 
     &.is-favorite {
       color: $c-favorite;
