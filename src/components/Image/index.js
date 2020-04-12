@@ -34,11 +34,14 @@ const Image = ({alt, src, blur, onClick, kind, style = {}, width, height}) => {
 
 Image.displayName = 'Image'
 Image.propTypes = {
-  onClick: PropTypes.func,
   alt: PropTypes.string,
   blur: PropTypes.string,
+  height: PropTypes.number,
+  kind: PropTypes.oneOf(['photo', 'poster']),
+  onClick: PropTypes.func,
   src: PropTypes.string,
-  kind: PropTypes.oneOf(['photo', 'poster'])
+  style: PropTypes.object,
+  width: PropTypes.number
 }
 
 export default Image
