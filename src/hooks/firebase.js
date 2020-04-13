@@ -40,15 +40,10 @@ const uniqueElementsBy = (arr, fn) =>
     if (!acc.some(x => fn(v, x))) acc.push(v)
     return acc
   }, [])
-const shuffle = ([...arr]) => {
-  let m = arr.length
-  while (m) {
-    const i = Math.floor(Math.random() * m--)
-    ;[arr[m], arr[i]] = [arr[i], arr[m]]
-  }
-  return arr
-}
 
+const between = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
 export const useFavoritesFirebase = () => {
   const [items, setItems] = useState()
   const [loading, setLoading] = useState(true)
@@ -133,9 +128,12 @@ export const useItemFavoriteFirebase = item => {
 
 export const useItemFirebase = id => {
   const [loading, setLoading] = useState(true)
-  const [item, setItem] = useState()
+  const [item, setItem] = useState(false)
+  console.log('useItemFirebase', id, item && item.id)
 
   useEffect(() => {
+    setLoading(true)
+    setItem(false)
     get(ITEMS_KEY).then((items = []) => {
       let item = items.find(i => i.id === id)
       if (item) {
@@ -157,29 +155,59 @@ export const useItemFirebase = id => {
   return {loading, item}
 }
 
-export const useRandomFirebaseRef = ref => {
+window.__CACHE_RND_ITEMS_BY_MEME__ = {}
+export const useRandomFirebaseRef = (ref, id) => {
   const [loading, setLoading] = useState(true)
   const [items = [], setItems] = useState()
 
   useEffect(() => {
-    firebase
-      .database()
-      .ref(ref)
-      .on('value', async snapshot => {
-        const fbItems = Object.values(snapshot.val() || {})
+    if (window.__CACHE_RND_ITEMS_BY_MEME__[id]) {
+      setLoading(false)
+      setItems(window.__CACHE_RND_ITEMS_BY_MEME__[id].sort(sortByDate))
+      return
+    } else {
+      firebase
+        .database()
+        .ref(ref)
+        .orderByChild('createdAt')
+        .limitToFirst(1)
+        .on('value', async snapshot => {
+          const fbItems = Object.values(snapshot.val() || {})
+          const [item] = fbItems
+          const latest = item.createdAt
+          const today = Date.now()
 
-        setLoading(false)
-        setItems(fbItems)
-      })
+          const end = between(latest, today)
+          const start = between(latest, end)
+
+          firebase
+            .database()
+            .ref(ref)
+            .orderByChild('createdAt')
+            .limitToLast(20)
+            .startAt(start)
+            .endAt(end)
+            .on('value', async snapshot => {
+              const fbItems = Object.values(snapshot.val() || {})
+
+              window.__CACHE_RND_ITEMS_BY_MEME__[id] =
+                window.__CACHE_RND_ITEMS_BY_MEME__[id] ||
+                fbItems.sort(sortByDate)
+
+              setLoading(false)
+              setItems(window.__CACHE_RND_ITEMS_BY_MEME__[id])
+            })
+        })
+    }
 
     return () =>
       firebase
         .database()
         .ref(ref)
         .off()
-  }, [ref])
+  }, [id, ref])
 
-  return {loading, items: shuffle(items)}
+  return {loading, items}
 }
 
 export const useFirebaseRef = ref => {
