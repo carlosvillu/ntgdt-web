@@ -6,6 +6,10 @@
     height: 100%;
     position: relative;
     width: 100%;
+
+    &.link {
+      cursor: pointer;
+    }
   }
 
   &-play {
@@ -35,9 +39,6 @@
     object-fit: cover;
   }
 
-  &.link {
-    cursor: pointer;
-  }
 
   &.is-loading {
     height: 100%;

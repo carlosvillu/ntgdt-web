@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import Play from '../Icons/Play'
@@ -18,7 +18,6 @@ const Image = ({
   width
 }) => {
   // const imgURLWith = imgWith(src)
-  const [imageLoaded, setImageLoad] = useState(false)
 
   function imageKind() {
     switch (kind) {
@@ -32,23 +31,25 @@ const Image = ({
   }
 
   return (
-    <div className="Image-container">
+    <div
+      className={`Image-container ${onClick ? 'link' : ''}`}
+      style={{
+        backgroundImage: `url(${blur})`,
+        backgrounRepeat: 'no-repeat',
+        backgroundSize: 'cover'
+      }}
+      onClick={onClick}
+    >
       <img
         loading="lazy"
         width={width}
         height={height}
-        onClick={onClick}
-        className={`Image ${onClick ? 'link' : ''} ${imageKind()}`}
+        className={`Image ${imageKind()}`}
         style={style}
-        src={imageLoaded ? src : blur}
+        src={src}
         alt={alt}
       />
-      <img
-        style={{width: 0, height: 0, display: 'none'}}
-        src={src}
-        onLoad={() => setImageLoad(true)}
-      />
-      {hasPlayButton && <Play className="Image-play" onClick={onClick} />}
+      {hasPlayButton && <Play className="Image-play" />}
     </div>
   )
 }
