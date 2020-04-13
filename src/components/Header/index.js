@@ -7,16 +7,16 @@ import Brightness from '../Icons/Brightness'
 import ContextualMenu from '../ContextualMenu'
 import Link from '@s-ui/react-router/lib/Link'
 import {useFirebaseAuth} from '../../hooks/firebase'
+import {useSetupScrollRestoration} from '../../hooks/scroll'
 
 import RouterSwitcher from '../RouterSwitcher'
 import RRContext from '@s-ui/react-router/lib/ReactRouterContext'
-import VirtualListPositions from '../../context/VirtualListPositions'
 
 const Header = () => {
+  const setScrollTo = useSetupScrollRestoration()
   const {currentUser} = useFirebaseAuth()
   const [favoriteAdded, setFavoriteAdded] = useState(false)
   const {router} = useContext(RRContext)
-  const {setMaster} = useContext(VirtualListPositions)
 
   useEffect(() => {
     document.addEventListener('favorite', onAddFavorite)
@@ -72,7 +72,7 @@ const Header = () => {
           <h1 className="Header-logo">
             <Link
               className="Header-link"
-              onClick={() => setMaster(0)}
+              onClick={() => setScrollTo()}
               to="/"
               activeClassName="is-selected"
             >

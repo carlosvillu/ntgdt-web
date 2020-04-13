@@ -22,6 +22,7 @@ const ItemHero = ({
       {/* TODO: get image max-width 1024 px */}
       {image && (
         <Image
+          {...item}
           blur={blur}
           src={image}
           alt={title}

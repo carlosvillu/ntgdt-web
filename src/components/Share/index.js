@@ -6,7 +6,7 @@ const Share = ({hidden, item, children}) => {
     <a
       hidden={hidden}
       href={`whatsapp://send?text=${encodeURIComponent(
-        `https://${process.env.HOST}/preview?id=${item.id}`
+        `https://${process.env.HOST}/meme?id=${item.id}`
       )}`}
       aria-label="Send"
       onClick={evt => {
@@ -14,7 +14,7 @@ const Share = ({hidden, item, children}) => {
           evt.preventDefault()
           navigator.share({
             title: item.title,
-            url: `https://${process.env.HOST}/preview?id=${item.id}`
+            url: `https://${process.env.HOST}/meme?id=${item.id}`
           })
         }
 
