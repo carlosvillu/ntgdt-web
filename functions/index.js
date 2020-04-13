@@ -106,7 +106,7 @@ exports.share = functions.https.onRequest((request, response) => {
     const item = snapshot.val()
     const metas = `
      <meta property="og:title" content="${item.title}" />
-     <meta property="og:url" content="https://ntgdt.com/preview/${item.id}">
+     <meta property="og:url" content="https://ntgdt.com/meme?id=${item.id}">
      ${
        item.image
          ? `<meta property="og:image" content="https://res.cloudinary.com/carlosvillu/image/fetch/w_300,f_auto/${item.image}">`
