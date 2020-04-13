@@ -2,21 +2,27 @@ import React, {useContext} from 'react'
 
 import RRContext from '@s-ui/react-router/lib/ReactRouterContext'
 import {useFirebaseRef} from '../../hooks/firebase'
+import {useScrollRestoration} from '../../hooks/scroll'
 import MemeList from '../../components/MemeList'
 import Image from '../../components/Image'
 import Loading from '../../components/Loading'
 
 const HomeMasonry = () => {
+  useScrollRestoration()
   const {router} = useContext(RRContext)
   const {loading, items = []} = useFirebaseRef('/entries')
 
-  if (loading || items.length === 0) return <Loading />
+  if (loading || items.length === 0) {
+    return <Loading />
+  }
 
   return (
     <div className="HomeMasonry">
       <MemeList list={newItems(items)}>
         {({item, columnWidth}) => (
           <Image
+            {...item}
+            hasPlayButton={item.video}
             key={item.id}
             width={columnWidth}
             height={item.height}

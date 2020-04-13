@@ -1,18 +1,21 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import MemeList from '../../components/MemeList'
 import {useItemFirebase, useRandomFirebaseRef} from '../../hooks/firebase'
+import {useScrollRestoration} from '../../hooks/scroll'
 import ItemHero from '../../components/ItemHero'
 import HeaderSeoItem from '../../components/HeaderSeoItem'
 import {MAXWIDTH_APP} from '../../app'
 import {newItems} from '../../pages/HomeMasonry'
 import Image from '../../components/Image'
+import Loading from '../../components/Loading'
 
 const Meme = ({router}) => {
   const {id} = router.location.query
+  useScrollRestoration()
   const {loading, item} = useItemFirebase(id)
-  const {items: remoteItems} = useRandomFirebaseRef('/entries')
+  const {items: remoteItems} = useRandomFirebaseRef('/entries', id)
 
   const imgRatio = item ? item.height / item.width : null
   const heroWidth =
@@ -20,6 +23,10 @@ const Meme = ({router}) => {
   const videoHeight = heroWidth * imgRatio
   const maxWithForLongVerticalImages =
     imgRatio > 1.5 ? Math.min(600, heroWidth) : heroWidth
+
+  if (loading) {
+    return <Loading />
+  }
 
   return (
     <div className="Meme">
@@ -38,6 +45,7 @@ const Meme = ({router}) => {
             <MemeList list={newItems(remoteItems)}>
               {({item}) => (
                 <Image
+                  {...item}
                   key={item.id}
                   width={item.width}
                   height={item.height}
