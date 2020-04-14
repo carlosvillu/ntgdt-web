@@ -11,7 +11,7 @@ import i18n from './literals'
 import Perfume from 'perfume.js'
 import {VirtualListPositionsProvider} from './context/VirtualListPositions'
 
-import {register} from '@s-ui/bundler/registerServiceWorker'
+import {unregister} from '@s-ui/bundler/registerServiceWorker'
 
 import './styles/index.scss'
 
@@ -59,10 +59,12 @@ document.addEventListener('tracker:event', evt => {
   window.ga('send', 'event', category, action, label)
 })
 
-register({
-  first: () => window.alert('Content is cached for offline use.'),
-  renovate: () => {
-    window.alert('New content is available; please refresh.')
-    window.location.href = '/'
-  }
-})()
+unregister()
+
+// register({
+//   first: () => window.alert('Content is cached for offline use.'),
+//   renovate: () => {
+//     window.alert('New content is available; please refresh.')
+//     window.location.href = '/'
+//   }
+// })()
