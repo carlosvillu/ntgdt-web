@@ -16,12 +16,18 @@ const ItemHero = ({
 }) => {
   const {title, site, image, video, image_blur: blur} = item
   const {isFavorite, callbackHandleClick} = useItemFavoriteFirebase(item)
+  const height = (
+    (item.height * maxWithForLongVerticalImages) /
+    item.width
+  ).toFixed()
 
   return (
     <div className="ItemHero">
       {/* TODO: get image max-width 1024 px */}
       {image && (
         <Image
+          width={maxWithForLongVerticalImages}
+          height={height}
           image_blur={blur}
           src={image}
           alt={title}
@@ -69,13 +75,15 @@ ItemHero.propTypes = {
   hiddenShare: PropTypes.bool,
   item: PropTypes.shape({
     createdAt: PropTypes.number,
+    height: PropTypes.number,
     id: PropTypes.string,
     image: PropTypes.string,
-    video: PropTypes.object,
     image_blur: PropTypes.string,
     link: PropTypes.string,
     site: PropTypes.string,
-    title: PropTypes.string
+    title: PropTypes.string,
+    video: PropTypes.object,
+    width: PropTypes.number
   }),
   videoHeight: PropTypes.number,
   heroWidth: PropTypes.number,

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 
 import Play from '../Icons/Play'
 
-// const imgWith = url => width =>
-//   `https://res.cloudinary.com/carlosvillu/image/fetch/w_${width},f_auto/${url}`
+const imgWith = url => width =>
+  `https://res.cloudinary.com/carlosvillu/image/fetch/w_${width},f_auto/${url}`
 
 const Image = ({
   alt,
@@ -17,7 +17,7 @@ const Image = ({
   style = {},
   width
 }) => {
-  // const imgURLWith = imgWith(src)
+  const imgURLWith = imgWith(src)
 
   function imageKind() {
     switch (kind) {
@@ -46,7 +46,7 @@ const Image = ({
         height={height}
         className={`Image ${imageKind()}`}
         style={style}
-        src={src}
+        src={imgURLWith(width)}
         alt={alt}
       />
       {hasPlayButton && <Play className="Image-play" />}
