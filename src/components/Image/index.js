@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 import Play from '../Icons/Play'
 
 const imgWith = url => width =>
-  `https://res.cloudinary.com/carlosvillu/image/fetch/w_${width},f_auto/${url}`
+  `https://res.cloudinary.com/carlosvillu/image/fetch/w_${Math.floor(
+    width
+  )},f_auto/${url}`
 
 const Image = ({
   alt,
