@@ -43,12 +43,12 @@ const Meme = ({router}) => {
 
           <div className="HomeMasonry">
             <MemeList list={newItems(remoteItems)}>
-              {({item}) => (
+              {({item, columnWidth, heightSpan}) => (
                 <Image
                   {...item}
                   key={item.id}
-                  width={item.width}
-                  height={item.height}
+                  width={columnWidth}
+                  height={heightSpan}
                   src={item.image}
                   alt={item.title}
                   kind="cover"
