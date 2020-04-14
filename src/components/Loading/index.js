@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import Settings from '../Icons/Settings'
 
 const Loading = () => {
-  const {showSpinner, setShowSpinner} = useState(false)
+  const [showSpinner, setShowSpinner] = useState(false)
   useEffect(() => {
     setTimeout(() => setShowSpinner(true), 145)
   })

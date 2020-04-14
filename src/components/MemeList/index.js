@@ -33,7 +33,7 @@ const MemeList = ({list, children}) => {
             }}
             className="MemeList-Item"
           >
-            {children({item, columnWidth})}
+            {children({item, columnWidth, heightSpan})}
           </div>
         )
       })}

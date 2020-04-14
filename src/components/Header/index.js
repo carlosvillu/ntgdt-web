@@ -47,6 +47,7 @@ const Header = () => {
               className="Header-ArrowBack"
               onClick={() => {
                 setScrollTo({
+                  forceTopScroll: /meme/,
                   uri: `${window.location.pathname}${window.location.search}`,
                   position: 0
                 })
