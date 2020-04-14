@@ -46,6 +46,7 @@ const Meme = ({router}) => {
               {({item, columnWidth, heightSpan}) => (
                 <Image
                   {...item}
+                  hasPlayButton={item.video}
                   key={item.id}
                   width={columnWidth}
                   height={heightSpan}
