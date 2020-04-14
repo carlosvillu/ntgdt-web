@@ -3,7 +3,10 @@ import PropTypes from 'prop-types'
 
 import MemeList from '../../components/MemeList'
 import {useItemFirebase, useRandomFirebaseRef} from '../../hooks/firebase'
-import {useScrollRestoration} from '../../hooks/scroll'
+import {
+  useScrollRestoration,
+  useSetupScrollRestoration
+} from '../../hooks/scroll'
 import ItemHero from '../../components/ItemHero'
 import HeaderSeoItem from '../../components/HeaderSeoItem'
 import {MAXWIDTH_APP} from '../../app'
@@ -14,6 +17,7 @@ import Loading from '../../components/Loading'
 const Meme = ({router}) => {
   const {id} = router.location.query
   useScrollRestoration()
+  const setScrollTo = useSetupScrollRestoration()
   const {loading, item} = useItemFirebase(id)
   const {items: remoteItems} = useRandomFirebaseRef('/entries', id)
 
@@ -54,6 +58,9 @@ const Meme = ({router}) => {
                   alt={item.title}
                   kind="cover"
                   onClick={() => {
+                    setScrollTo({
+                      forceTopScroll: /meme/
+                    })
                     router.push({
                       pathname: '/meme',
                       query: {id: item.id}
