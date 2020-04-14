@@ -18,7 +18,7 @@ jobs:
     if: type = pull_request
     env:
     - NODE_ENV=production
-    - STAGE=development
+    - STAGE=production
     - HOST=dev.ntgdt.com
     script:
     - npm install --only=dev --force-online
