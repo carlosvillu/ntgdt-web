@@ -19,7 +19,7 @@ const ItemHero = ({
 }) => {
   const {router} = useContext(RRContext)
   const {title, site, image, video, image_blur: blur} = item
-  const {isFavorite, callbackHandleClick} = useItemFavoriteFirebase(item.id)
+  const {isFavorite, callbackHandleClick} = useItemFavoriteFirebase(item)
   const height = (
     (item.height * maxWithForLongVerticalImages) /
     item.width

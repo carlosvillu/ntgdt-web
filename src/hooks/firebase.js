@@ -35,7 +35,6 @@ const NOT_FOUND = -1
 const MAX_ITEMS = 100
 const ITEMS_KEY = 'NTGDT_ITEMS_KEY'
 const FAVORITES_ITEMS_KEY = 'NTGDT_FAVORITES_ITEMS_KEY'
-window.__CACHE_RND_ITEMS_BY_MEME__ = {}
 const sortByDate = ({createdAt: a}, {createdAt: b}) => new Date(b) - new Date(a) // eslint-disable-line
 const uniqueElementsBy = (arr, fn) =>
   arr.reduce((acc, v) => {
@@ -75,6 +74,7 @@ export const favoriteAddedEvent = new Event('favorite')
 
 export const useItemFavoriteFirebase = item => {
   const [isFavorite, setIsFavorite] = useState(false)
+
   useEffect(() => {
     get(FAVORITES_ITEMS_KEY).then((favorites = []) => {
       setIsFavorite(favorites.some(favorite => item.id === favorite.id))
