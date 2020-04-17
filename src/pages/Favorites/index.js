@@ -1,7 +1,8 @@
 import React, {useContext} from 'react'
 
 import RRContext from '@s-ui/react-router/lib/ReactRouterContext'
-import {useFavoritesFirebase} from '../../hooks/firebase'
+import {useFavoritesFirebase, useNextItemsCache} from '../../hooks/firebase'
+import {useSetupScrollRestoration} from '../../hooks/scroll'
 import MemeList from '../../components/MemeList'
 import Loading from '../../components/Loading'
 import Image from '../../components/Image'
@@ -10,6 +11,9 @@ import {newItems} from '../../pages/HomeMasonry'
 const Favorites = () => {
   const {loading, items = []} = useFavoritesFirebase()
   const {router} = useContext(RRContext)
+  useScrollRestoration()
+  const setScrollTo = useSetupScrollRestoration()
+  const {setNextItemsCache} = useNextItemsCache({items})
 
   if (loading || items.length === 0) return <Loading />
 
@@ -25,6 +29,10 @@ const Favorites = () => {
             alt={item.title}
             kind="cover"
             onClick={() => {
+              setNextItemsCache()
+
+              setScrollTo({forceTopScroll: /meme/})
+
               router.push({
                 pathname: '/meme',
                 query: {id: item.id}

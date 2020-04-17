@@ -2,10 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import MemeList from '../../components/MemeList'
-import {useItemFirebase, useRandomFirebaseRef} from '../../hooks/firebase'
 import {
-  useScrollRestoration,
-  useSetupScrollRestoration
+  useItemFirebase,
+  useRandomFirebaseRef,
+  useNextItemsCache
+} from '../../hooks/firebase'
+import {
+  useSetupScrollRestoration,
+  useScrollRestoration
 } from '../../hooks/scroll'
 import ItemHero from '../../components/ItemHero'
 import HeaderSeoItem from '../../components/HeaderSeoItem'
@@ -19,7 +23,11 @@ const Meme = ({router}) => {
   useScrollRestoration()
   const setScrollTo = useSetupScrollRestoration()
   const {loading, item} = useItemFirebase(id)
-  const {items: remoteItems} = useRandomFirebaseRef('/entries', id)
+  const {items} = useRandomFirebaseRef('/entries', id)
+  const {nextItemId, setNextItemsCache} = useNextItemsCache({
+    currentItemId: id,
+    items
+  })
 
   const imgRatio = item ? item.height / item.width : null
   const heroWidth =
@@ -34,7 +42,7 @@ const Meme = ({router}) => {
 
   return (
     <div className="Meme">
-      {!loading && item && (
+      {item && (
         <>
           <HeaderSeoItem item={item} />
 
@@ -43,10 +51,11 @@ const Meme = ({router}) => {
             item={item}
             videoHeight={videoHeight}
             maxWithForLongVerticalImages={maxWithForLongVerticalImages}
+            nextItemId={nextItemId}
           />
 
           <div className="HomeMasonry">
-            <MemeList list={newItems(remoteItems)}>
+            <MemeList list={newItems(items)}>
               {({item, columnWidth, heightSpan}) => (
                 <Image
                   {...item}
@@ -58,9 +67,10 @@ const Meme = ({router}) => {
                   alt={item.title}
                   kind="cover"
                   onClick={() => {
-                    setScrollTo({
-                      forceTopScroll: /meme/
-                    })
+                    setNextItemsCache()
+
+                    setScrollTo({forceTopScroll: /meme/})
+
                     router.push({
                       pathname: '/meme',
                       query: {id: item.id}
