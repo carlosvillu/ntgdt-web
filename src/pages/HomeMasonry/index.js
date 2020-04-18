@@ -2,7 +2,10 @@ import React, {useContext} from 'react'
 
 import RRContext from '@s-ui/react-router/lib/ReactRouterContext'
 import {useFirebaseRef, useNextItemsCache} from '../../hooks/firebase'
-import {useSetupScrollRestoration} from '../../hooks/scroll'
+import {
+  useSetupScrollRestoration,
+  useScrollRestoration
+} from '../../hooks/scroll'
 import MemeList from '../../components/MemeList'
 import Image from '../../components/Image'
 import Loading from '../../components/Loading'
