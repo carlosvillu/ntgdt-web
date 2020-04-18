@@ -5,6 +5,7 @@ import {get, set} from 'idb-keyval'
 import * as firebase from 'firebase/app'
 import 'firebase/database'
 import 'firebase/auth'
+import {useCacheItems} from '../context/CacheItems'
 
 const configPRO = {
   apiKey: 'AIzaSyCeUsBwp1gzKDwQqorrri7nRlqr_QXtg1g',
@@ -73,6 +74,7 @@ export const favoriteAddedEvent = new Event('favorite')
 
 export const useItemFavoriteFirebase = item => {
   const [isFavorite, setIsFavorite] = useState(false)
+
   useEffect(() => {
     get(FAVORITES_ITEMS_KEY).then((favorites = []) => {
       setIsFavorite(favorites.some(favorite => item.id === favorite.id))
@@ -129,7 +131,6 @@ export const useItemFavoriteFirebase = item => {
 export const useItemFirebase = id => {
   const [loading, setLoading] = useState(true)
   const [item, setItem] = useState(false)
-  console.log('useItemFirebase', id, item && item.id)
 
   useEffect(() => {
     setLoading(true)
@@ -155,15 +156,15 @@ export const useItemFirebase = id => {
   return {loading, item}
 }
 
-window.__CACHE_RND_ITEMS_BY_MEME__ = {}
 export const useRandomFirebaseRef = (ref, id) => {
   const [loading, setLoading] = useState(true)
   const [items = [], setItems] = useState()
+  const {cacheRandomItemsByMeme, setCacheRandomItemsByMeme} = useCacheItems()
 
   useEffect(() => {
-    if (window.__CACHE_RND_ITEMS_BY_MEME__[id]) {
+    if (cacheRandomItemsByMeme[id]) {
       setLoading(false)
-      setItems(window.__CACHE_RND_ITEMS_BY_MEME__[id].sort(sortByDate))
+      setItems(cacheRandomItemsByMeme[id])
       return
     } else {
       firebase
@@ -190,12 +191,12 @@ export const useRandomFirebaseRef = (ref, id) => {
             .on('value', async snapshot => {
               const fbItems = Object.values(snapshot.val() || {})
 
-              window.__CACHE_RND_ITEMS_BY_MEME__[id] =
-                window.__CACHE_RND_ITEMS_BY_MEME__[id] ||
-                fbItems.sort(sortByDate)
-
+              setCacheRandomItemsByMeme({
+                ...cacheRandomItemsByMeme,
+                [id]: fbItems.sort(sortByDate)
+              })
               setLoading(false)
-              setItems(window.__CACHE_RND_ITEMS_BY_MEME__[id])
+              setItems(fbItems)
             })
         })
     }
@@ -205,7 +206,7 @@ export const useRandomFirebaseRef = (ref, id) => {
         .database()
         .ref(ref)
         .off()
-  }, [id, ref])
+  }, [id, ref]) // eslint-disable-line
 
   return {loading, items}
 }
@@ -256,7 +257,6 @@ export const useFirebaseAuth = () => {
       console.log(user) // eslint-disable-line
     } catch (e) {
       console.error(e) //eslint-disable-line
-      debugger // eslint-disable-line
     }
   }
 
@@ -270,4 +270,33 @@ export const useFirebaseAuth = () => {
   }
 
   return {loginWithGoogle, logout, currentUser}
+}
+
+export function useNextItemsCache({currentItemId, items = []}) {
+  const {nextItem, setNextItem, cacheItems, setCacheItems} = useCacheItems()
+
+  useEffect(() => {
+    if (items.length > 0 && cacheItems.length === 0) {
+      setCacheItems(items)
+    }
+  }, [items, cacheItems.length, setCacheItems])
+
+  useEffect(() => {
+    if (currentItemId && cacheItems && cacheItems.length > 0) {
+      const currentItemPosition = cacheItems.findIndex(
+        _ => _.id === currentItemId
+      )
+      const nextItem =
+        currentItemPosition >= 0
+          ? cacheItems[(currentItemPosition + 1) % cacheItems.length]
+          : cacheItems[0]
+
+      setNextItem(nextItem)
+    }
+  }, [currentItemId, cacheItems, setNextItem])
+
+  return {
+    nextItemId: nextItem?.id,
+    setNextItemsCache: () => setCacheItems(items)
+  }
 }

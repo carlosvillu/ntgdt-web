@@ -45,14 +45,7 @@ const Header = () => {
             <ArrowBack
               route="/meme"
               className="Header-ArrowBack"
-              onClick={() => {
-                setScrollTo({
-                  forceTopScroll: /meme/,
-                  uri: `${window.location.pathname}${window.location.search}`,
-                  position: 0
-                })
-                router.goBack()
-              }}
+              onClick={() => router.goBack()}
             />
             <ContextualMenu cta={<Burguer className="Header-burguer" />}>
               <ul className="Header-menu">

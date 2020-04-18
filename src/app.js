@@ -9,7 +9,7 @@ import Context from './context'
 import i18n from './literals'
 
 import Perfume from 'perfume.js'
-import {VirtualListPositionsProvider} from './context/VirtualListPositions'
+import {CacheItemsProvider} from './context/CacheItems'
 
 import {unregister} from '@s-ui/bundler/registerServiceWorker'
 
@@ -40,9 +40,9 @@ const render = () => {
       perfume.start('render')
       ReactDOM.render(
         <Context.Provider value={{i18n}}>
-          <VirtualListPositionsProvider>
+          <CacheItemsProvider>
             <Router {...renderProps} />
-          </VirtualListPositionsProvider>
+          </CacheItemsProvider>
         </Context.Provider>,
         document.getElementById('⚛️')
       )
