@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import PropTypes from 'prop-types'
 import Hammer from 'react-hammerjs'
 
@@ -20,6 +20,7 @@ const ItemHero = ({
   const {router} = useContext(RRContext)
   const {title, site, image, video, image_blur: blur} = item
   const {isFavorite, callbackHandleClick} = useItemFavoriteFirebase(item)
+  const [translateX, setTranslateX] = useState(0)
   const height = (
     (item.height * maxWithForLongVerticalImages) /
     item.width
@@ -32,6 +33,15 @@ const ItemHero = ({
         if (e.direction === 2)
           return router.push({pathname: '/meme', query: {id: nextItemId}})
       }}
+      onPan={e => {
+        if (
+          (e.angle > -45 && e.angle < 45) ||
+          (e.angle > 145 && e.angle > -145)
+        ) {
+          setTranslateX(e.deltaX)
+        }
+      }}
+      onPanEnd={() => setTranslateX(0)}
       onDoubleTap={callbackHandleClick}
     >
       <div className="ItemHero">
@@ -43,7 +53,10 @@ const ItemHero = ({
             image_blur={blur}
             src={image}
             alt={title}
-            style={{width: `${maxWithForLongVerticalImages}px`}}
+            style={{
+              width: `${maxWithForLongVerticalImages}px`,
+              transform: `translateX(${translateX}px)`
+            }}
           />
         )}
         {video && <Video {...video} width={heroWidth} height={videoHeight} />}
