@@ -11,7 +11,7 @@ import i18n from './literals'
 import Perfume from 'perfume.js'
 import {CacheItemsProvider} from './context/CacheItems'
 
-import {unregister} from '@s-ui/bundler/registerServiceWorker'
+import {register} from '@s-ui/bundler/registerServiceWorker'
 
 import './styles/index.scss'
 
@@ -29,6 +29,13 @@ const perfume = new Perfume({
 
 export const MAXWIDTH_APP = 1024 // same as $maw-App css variable
 export const LATERAL_PADDING_APP = 16 * 2 // same as $p-App css variable
+
+document
+  .getElementById('themeColor')
+  .setAttribute(
+    'content',
+    window.matchMedia('(prefers-color-scheme: dark)').matches ? '#000' : '#fff'
+  )
 
 const render = () => {
   match(
@@ -59,12 +66,10 @@ document.addEventListener('tracker:event', evt => {
   window.ga('send', 'event', category, action, label)
 })
 
-unregister()
-
-// register({
-//   first: () => window.alert('Content is cached for offline use.'),
-//   renovate: () => {
-//     window.alert('New content is available; please refresh.')
-//     window.location.href = '/'
-//   }
-// })()
+register({
+  first: () => window.alert('Content is cached for offline use.'),
+  renovate: () => {
+    window.alert('New content is available; please refresh.')
+    window.location.href = '/'
+  }
+})()
