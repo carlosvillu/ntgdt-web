@@ -63,7 +63,8 @@ const Header = () => {
               className="Header-ArrowBack"
               onClick={() => router.goBack()}
             />
-            <ContextualMenu cta={<Burguer className="Header-burguer" />}>
+            <div />
+            {/* <ContextualMenu cta={<Burguer className="Header-burguer" />}>
               <ul className="Header-menu">
                 <li className="Header-menuItem">
                   {currentUser ? (
@@ -83,7 +84,7 @@ const Header = () => {
                   )}
                 </li>
               </ul>
-            </ContextualMenu>
+            </ContextualMenu> */}
           </RouterSwitcher>
           <h1 className="Header-logo">
             <Link
