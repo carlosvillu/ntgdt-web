@@ -13,7 +13,11 @@ import {CacheItemsProvider} from './context/CacheItems'
 
 import {register} from '@s-ui/bundler/registerServiceWorker'
 
+import firebase from './firebase'
+
 import './styles/index.scss'
+
+window.firebase = firebase
 
 const perfume = new Perfume({
   // Metrics
