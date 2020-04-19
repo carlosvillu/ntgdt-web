@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import PropTypes from 'prop-types'
 
 import MemeList from '../../components/MemeList'
@@ -28,6 +28,18 @@ const Meme = ({router}) => {
     currentItemId: id,
     items
   })
+
+  useEffect(() => {
+    document.dispatchEvent(
+      new window.CustomEvent('tracker:event', {
+        detail: {
+          category: 'Action',
+          action: 'visit',
+          label: 'meme'
+        }
+      })
+    )
+  }, [])
 
   const imgRatio = item ? item.height / item.width : null
   const heroWidth =

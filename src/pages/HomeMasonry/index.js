@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 
 import RRContext from '@s-ui/react-router/lib/ReactRouterContext'
 import {useFirebaseRef, useNextItemsCache} from '../../hooks/firebase'
@@ -16,6 +16,18 @@ const HomeMasonry = () => {
   useScrollRestoration()
   const setScrollTo = useSetupScrollRestoration()
   const {setNextItemsCache} = useNextItemsCache({items})
+
+  useEffect(() => {
+    document.dispatchEvent(
+      new window.CustomEvent('tracker:event', {
+        detail: {
+          category: 'Action',
+          action: 'visit',
+          label: 'home'
+        }
+      })
+    )
+  }, [])
 
   if (loading || items.length === 0) {
     return <Loading />
