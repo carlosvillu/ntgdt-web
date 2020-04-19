@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Play from '../Icons/Play'
+import {useNearScreen} from '@s-ui/react-hooks'
 
 const imgWith = url => width =>
   `https://res.cloudinary.com/carlosvillu/image/fetch/w_${Math.floor(
@@ -19,6 +20,7 @@ const Image = ({
   style = {},
   width
 }) => {
+  const [isNear, outerRef] = useNearScreen({offset: '50px'})
   const imgURLWith = imgWith(src)
 
   function imageKind() {
@@ -34,6 +36,7 @@ const Image = ({
 
   return (
     <div
+      ref={outerRef}
       className={`Image-container ${onClick ? 'link' : ''}`}
       style={{
         backgroundImage: `url(${blur})`,
@@ -42,15 +45,17 @@ const Image = ({
       }}
       onClick={onClick}
     >
-      <img
-        loading="lazy"
-        width={width}
-        height={height}
-        className={`Image ${imageKind()}`}
-        style={style}
-        src={imgURLWith(width)}
-        alt={alt}
-      />
+      {isNear && (
+        <img
+          loading="lazy"
+          width={width}
+          height={height}
+          className={`Image ${imageKind()}`}
+          style={style}
+          src={imgURLWith(width)}
+          alt={alt}
+        />
+      )}
       {hasPlayButton && <Play className="Image-play" />}
     </div>
   )
