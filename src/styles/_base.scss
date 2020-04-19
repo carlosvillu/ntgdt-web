@@ -16,8 +16,18 @@ body {
   background-color: var(--background-color);
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 body *:not(img) {
   -webkit-touch-callout: none;
+}
+
+.app {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -68,6 +68,11 @@ $c-error: #e93e40 !default;
 $c-error-light: color-variation($c-error, $c-light-step) !default;
 $c-error-dark: color-variation($c-error, $c-dark-step) !default;
 
+// Favorite color
+$c-favorite: rgb(244, 0, 87) !default;
+$c-favorite-light: color-variation($c-favorite, $c-light-step) !default;
+$c-favorite-dark: color-variation($c-favorite, $c-dark-step) !default;
+
 ///////////////////////////////////////////////////////////////////////////////
 // Specific Colors
 ///////////////////////////////////////////////////////////////////////////////
@@ -194,8 +199,14 @@ $bdw-l: 4px !default;
 $bdw-xl: 8px !default;
 
 // Box shadows
-$bxsh-m: 0 1px 4px 0 rgba(0, 0, 0, 0.24) !default;
-$bxsh-l: 0 3px 8px 0 rgba(0, 0, 0, 0.16) !default;
+$bxsh-m: 0 1px 4px 0 var(--text-color-normal) !default;
+$bxsh-l: 0 3px 8px 0 var(--text-color-normal) !default;
 
 // Box shadows focus
 $bxsh-focus: 0 0 3px 0 $c-primary !default;
+
+///////////////////////////////////////////////////////////////////////////////
+// App globals
+///////////////////////////////////////////////////////////////////////////////
+$maw-App: 1024px !default;
+$p-App: $p-l !default;

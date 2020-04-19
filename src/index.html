@@ -4,8 +4,13 @@
     <style>
       :root {
         --ligth: 0%;
+
         --background-color: hsl(0, 0%, calc(100% - var(--ligth)));
+        --background-accent-color: hsl(0, 0%, var(--ligth), 1);
+
         --text-color-normal: hsl(0, 0%, var(--ligth), 1);
+        --text-color-accent-normal: hsl(0, 0%, calc(100% - var(--ligth)));
+
         --text-color-light: hsl(0, 0%, 45%, 1);
       }
 
@@ -48,7 +53,7 @@
 
     <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self'">-->
     <meta name="application-name" content="No tengo ganas de trabajar">
-    <meta name="theme-color" content="#fff">
+    <meta id="themeColor" name="theme-color" content="#fff">
     <meta name="referrer" content="no-referrer">
     <meta name="format-detection" content="telephone=no">
     <link rel="manifest" href="/manifest.json">
@@ -83,11 +88,12 @@
       ga('send', 'pageview');
     </script>
     <script async src='https://www.google-analytics.com/analytics.js' ></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@pwabuilder/pwainstall"></script>
 
     <title>NTGDT</title>
   </head>
   <body ontouchstart="">
-    <div id='⚛️'></div>
+    <div class="app" id='⚛️'></div>
     <noscript>
       <h1>This page required enabled JS. Otherwise,  this message will be the funniest thing that you will see here.</h1>
     </noscript>

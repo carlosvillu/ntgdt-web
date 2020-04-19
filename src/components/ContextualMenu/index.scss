@@ -1,0 +1,43 @@
+@import '../../styles/settings';
+
+$animation-duration: 250ms;
+
+.ContextualMenu {
+  &-container {
+    position: relative;
+    width: $fz-giant;
+    height: $fz-giant;
+  }
+
+  &-content {
+    animation: growth $animation-duration forwards;
+    background: var(--background-accent-color);
+    box-shadow: $bxsh-m;
+    color: var(--text-color-accent-normal);
+    padding: $p-m;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform-origin: top left;
+    width: 200px;
+    z-index: 2;
+
+    & > * {
+      animation: opacity $animation-duration forwards;
+      opacity: 0;
+    }
+  }
+
+
+  @keyframes growth {
+    from {
+      transform: scaleX(0) scaleY(0);
+    }
+  }
+
+  @keyframes opacity {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+}
+

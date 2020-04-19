@@ -1,23 +1,41 @@
 import React from 'react'
-import Router from 'react-router/lib/Router'
-import Route from 'react-router/lib/Route'
+import Router from '@s-ui/react-router/lib/Router'
+import Route from '@s-ui/react-router/lib/Route'
 
 import Root from './components/Root'
-import Home from './pages/Home'
-import Favorites from './pages/Favorites'
-import Preview from './pages/Preview'
-import Shared from './pages/Shared'
 
-import MyPhotos from './pages/MyPhotos'
+const getHomeMasonry = (_, cb) => {
+  return import(
+    /* webpackChunkName: "HomeMasonry" */ './pages/HomeMasonry'
+  ).then(module => {
+    cb(null, module.default)
+  })
+}
+const getMeme = (_, cb) =>
+  import(/* webpackChunkName: "Meme" */ './pages/Meme').then(module =>
+    cb(null, module.default)
+  )
+const getFavorites = (_, cb) =>
+  import(/* webpackChunkName: "Favorites" */ './pages/Favorites').then(module =>
+    cb(null, module.default)
+  )
+const getLogin = (_, cb) =>
+  import(/* webpackChunkName: "Login" */ './pages/Login').then(module =>
+    cb(null, module.default)
+  )
+const getLogout = (_, cb) =>
+  import(/* webpackChunkName: "Logout" */ './pages/Logout').then(module =>
+    cb(null, module.default)
+  )
 
 export default (
   <Router>
     <Route component={Root}>
-      <Route path="/" component={Home} />
-      <Route path="/favorites" component={Favorites} />
-      <Route path="/preview" component={Preview} />
-      <Route path="/shared-target" component={Shared} />
-      <Route path="/myPhoto" component={MyPhotos} />
+      <Route path="/" getComponent={getHomeMasonry} />
+      <Route path="/meme" getComponent={getMeme} />
+      <Route path="/favorites" getComponent={getFavorites} />
+      <Route path="/login" getComponent={getLogin} />
+      <Route path="/logout" getComponent={getLogout} />
     </Route>
   </Router>
 )

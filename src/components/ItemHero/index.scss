@@ -1,0 +1,54 @@
+@import '../../styles/settings';
+
+.ItemHero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: $m-xl;
+  font-size: $fz-xl;
+
+  &-site {
+    font-size: $fz-s;
+    text-transform: uppercase;
+    font-weight: $fw-light;
+    line-height: $lh-xl;
+  }
+
+  &-description {
+    font-size: $fz-l;
+    font-weight: fw-regular;
+    line-height: $lh-s;
+  }
+
+  &-meta {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: $p-l;
+    border-top: 3px solid currentColor;
+  }
+
+  &-actions {
+    font-size: 36px;
+    flex-shrink: 0;
+
+    & > * {
+      margin-left: $m-l;
+    }
+  }
+
+  &-icon {
+    color: var(--text-color-normal);
+    fill: currentColor;
+    width: $fz-xxxl;
+    height: $fz-xxxl;
+
+    &.is-favorite {
+      color: $c-favorite;
+    }
+  }
+}
+

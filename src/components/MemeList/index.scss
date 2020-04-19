@@ -1,0 +1,12 @@
+@import '../../styles/settings';
+
+.MemeList {
+  display: grid;
+
+  &-Item {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+}
+
+

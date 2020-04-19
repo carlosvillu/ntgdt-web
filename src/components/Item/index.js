@@ -18,10 +18,13 @@ const Item = ({item, style, onClick, hiddenShare}) => {
     <div className="Item" style={style}>
       <h2 className="Item-title">{title}</h2>
       <div className="Item-image" onClick={onClick}>
-        {image && <Image blur={blur} src={image} alt={title} />}
-        {video && <Image blur={blur} src={video.poster} alt={title} />}
+        {image && <Image kind="photo" blur={blur} src={image} alt={title} />}
+        {video && (
+          <Image kind="poster" blur={blur} src={video.poster} alt={title} />
+        )}
         {video && <Play className="Item-play" fill="white" />}
       </div>
+
       <div className="Item-icons">
         <Favorite
           className={`Item-icon ${isFavorite ? 'is-favorite' : ''}`}

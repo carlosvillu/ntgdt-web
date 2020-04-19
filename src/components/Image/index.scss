@@ -1,15 +1,50 @@
 @import '../../styles/settings';
 
 .Image {
-  border-radius: $bdrs-l;
-  box-shadow: $bxsh-l;
-  max-width: 95%;
-  max-height: 100%;
-  object-fit: scale-down;
 
-  &:first-of-type {
-    border-top: none;
+  &-container {
+    height: 100%;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    &.link {
+      cursor: pointer;
+    }
+
+    img {
+    box-shadow: 0 0 150px rgba(0,0,0,.6);
+    }
   }
+
+  &-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    fill: currentColor;
+    width: 36px;
+    height: 36px;
+
+    & svg {
+     box-shadow: 0 0 10px var(--text-color-normal);
+    }
+  }
+
+  &.scaleDown {
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+  }
+
+  &.cover {
+  width: 100%;
+  height: 100%;
+    object-fit: cover;
+  }
+
 
   &.is-loading {
     height: 100%;

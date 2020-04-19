@@ -1,47 +1,72 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const imgWith = url => width =>
-  `https://res.cloudinary.com/carlosvillu/image/fetch/w_${width},f_auto/${url}`
+import Play from '../Icons/Play'
 
-const Image = ({alt, src, blur, onClick}) => {
+const imgWith = url => width =>
+  `https://res.cloudinary.com/carlosvillu/image/fetch/w_${Math.floor(
+    width
+  )},f_auto/${url}`
+
+const Image = ({
+  alt,
+  image_blur: blur,
+  hasPlayButton,
+  height,
+  kind,
+  onClick,
+  src,
+  style = {},
+  width
+}) => {
   const imgURLWith = imgWith(src)
+
+  function imageKind() {
+    switch (kind) {
+      case 'scaleDown':
+        return 'scaleDown'
+      case 'cover':
+        return 'cover'
+      default:
+        return ''
+    }
+  }
+
   return (
-    <img
-      className="Image"
-      src={src}
-      srcSet={`
-        ${imgURLWith(320)} 320w,
-        ${imgURLWith(480)} 480w`}
-      alt={alt}
-    />
+    <div
+      className={`Image-container ${onClick ? 'link' : ''}`}
+      style={{
+        backgroundImage: `url(${blur})`,
+        backgrounRepeat: 'no-repeat',
+        backgroundSize: 'cover'
+      }}
+      onClick={onClick}
+    >
+      <img
+        loading="lazy"
+        width={width}
+        height={height}
+        className={`Image ${imageKind()}`}
+        style={style}
+        src={imgURLWith(width)}
+        alt={alt}
+      />
+      {hasPlayButton && <Play className="Image-play" />}
+    </div>
   )
 }
 
 Image.displayName = 'Image'
 Image.propTypes = {
-  onClick: PropTypes.func,
   alt: PropTypes.string,
-  blur: PropTypes.string,
-  src: PropTypes.string
+  image_blur: PropTypes.string,
+  hasPlayButton: PropTypes.bool,
+  height: PropTypes.number,
+  kind: PropTypes.oneOf(['photo', 'poster']),
+  onClick: PropTypes.func,
+  src: PropTypes.string,
+  style: PropTypes.object,
+  width: PropTypes.number
 }
 
 export default Image
-
-/**
-<img
-  className="Image"
-  src={src}
-  srcSet={`
-${imgURLWith(320)} 320w,
-${imgURLWith(480)} 480w,
-${imgURLWith(768)} 768w,
-${imgURLWith(1024)} 1024w,
-${imgURLWith(1280)} 1280w`}
-  sizes="
-(max-width: 20em) 30vw,
-(max-width: 30em) 100%,
-(max-width: 40em) 90vw"
-  alt={alt}
-/>
-*/

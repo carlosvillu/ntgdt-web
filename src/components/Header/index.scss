@@ -1,37 +1,158 @@
 @import '../../styles/settings';
 
+$h-Header:70px;
+
+.headerPadding {
+
+  margin-bottom: $h-Header;
+}
+
+pwa-install::part(openButton) {
+  align-items: center;
+  border-radius: $bdrs-l;
+  display: flex;
+  font-size: $fz-xxxl;
+  height: $fz-giant;
+  justify-content: center;
+  padding: 0;
+  width: $fz-giant;
+  background: $c-favorite;
+  margin-left: -$fz-giant;
+}
+
 .Header {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: var(--background-color);
   display: flex;
   font-size: $fz-giant;
-  font-weight: 800;
-  justify-content: space-between;
-  padding-left: $p-xl;
-  padding-top: $p-xl;
+  height: $h-Header;
+  padding: 0 $p-App;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+
+  &-Content {
+    width: 100%;
+    max-width: $maw-App;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
   &-link {
-    text-decoration: none;
     color: var(--text-color-normal);
+    text-decoration: none;
+    font-weight: $fw-black;
   }
 
   &-actions {
-    padding-right: $p-xl;
+    display: flex;
+    
+    & > *:not(:first-child)  {   
+     margin-left: $p-l;
+    }
   }
 
-  &-action {
-    color: var(--text-color-normal);
+  &-burguer, &-favorites, &-ArrowBack {
     fill: currentColor;
-    width: $fz-xxl;
-    height: $fz-xxl;
   }
 
-  @media (prefers-color-scheme: dark) {
-    &-action {
-      display: none;
+  &-menu {
+    font-size: $fz-m;
+    line-height: 2em;
+    font-weight: $fw-regular;
+    padding: 0 $p-l;
+  }
+
+  &-menuLink {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &-logoutLink {
+    display: flex;
+    align-items: center;
+  }
+
+  &-menuPhoto {
+    border-radius: 50%;
+    height: 42px;
+    margin-right: 15px;
+    width: 42px;
+  }
+
+  &-favorites-button {
+    width: 1em;
+    height: 1em;
+    position: relative;
+  }
+
+  &-installContainer.is-installed {
+    display: none;
+  }
+
+  &-install {
+    fill: currentColor;
+  }
+
+  &-favorites {
+    fill: transparent;
+    stroke: var(--text-color-normal);
+    stroke-width: 2px;
+    stroke-linecap: round;
+    position: absolute;
+  }
+
+  &-favorites.active {
+    fill: var(--text-color-normal);
+  }
+
+  &-favorites-animated {
+    fill: transparent;
+    stroke: $c-favorite;
+    stroke-dasharray: 60;
+    stroke-dashoffset: 0;
+    stroke-width: 3px;
+    animation: drawBorder 1s ease-out, fade .5s .4s ;
+    stroke-linecap: round;
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+  }
+
+  @keyframes drawBorder {
+    0% {
+      opacity: 1;
+      stroke-dashoffset: 60;
+    }
+    50% {
+      opacity: 1;
+      stroke-dashoffset: 0;
+    }
+    100% {
+      opacity: 1;
+      stroke-dashoffset: 0;
     }
   }
-  @media (prefers-color-scheme: light) {
-    &-action {
-      display: none;
+
+  @keyframes fade {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
     }
   }
+
 }
