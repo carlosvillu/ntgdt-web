@@ -18,7 +18,8 @@ const Favorites = () => {
   const setScrollTo = useSetupScrollRestoration()
   const {setNextItemsCache} = useNextItemsCache({items})
 
-  if (loading || items.length === 0) return <Loading />
+  if (loading) return <Loading />
+  if (items.length === 0) return null
 
   return (
     <div className="Favorites">
