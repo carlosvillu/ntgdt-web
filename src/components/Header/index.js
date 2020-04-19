@@ -130,7 +130,8 @@ const Header = () => {
           <div className="Header-actions">
             <div className={installContainerClass}>
               <pwa-install
-                onClick={() => {
+                onClick={evt => {
+                  if (evt.target.tagName !== 'svg') return null
                   document.dispatchEvent(
                     new window.CustomEvent('tracker:event', {
                       detail: {
