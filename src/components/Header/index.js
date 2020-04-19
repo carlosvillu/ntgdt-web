@@ -1,6 +1,8 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect, useContext, useRef} from 'react'
+import cx from 'classnames'
 
 import Burguer from '../Icons/Burguer'
+import GetApp from '../Icons/GetApp'
 import ArrowBack from '../Icons/ArrowBack'
 import FavoriteBorder from '../Icons/FavoriteBorder'
 import Brightness from '../Icons/Brightness'
@@ -11,21 +13,35 @@ import {useSetupScrollRestoration} from '../../hooks/scroll'
 
 import RouterSwitcher from '../RouterSwitcher'
 import RRContext from '@s-ui/react-router/lib/ReactRouterContext'
+import Context from '../../context'
 
 const Header = () => {
   const setScrollTo = useSetupScrollRestoration()
   const {currentUser} = useFirebaseAuth()
   const [favoriteAdded, setFavoriteAdded] = useState(false)
   const {router} = useContext(RRContext)
+  const {i18n} = useContext(Context)
+  const [isInstalled, setIsInstalled] = useState(false)
+  const pwaInstallerRef = useRef()
 
   useEffect(() => {
     document.addEventListener('favorite', onAddFavorite)
     return () => document.removeEventListener('favorite', onAddFavorite)
   }, [])
 
+  useEffect(() => {
+    setIsInstalled(pwaInstallerRef.current?.getInstalledStatus())
+  }, [setIsInstalled])
+
   function onAddFavorite() {
     setFavoriteAdded(true)
   }
+
+  console.log(pwaInstallerRef.current?.getInstalledStatus())
+
+  const installContainerClass = cx('Header-installContainer', {
+    'is-installed': isInstalled
+  })
 
   return (
     <>
@@ -80,25 +96,19 @@ const Header = () => {
             </Link>
           </h1>
           <div className="Header-actions">
-            <Brightness
-              className="Header-action"
-              onClick={() => {
-                const isDark =
-                  document.documentElement.getAttribute('data-theme') === 'dark'
-                document.documentElement.classList.add(
-                  'color-theme-in-transition'
-                )
-                document.documentElement.setAttribute(
-                  'data-theme',
-                  isDark ? 'white' : 'dark'
-                )
-                window.setTimeout(function() {
-                  document.documentElement.classList.remove(
-                    'color-theme-in-transition'
-                  )
-                }, 1000)
-              }}
-            />
+            <div className={installContainerClass}>
+              <pwa-install
+                ref={pwaInstallerRef}
+                explainer={i18n.t('INSTALL_PWA_EXPLAINER')}
+                featuresheader={i18n.t('INSTALL_PWA_FEATURE_HEADER')}
+                descriptionheader={i18n.t('INSTALL_PWA_DESCRIPTION_HEADER')}
+                installbuttontext={i18n.t('INSTALL_PWA_INSTALL_BUTTON')}
+                cancelbuttontext={i18n.t('INSTALL_PWA_CANCEL_BUTTON')}
+                iosinstallinfotext={i18n.t('INSTALL_PWA_IOS_INSTALL')}
+              >
+                <GetApp className="Header-install" />
+              </pwa-install>
+            </div>
             <div className="Header-favorites-button">
               {favoriteAdded && (
                 <FavoriteBorder
@@ -114,6 +124,28 @@ const Header = () => {
                 <FavoriteBorder />
               </Link>
             </div>
+            <Brightness
+              className="Header-action"
+              onClick={() => {
+                const isDark =
+                  document.documentElement.getAttribute('data-theme') === 'dark'
+                document.documentElement.classList.add(
+                  'color-theme-in-transition'
+                )
+                document.documentElement.setAttribute(
+                  'data-theme',
+                  isDark ? 'white' : 'dark'
+                )
+                document
+                  .getElementById('themeColor')
+                  .setAttribute('content', isDark ? '#fff' : '#000')
+                window.setTimeout(function() {
+                  document.documentElement.classList.remove(
+                    'color-theme-in-transition'
+                  )
+                }, 1000)
+              }}
+            />
           </div>
         </div>{' '}
       </div>

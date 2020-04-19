@@ -7,6 +7,19 @@ $h-Header:70px;
   margin-bottom: $h-Header;
 }
 
+pwa-install::part(openButton) {
+  align-items: center;
+  border-radius: $bdrs-l;
+  display: flex;
+  font-size: $fz-xxxl;
+  height: $fz-giant;
+  justify-content: center;
+  padding: 0;
+  width: $fz-giant;
+  background: $c-favorite;
+  margin-left: -$fz-giant;
+}
+
 .Header {
   flex-direction: row;
   justify-content: center;
@@ -38,8 +51,8 @@ $h-Header:70px;
   &-actions {
     display: flex;
     
-    & > * {
-    margin-left: $p-l;
+    & > *:not(:first-child)  {   
+     margin-left: $p-l;
     }
   }
 
@@ -78,13 +91,21 @@ $h-Header:70px;
     width: 42px;
   }
 
-  .Header-favorites-button {
+  &-favorites-button {
     width: 1em;
     height: 1em;
     position: relative;
   }
 
-  .Header-favorites {
+  &-installContainer.is-installed {
+    display: none;
+  }
+
+  &-install {
+    fill: currentColor;
+  }
+
+  &-favorites {
     fill: transparent;
     stroke: var(--text-color-normal);
     stroke-width: 2px;
@@ -92,11 +113,11 @@ $h-Header:70px;
     position: absolute;
   }
 
-  .Header-favorites.active {
+  &-favorites.active {
     fill: var(--text-color-normal);
   }
 
-  .Header-favorites-animated {
+  &-favorites-animated {
     fill: transparent;
     stroke: $c-favorite;
     stroke-dasharray: 60;
