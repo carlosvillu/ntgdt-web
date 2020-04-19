@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 
 import RRContext from '@s-ui/react-router/lib/ReactRouterContext'
 import {useFavoritesFirebase, useNextItemsCache} from '../../hooks/firebase'
@@ -17,6 +17,18 @@ const Favorites = () => {
   useScrollRestoration()
   const setScrollTo = useSetupScrollRestoration()
   const {setNextItemsCache} = useNextItemsCache({items})
+
+  useEffect(() => {
+    document.dispatchEvent(
+      new window.CustomEvent('tracker:event', {
+        detail: {
+          category: 'Action',
+          action: 'visit',
+          label: 'favorites'
+        }
+      })
+    )
+  }, [])
 
   if (loading) return <Loading />
   if (items.length === 0) return null

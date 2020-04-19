@@ -70,6 +70,18 @@ document.addEventListener('tracker:event', evt => {
   window.ga('send', 'event', category, action, label)
 })
 
+document.dispatchEvent(
+  new window.CustomEvent('tracker:event', {
+    detail: {
+      category: 'Action',
+      action: 'visit',
+      label: window.matchMedia('(display-mode: standalone)').matches
+        ? 'pwa'
+        : 'browser'
+    }
+  })
+)
+
 register({
   first: () => window.alert('Content is cached for offline use.'),
   renovate: () => {
