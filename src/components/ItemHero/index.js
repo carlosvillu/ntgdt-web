@@ -26,32 +26,45 @@ const ItemHero = ({
     item.width
   ).toFixed()
 
+  function onGoBack() {
+    document.dispatchEvent(
+      new window.CustomEvent('tracker:event', {
+        detail: {
+          category: 'Action',
+          action: 'swipe',
+          label: 'lastMeme'
+        }
+      })
+    )
+    router.goBack()
+  }
+
+  function onGoFoward() {
+    document.dispatchEvent(
+      new window.CustomEvent('tracker:event', {
+        detail: {
+          category: 'Action',
+          action: 'swipe',
+          label: 'newMeme'
+        }
+      })
+    )
+    return router.push({pathname: '/meme', query: {id: nextItemId}})
+  }
+
   return (
     <Hammer
-      onSwipe={e => {
-        document.dispatchEvent(
-          new window.CustomEvent('tracker:event', {
-            detail: {
-              category: 'Action',
-              action: 'swipe',
-              label: e.direction === 4 ? 'lastMeme' : 'newMeme'
-            }
-          })
-        )
+      onPan={({deltaX}) => setTranslateX(deltaX)}
+      onPanEnd={e => {
+        const {width} = e.target
+        const {deltaX} = e
+        const minPanToAction = width / 3
 
-        if (e.direction === 4) return router.goBack()
-        if (e.direction === 2)
-          return router.push({pathname: '/meme', query: {id: nextItemId}})
+        if (Math.abs(deltaX) > minPanToAction) {
+          if (deltaX < 1) onGoFoward()
+          if (deltaX > 1) onGoBack()
+        } else setTranslateX(0)
       }}
-      onPan={e => {
-        if (
-          (e.angle > -45 && e.angle < 45) ||
-          (e.angle > 145 && e.angle > -145)
-        ) {
-          setTranslateX(e.deltaX)
-        }
-      }}
-      onPanEnd={() => setTranslateX(0)}
       onDoubleTap={() => {
         document.dispatchEvent(
           new window.CustomEvent('tracker:event', {
