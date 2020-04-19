@@ -110,7 +110,17 @@ const Header = () => {
           <h1 className="Header-logo">
             <Link
               className="Header-link"
-              onClick={() => setScrollTo()}
+              onClick={() => {
+                document.dispatchEvent(
+                  new window.CustomEvent('tracker:event', {
+                    detail: {
+                      category: 'Action',
+                      action: 'goHome'
+                    }
+                  })
+                )
+                setScrollTo()
+              }}
               to="/"
               activeClassName="is-selected"
             >
@@ -120,6 +130,16 @@ const Header = () => {
           <div className="Header-actions">
             <div className={installContainerClass}>
               <pwa-install
+                onClick={() => {
+                  document.dispatchEvent(
+                    new window.CustomEvent('tracker:event', {
+                      detail: {
+                        category: 'Action',
+                        action: 'showInstall'
+                      }
+                    })
+                  )
+                }}
                 ref={pwaInstallerRef}
                 explainer={i18n.t('INSTALL_PWA_EXPLAINER')}
                 featuresheader={i18n.t('INSTALL_PWA_FEATURE_HEADER')}

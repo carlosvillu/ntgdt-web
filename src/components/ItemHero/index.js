@@ -29,6 +29,16 @@ const ItemHero = ({
   return (
     <Hammer
       onSwipe={e => {
+        document.dispatchEvent(
+          new window.CustomEvent('tracker:event', {
+            detail: {
+              category: 'Action',
+              action: 'swipe',
+              label: e.direction === 4 ? 'lastMeme' : 'newMeme'
+            }
+          })
+        )
+
         if (e.direction === 4) return router.goBack()
         if (e.direction === 2)
           return router.push({pathname: '/meme', query: {id: nextItemId}})
@@ -42,7 +52,18 @@ const ItemHero = ({
         }
       }}
       onPanEnd={() => setTranslateX(0)}
-      onDoubleTap={callbackHandleClick}
+      onDoubleTap={() => {
+        document.dispatchEvent(
+          new window.CustomEvent('tracker:event', {
+            detail: {
+              category: 'Action',
+              action: 'favorite',
+              label: 'created'
+            }
+          })
+        )
+        callbackHandleClick()
+      }}
     >
       <div className="ItemHero">
         {/* TODO: get image max-width 1024 px */}
@@ -87,7 +108,18 @@ const ItemHero = ({
 
             <Favorite
               className={`ItemHero-icon ${isFavorite ? 'is-favorite' : ''}`}
-              onClick={callbackHandleClick}
+              onClick={evt => {
+                document.dispatchEvent(
+                  new window.CustomEvent('tracker:event', {
+                    detail: {
+                      category: 'Action',
+                      action: 'favorite',
+                      label: isFavorite ? 'remove' : 'created'
+                    }
+                  })
+                )
+                callbackHandleClick(evt)
+              }}
             />
           </div>
         </div>
