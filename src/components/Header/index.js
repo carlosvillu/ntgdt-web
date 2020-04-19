@@ -5,10 +5,9 @@ import Burguer from '../Icons/Burguer'
 import GetApp from '../Icons/GetApp'
 import ArrowBack from '../Icons/ArrowBack'
 import FavoriteBorder from '../Icons/FavoriteBorder'
-import Brightness from '../Icons/Brightness'
 import ContextualMenu from '../ContextualMenu'
 import Link from '@s-ui/react-router/lib/Link'
-import {useFirebaseAuth} from '../../hooks/firebase'
+// import {useFirebaseAuth} from '../../hooks/firebase'
 import {useSetupScrollRestoration} from '../../hooks/scroll'
 
 import RouterSwitcher from '../RouterSwitcher'
@@ -17,7 +16,7 @@ import Context from '../../context'
 
 const Header = () => {
   const setScrollTo = useSetupScrollRestoration()
-  const {currentUser} = useFirebaseAuth()
+  // const {currentUser} = useFirebaseAuth()
   const [favoriteAdded, setFavoriteAdded] = useState(false)
   const {router} = useContext(RRContext)
   const {i18n} = useContext(Context)
@@ -36,8 +35,6 @@ const Header = () => {
   function onAddFavorite() {
     setFavoriteAdded(true)
   }
-
-  console.log(pwaInstallerRef.current?.getInstalledStatus())
 
   const installContainerClass = cx('Header-installContainer', {
     'is-installed': isInstalled
@@ -63,10 +60,9 @@ const Header = () => {
               className="Header-ArrowBack"
               onClick={() => router.goBack()}
             />
-            <div />
-            {/* <ContextualMenu cta={<Burguer className="Header-burguer" />}>
+            <ContextualMenu cta={<Burguer className="Header-burguer" />}>
               <ul className="Header-menu">
-                <li className="Header-menuItem">
+                {/* <li className="Header-menuItem">
                   {currentUser ? (
                     <Link to="/logout" className="Header-menuLink">
                       <p className="Header-logoutLink">
@@ -82,9 +78,34 @@ const Header = () => {
                       <p>Login</p>
                     </Link>
                   )}
+                </li> */}
+                <li
+                  className="Header-menuItem"
+                  onClick={() => {
+                    const isDark =
+                      document.documentElement.getAttribute('data-theme') ===
+                      'dark'
+                    document.documentElement.classList.add(
+                      'color-theme-in-transition'
+                    )
+                    document.documentElement.setAttribute(
+                      'data-theme',
+                      isDark ? 'white' : 'dark'
+                    )
+                    document
+                      .getElementById('themeColor')
+                      .setAttribute('content', isDark ? '#fff' : '#000')
+                    window.setTimeout(function() {
+                      document.documentElement.classList.remove(
+                        'color-theme-in-transition'
+                      )
+                    }, 1000)
+                  }}
+                >
+                  {i18n.t('HEADER_SWITCH_THEME')}
                 </li>
               </ul>
-            </ContextualMenu> */}
+            </ContextualMenu>
           </RouterSwitcher>
           <h1 className="Header-logo">
             <Link
@@ -125,28 +146,6 @@ const Header = () => {
                 <FavoriteBorder />
               </Link>
             </div>
-            <Brightness
-              className="Header-action"
-              onClick={() => {
-                const isDark =
-                  document.documentElement.getAttribute('data-theme') === 'dark'
-                document.documentElement.classList.add(
-                  'color-theme-in-transition'
-                )
-                document.documentElement.setAttribute(
-                  'data-theme',
-                  isDark ? 'white' : 'dark'
-                )
-                document
-                  .getElementById('themeColor')
-                  .setAttribute('content', isDark ? '#fff' : '#000')
-                window.setTimeout(function() {
-                  document.documentElement.classList.remove(
-                    'color-theme-in-transition'
-                  )
-                }, 1000)
-              }}
-            />
           </div>
         </div>{' '}
       </div>

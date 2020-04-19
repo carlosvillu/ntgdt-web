@@ -56,13 +56,6 @@ pwa-install::part(openButton) {
     }
   }
 
-  &-action {
-    color: var(--text-color-normal);
-    fill: currentColor;
-    width: $fz-xxl;
-    height: $fz-xxl;
-  }
-
   &-burguer, &-favorites, &-ArrowBack {
     fill: currentColor;
   }
@@ -162,14 +155,4 @@ pwa-install::part(openButton) {
     }
   }
 
-  @media (prefers-color-scheme: dark) {
-    &-action {
-      display: none;
-    }
-  }
-  @media (prefers-color-scheme: light) {
-    &-action {
-      display: none;
-    }
-  }
 }
