@@ -28,12 +28,11 @@
     "react": "16",
     "react-div-100vh": "0.3.8",
     "react-dom": "16",
-    "react-hammerjs": "^1.0.1",
-    "react-helmet": "5.2.1",
-    "react-tiny-virtual-list": "^2.2.0"
+    "react-hammerjs": "1.0.1",
+    "react-helmet": "5.2.1"
   },
   "devDependencies": {
-    "@s-ui/bundler": "5",
+    "@s-ui/bundler": "beta",
     "@s-ui/component-peer-dependencies": "1",
     "@s-ui/lint": "3",
     "@s-ui/mono": "1"
@@ -44,8 +43,19 @@
       "STAGE"
     ],
     "offline": {
-      "whitelist": [
-        "::all::"
+      "fallback": "index.html",
+      "runtime": [
+        {
+          "handler": "CacheFirst",
+          "urlPattern": "^https:\\/\\/res\\.cloudinary\\.com",
+          "options": {
+            "cacheName": "cloudinary",
+            "expiration": {
+              "maxEntries": 200,
+              "maxAgeSeconds": 604800
+            }
+          }
+        }
       ]
     }
   },
