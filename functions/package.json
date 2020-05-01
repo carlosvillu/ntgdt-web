@@ -9,7 +9,13 @@
     "firebase-admin": "8.6.0",
     "firebase-functions": "3.3.0",
     "formidable": "1.2.1",
-    "sharp": "0.23.1"
+    "sharp": "0.23.1",
+    "snyk": "^1.316.1"
   },
-  "private": true
+  "private": true,
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
