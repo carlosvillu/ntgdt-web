@@ -4,11 +4,6 @@ import PropTypes from 'prop-types'
 import Play from '../Icons/Play'
 import {useNearScreen} from '@s-ui/react-hooks'
 
-const imgWith = url => width =>
-  `https://res.cloudinary.com/carlosvillu/image/fetch/w_${Math.floor(
-    width
-  )},f_auto/${url}`
-
 const Image = ({
   alt,
   image_blur: blur,
@@ -21,7 +16,6 @@ const Image = ({
   width
 }) => {
   const [isNear, outerRef] = useNearScreen({offset: '50px'})
-  const imgURLWith = imgWith(src)
 
   function imageKind() {
     switch (kind) {
@@ -52,7 +46,7 @@ const Image = ({
           height={height}
           className={`Image ${imageKind()}`}
           style={style}
-          src={imgURLWith(width)}
+          src={src}
           alt={alt}
         />
       )}

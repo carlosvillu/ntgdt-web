@@ -11,12 +11,7 @@ const HeaderSeoItem = ({item}) => (
       property="og:url"
       content={`http://${process.env.HOST}/preview/${item.id}`}
     />
-    {item.image && (
-      <meta
-        property="og:image"
-        content={`https://res.cloudinary.com/carlosvillu/image/fetch/w_300,f_auto/${item.image}`}
-      />
-    )}
+    {item.image && <meta property="og:image" content={item.image} />}
     {item.video && <meta property="og:video" content={item.video.mp4} />}
   </Helmet>
 )
