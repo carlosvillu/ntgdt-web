@@ -110,9 +110,7 @@ exports.share = functions.https.onRequest((request, response) => {
       <meta name="twitter:creator" content="${item.site}">
       <meta name="twitter:title" content="NTGDT.com">
       <meta name="twitter:description" content="${item.title}">
-      <meta name="twitter:image" content="https://res.cloudinary.com/carlosvillu/image/fetch/w_300,f_auto/${
-        item.image
-      }">
+      <meta name="twitter:image" content="${item.image}">
 
      <meta property="og:title" content="${item.title}" />
      <meta property="og:url" content="https://ntgdt.com/meme?id=${item.id}">
