@@ -105,6 +105,15 @@ exports.share = functions.https.onRequest((request, response) => {
   ref.once('value', function(snapshot) {
     const item = snapshot.val()
     const metas = `
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:site" content="@ntgdt">
+      <meta name="twitter:creator" content="${item.site}">
+      <meta name="twitter:title" content="NTGDT.com">
+      <meta name="twitter:description" content="${item.title}">
+      <meta name="twitter:image" content="https://res.cloudinary.com/carlosvillu/image/fetch/w_300,f_auto/${
+        item.image
+      }">
+
      <meta property="og:title" content="${item.title}" />
      <meta property="og:url" content="https://ntgdt.com/meme?id=${item.id}">
      ${
