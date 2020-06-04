@@ -12,7 +12,9 @@
     "predeploy:pre": "firebase use development && firebase functions:config:set env.stage=\"development\" && cd functions && npm install",
     "deploy:pre": "npm run build && npx firebase deploy --token \"$FIREBASE_TOKEN\"",
     "predeploy:pro": "firebase use production && firebase functions:config:set env.stage=\"production\" && cd functions && npm install",
-    "deploy:pro": "npm run build && npx firebase deploy --token \"$FIREBASE_TOKEN\""
+    "deploy:pro": "npm run build && npx firebase deploy --token \"$FIREBASE_TOKEN\"",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "keywords": [],
   "author": "",
@@ -30,7 +32,8 @@
     "react-div-100vh": "0.3.8",
     "react-dom": "16",
     "react-hammerjs": "1.0.1",
-    "react-helmet": "5.2.1"
+    "react-helmet": "5.2.1",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@s-ui/bundler": "beta",
@@ -68,5 +71,6 @@
   "stylelint": {
     "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
   },
-  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js"
+  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js",
+  "snyk": true
 }
