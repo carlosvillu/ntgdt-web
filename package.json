@@ -22,7 +22,7 @@
     "@s-ui/react-hooks": "1",
     "@s-ui/react-router": "1.0.0-beta.6",
     "classnames": "2.2.6",
-    "firebase": "7.13.1",
+    "firebase": "10.2.0",
     "firebase-tools": "7.16.1",
     "idb-keyval": "3.2.0",
     "perfume.js": "3.0.2",
